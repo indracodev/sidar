@@ -1,5 +1,6 @@
 <?php
 include "config.php";
+$headerURL = "https://localhost/sidar-git/";
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
@@ -62,20 +63,27 @@ date_default_timezone_set('Asia/Jakarta');
 $tanggal = date('Y-m-d');
 $jam = date('h:i:s');
 
+
+
 if(strlen($_POST['username']) >= 30 || strlen($_POST['password']) >= 30 ){
-header("Location: https://www.sidar.com/login");
+// header("Location: https://localhost/sidar/login");
+header("Location: ".$headerURL."login");
 exit();
 } 
-
+//  var_dump(strlen($_POST['username']));
+// die;
 if(empty($_POST['username'])){
  echo " UserName is empty! ";
  return false;
+
+
 }
 elseif (empty($_POST['password'])){
   echo " Password is empty! ";
   return false;
 }
 else{
+  
  $username = strtolower(addslashes($_POST['username']));
  $password = strtolower(addslashes($_POST['password']));
  $password = encrypt_decrypt('encrypt', $password); 
@@ -113,6 +121,7 @@ else{
    setcookie('Ke4', $row['ke4'], strtotime('+360 days'), '/');
    setcookie('Ke5', $row['ke5'], strtotime('+360 days'), '/');
    $activity = "login";
+   
    $updatelog = "INSERT INTO log (iduser, tanggal, jam, activity, ip, userdevice, latitude, longitude) VALUE ('".$iduser."', '".$tanggal."', '".$jam."', '".$activity."', '".$ip."', '".$useragent."', '".$latitude."', '".$longitude."')"; 
    $queryupdatelog =$conn->query($updatelog);
  
@@ -124,11 +133,18 @@ else{
       $rowambilnomer = mysqli_fetch_array($queryambilnomer, MYSQLI_ASSOC);
       $_SESSION["Nodar"] = $rowambilnomer['nodar'];
     }
-   
+  //  var_dump("134");
+  // die;
  if($dahupdatemail == "belum"){
-     header("location: emailupdate.php");
+  // var_dump("belum");
+  // die;
+    //  header("location: emailupdate.php");
+     header("Location: ".$headerURL."emailupdate.php");
  }else{
-     header("location: /"); 
+  // var_dump("sudah");
+  // die;
+    //  header("location: /sidar"); 
+     header("Location: ".$headerURL);
  }
   // if($_SESSION["Level"] != "admin") header("location: index.php");
   // else header("location: index.php");
