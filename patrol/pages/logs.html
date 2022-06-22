@@ -1,0 +1,259 @@
+<template>
+    <div class="page">
+
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner">
+                <div class="left left-navbar">
+                    <a class="link back">
+                        <span>Back</span>
+                    </a>
+                </div>
+                <div class="title text-align-center" style="width: 100%;">Logs</div>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div style="max-width: 1280px; margin: 0 auto;">
+                <div class="card card-outline data-table data-table-collapsible data-table-init">
+                    <div class="card-header" style="border-radius: inherit;">
+                        <div class="data-table-header">
+                            <div class="data-table-title">Logs List</div>
+                            <a class="link icon-only popover-open" data-popover="#logs-filter">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                                    <path fill="currentColor" d="M479.968 0H32.038C3.613 0-10.729 34.487 9.41 54.627L192 237.255V424a31.996 31.996 0 0 0 10.928 24.082l64 55.983c20.438 17.883 53.072 3.68 53.072-24.082V237.255L502.595 54.627C522.695 34.528 508.45 0 479.968 0zM288 224v256l-64-56V224L32 32h448L288 224z"></path>
+                                </svg>
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="card-content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="label-cell"><b>No</b></th>
+                                    <th class="label-cell"><b>Activity</b></th>
+                                    <th class="label-cell"><b>Category</b></th>
+                                    <th class="label-cell"><b>User</b></th>
+                                    <th class="label-cell"><b>Note</b></th>
+                                    <th class="numeric-cell"><b>Date & Time</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${logs && logs.map((log) => $h`
+                                    <tr style="background-color: white; color: ${log.color};">
+                                        <td class="label-cell" data-collapsible-title="No">${log.no}</td>
+                                        <td class="label-cell" data-collapsible-title="Activity">
+                                            <div class="chip chip-outline" style="border-radius: 10px; color: ${log.color}; border: 1px solid ${log.color};">
+                                                <div class="chip-label">${log.activity.toUpperCase()}</div>
+                                            </div>
+                                        </td>
+                                        <td class="label-cell" data-collapsible-title="Category">${log.category.toUpperCase()}</td>
+                                        <td class="label-cell" data-collapsible-title="User">${log.username.toUpperCase()}</td>
+                                        <td class="label-cell" data-collapsible-title="Note">${log.note.toUpperCase()}</td>
+                                        <td class="numeric-cell" data-collapsible-title="Date & Time">${log.update}</td>
+                                    </tr>
+                                `)}
+                                ${!logs && $h`
+                                    <tr style="background-color: white;">
+                                        <td class="label-cell" colspan="6">No Data!</td>
+                                    </tr>
+                                `}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="logs-filter">
+            <div class="popover-inner">
+                <div class="block">
+                    <span style="font-size: large;">Filter</span>
+                    <form id="form-logs-filter">
+                        <div class="list no-hairlines-between no-hairlines padding-bottom">
+                            <ul>
+                                <li>
+                                    <label class="item-radio item-radio-icon-end item-content">
+                                        <input @click="${()=> set('insert')}" type="radio" name="logs-filter" value="insert" />
+                                        <i class="icon icon-radio"></i>
+                                        <div class="item-inner">
+                                            <div class="item-title" style="font-size: smaller;">INSERT</div>
+                                        </div>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="item-radio item-radio-icon-end item-content">
+                                        <input @click="${()=> set('update')}" type="radio" name="logs-filter" value="insert" />
+                                        <i class="icon icon-radio"></i>
+                                        <div class="item-inner">
+                                            <div class="item-title" style="font-size: smaller;">UPDATE</div>
+                                        </div>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="item-radio item-radio-icon-end item-content">
+                                        <input @click="${()=> set('delete')}" type="radio" name="logs-filter" value="insert" />
+                                        <i class="icon icon-radio"></i>
+                                        <div class="item-inner">
+                                            <div class="item-title" style="font-size: smaller;">DELETE</div>
+                                        </div>
+                                    </label>
+                                </li>
+                                <li class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">${endDate ? '' : 'Date'}${Date.parse(startDate) < Date.parse(endDate) ? 'Start Date' : ''}${Date.parse(startDate) > Date.parse(endDate) ? 'End Date' : ''}</div>
+                                        <div class="item-input-wrap">
+                                            <input type="date" @change="${()=> set('start-date', event.target.value)}" placeholder="Date" />
+                                        </div>
+                                    </div>
+                                </li>
+                                ${startDate && $h`
+                                    <li class="item-content item-input">
+                                        <div class="item-inner">
+                                            <div class="item-title item-label">${endDate ? '' : 'Date'}${Date.parse(startDate) < Date.parse(endDate) ? 'End Date' : ''}${Date.parse(startDate) > Date.parse(endDate) ? 'Start Date' : ''}</div>
+                                            <div class="item-input-wrap">
+                                                <input type="date" @change="${()=> set('end-date', event.target.value)}" placeholder="Date" />
+                                            </div>
+                                        </div>
+                                    </li>
+                                `}
+                            </ul>
+                        </div>
+                    </form>
+                    <div class="segmented">
+                        <a @click="${set}" class="button button-outline popover-close">Reset</a>
+                        <a @click="${submit}" class="button button-fill popover-close">Submit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    "user strict"
+    export default (props, { $onBeforeMount, $onBeforeUnmount, $onMounted, $, $f7, $update, $tick }) => {
+        let logs, filter, startDate, endDate,
+            isFilter = false,
+            hash = storage.getItem('hash-patrol') || '',
+            api = new Model()
+
+        $onBeforeMount(() => {
+            $f7.dialog.preloader('Getting Data...')
+            setTimeout(() => {
+                submit()
+            }, 250)
+            console.log('logs:before-mount')
+        })
+
+        $onMounted(() => {
+            console.log('logs:mounted')
+        })
+
+        $onBeforeUnmount(() => {
+            console.log('logs:before-unmount')
+        })
+
+        const set = (e, val) => {
+            switch (e) {
+                case 'insert':
+                    filter = 'insert'
+                    break
+                case 'update':
+                    filter = 'update'
+                    break
+                case 'delete':
+                    filter = 'delete'
+                    break
+                case 'start-date':
+                    startDate = val
+                    $update()
+                    break
+                case 'end-date':
+                    endDate = val
+                    $update()
+                    break
+                default:
+                    filter = null
+                    endDate = null
+                    startDate = null
+                    submit()
+                    break
+            }
+        }
+
+        const submit = () => {
+            if (!$f7.dialog.get()) {
+                $f7.dialog.preloader('Getting Data...')
+                setTimeout(() => {
+                    let date = []
+                    if (startDate && endDate) {
+                        if (Date.parse(startDate) < Date.parse(endDate)) {
+                            let tempStart = new Date(startDate)
+                            tempStart.setDate(tempStart.getDate() - 1)
+
+                            let tempEnd = new Date(endDate)
+                            tempEnd.setDate(tempEnd.getDate() + 1)
+
+                            date.push(tempStart.toLocaleDateString('en-CA'))
+                            date.push(tempEnd.toLocaleDateString('en-CA'))
+                        } else {
+                            let tempStart = new Date(endDate)
+                            tempStart.setDate(tempStart.getDate() - 1)
+
+                            let tempEnd = new Date(startDate)
+                            tempEnd.setDate(tempEnd.getDate() + 1)
+
+                            date.push(tempStart.toLocaleDateString('en-CA'))
+                            date.push(tempEnd.toLocaleDateString('en-CA'))
+                        }
+                    }
+
+                    if (startDate && !endDate) date.push(startDate)
+
+                    if (!startDate && endDate) date.push(endDate)
+                    getLogs(date)
+                }, 250)
+            } else {
+                getLogs()
+            }
+        }
+
+        const getLogs = (date) => {
+            try {
+                logs = null
+                api.getLogs({
+                    hash: hash,
+                    filter: filter || '',
+                    date: date || ''
+                }, {
+                    success: (data) => {
+                        let res = JSON.parse(data)
+                        if (res.logs.length > 0) logs = res.logs
+                        endDate = null
+                        startDate = null
+                        $update()
+
+                        $tick().then(() => {
+                            $('#form-logs-filter')[0].reset()
+                            $f7.dialog.close()
+                        })
+                    }, error: () => {
+                        throw toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const toast = (msg) => {
+            $f7.toast.create({
+                text: msg,
+                closeTimeout: 2000,
+            }).open()
+        }
+
+        return $render
+    }
+</script>

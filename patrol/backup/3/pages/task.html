@@ -1,0 +1,555 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner">
+                <div class="left left-navbar">
+                    <a href="#" class="link back">
+                        <span>Back</span>
+                    </a>
+                </div>
+                <div class="title text-align-center" style="width: 100%;">Task List</div>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div style="max-width: 1280px; margin: 0 auto;">
+                <div class="card card-outline data-table data-table-collapsible data-table-init">
+                    <div class="row no-gap">
+                        <div class="col-100 medium-50" style="border-right: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0;">
+                            <div class="card-header" style="border-radius: inherit;">
+                                <div class="data-table-header">
+                                    <div class="data-table-title">Task List</div>
+                                    <a class="link icon-only popover-open" data-popover="#task-add">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                                <div class="data-table-header-selected">
+                                    <!-- Selected table title -->
+                                    <div class="data-table-title-selected"><span class="data-table-selected-count"></span> items selected</div>
+                                    <!-- Selected table actions -->
+                                    <div class="data-table-actions">
+                                        <a class="link icon-only" @click="${rmTask}" style="color: red;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-dash-square" viewBox="0 0 16 16">
+                                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+                                            </svg>
+                                        </a>
+                                        <a class="link icon-only popover-open" data-popover="#task-edit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                                                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                                                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-content" style="max-height: 40vh;">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th class="label-cell" colspan="2"></th>
+                                        <th class="label-cell"><b>Task Name</b></th>
+                                        <th class="numeric-cell"><b>Last Update</b></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    ${!task && $h`
+                                    <tr style="background-color: white;">
+                                        <td class="label-cell" colspan="2"></td>
+                                        <td class="label-cell" data-collapsible-title="Task Name">No data!</td>
+                                        <td class="numeric-cell" data-collapsible-title="Last Update"></td>
+                                    </tr>
+                                    `}
+                                    ${task && task.map((task) => $h`
+                                    <tr style="background-color: white;">
+                                        <td class="checkbox-cell">
+                                            <label class="checkbox">
+                                                <input type="checkbox" class="task-check" @click="${()=>check(task.name, task.id)}" />
+                                                <i class="icon-checkbox"></i>
+                                            </label>
+                                        </td>
+                                        <td class="label-cell"></td>
+                                        <td class="label-cell" data-collapsible-title="Task Name">${task.name}</td>
+                                        <td class="numeric-cell" data-collapsible-title="Last Update">${task.update}</td>
+                                    </tr>
+                                    `)}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-100 medium-50" style="border-right: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-outline data-table data-table-collapsible data-table-init">
+                    <div class="row no-gap">
+                        <div class="col-100 medium-50" style="border-right: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0;">
+                            <div class="card-header" style="border-radius: inherit;">
+                                <div class="data-table-header">
+                                    <div class="data-table-title">Template List</div>
+                                    <a class="link icon-only popover-open" data-popover="#template-add">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                                <div class="data-table-header-selected">
+                                    <!-- Selected table title -->
+                                    <div class="data-table-title-selected"><span class="data-table-selected-count"></span> items selected</div>
+                                    <!-- Selected table actions -->
+                                    <div class="data-table-actions">
+                                        <a class="link icon-only" @click="${rmTemplate}" style="color: red;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-dash-square" viewBox="0 0 16 16">
+                                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-content" style="max-height: 40vh;">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th class="label-cell" colspan="2"></th>
+                                        <th class="label-cell"><b>Template Name</b></th>
+                                        <th class="label-cell"><b>Task</b></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    ${!template && $h`
+                                    <tr style="background-color: white;">
+                                        <td class="label-cell" colspan="2"></td>
+                                        <td class="label-cell" data-collapsible-title="Task Name">No data!</td>
+                                        <td class="label-cell" data-collapsible-title="Last Update"></td>
+                                    </tr>
+                                    `}
+                                    ${template && template.map((template) => $h`
+                                    <tr style="background-color: white;">
+                                        <td class="checkbox-cell">
+                                            <label class="checkbox">
+                                                <input type="checkbox" class="template-check" @click="${()=>checkTemplate(template.name)}" />
+                                                <i class="icon-checkbox"></i>
+                                            </label>
+                                        </td>
+                                        <td class="label-cell"></td>
+                                        <td class="label-cell" data-collapsible-title="Task Name">${template.name}</td>
+                                        <td class="label-cell flex-direction-column">
+                                            ${template.task.map((task) => $h`
+                                            <div class="chip chip-outline margin-left-half">
+                                                <div class="chip-label">${task.name}</div>
+                                            </div>
+                                            `)}
+                                        </td>
+                                    </tr>
+                                    `)}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-100 medium-50" style="border-right: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="task-add" data-close-by-backdrop-click="false" data-close-by-outside-click="false">
+            <div class="popover-inner">
+                <div class="block">
+                    <form>
+                        <div class="list margin-right">
+                            <ul>
+                                <li class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">Task Name</div>
+                                        <div class="item-input-wrap">
+                                            <textarea name="add-name" required validate ></textarea>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content padding-top">
+                                    <div class="segmented segmented-raised" style="width: 100%;">
+                                        <a class="button popover-close" href="#" style="border-radius: 0; color: darkgrey;">Cancel</a>
+                                        <a class="button" href="#" @click="${addTask}" style="border-radius: 0;">Add</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="template-add" data-close-by-backdrop-click="false" data-close-by-outside-click="false"
+             style="width: auto;">
+            <div class="popover-inner">
+                <div class="block">
+                    <form>
+                        <div class="list margin-right">
+                            <ul>
+                                <li class="item-content item-input">
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">Template Name</div>
+                                        <div class="item-input-wrap">
+                                            <input type="text" autocomplete="off" name="template-name" required validate ></input>
+                                        </div>
+                                    </div>
+                                </li>
+                                ${task && task.map((task) => $h`
+                                <li>
+                                    <label class="item-checkbox item-content">
+                                        <input type="checkbox" name="task-template-check" class="task-template-check" value="${task.id}"/>
+                                        <i class="icon icon-checkbox"></i>
+                                        <div class="item-inner">
+                                            <div class="item-title">${task.name}</div>
+                                        </div>
+                                    </label>
+                                </li>
+                                `)}
+                                <li class="item-content padding-top">
+                                    <div class="segmented segmented-raised" style="width: 100%;">
+                                        <a class="button popover-close" href="#"
+                                           style="border-radius: 0; color: darkgrey;">Cancel</a>
+                                        <a class="button" @click="${addTemplate}" style="width: 100%;">Save</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="task-edit" data-close-by-backdrop-click="false" data-close-by-outside-click="false">
+            <div class="popover-inner">
+                <div class="block">
+                    <form>
+                        <div class="list margin-right">
+                            <ul>
+                                <li class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">Task Name</div>
+                                        <div class="item-input-wrap">
+                                            <textarea name="edit-name" value="${taskName}" required validate ></textarea>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content padding-top">
+                                    <div class="segmented segmented-raised" style="width: 100%;">
+                                        <a class="button popover-close" href="#" style="border-radius: 0; color: darkgrey;">Cancel</a>
+                                        <a class="button" @click="${editTask}" href="#" style="border-radius: 0;">Save</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</template>
+<script>
+    "user strict"
+    export default (props, { $onBeforeMount, $onMounted, $onBeforeUnmount, $, $update, $tick, $f7 }) => {
+        var template
+        var templateName
+        var task
+        var taskId
+        var taskName
+        var hash = storage.getItem('hash-patrol') || ''
+
+        $onBeforeMount(() => {
+            getTask()
+            getTemplate()
+        })
+
+        $onMounted(() => {
+            $('#task-edit').on('popover:close', () => {
+                $('.data-table').removeClass('data-table-has-checked')
+                $('.task-check').prop('checked', false)
+            })
+        })
+
+        const addTemplate = () => {
+            var $data = []
+            $('input[name="task-template-check"]:checked').each(function(){
+                $data.push($(this).val())
+            })
+
+            try {
+                if ($('input[name="template-name"]').val()) {
+                    $f7.popover.close()
+                    $f7.dialog.preloader('Adding...')
+                    model.addTemplate({
+                        template: $('input[name="template-name"]').val(),
+                        task: $data,
+                        hash: hash
+                    }, {
+                        success: (data) => {
+                            var res = JSON.parse(data)
+                            $f7.dialog.close()
+                            if (res.status == 'success') {
+                                res = null
+                                $('input[name="template-name"]').val('')
+                                $('.task-template-check').prop('checked', false)
+                                toast('Success added!')
+                                getTemplate()
+                            } else {
+                                res = null
+                                $('input[name="template-name"]').val('')
+                                $('.task-template-check').prop('checked', false)
+                                toast('Failed added!')
+                            }
+                        }, error: () => {
+                            $f7.dialog.close()
+                            toast('Connection problem!')
+                        }
+                    })
+                } else {
+                    $('input[name="template-name"]').focus()
+                    toast('Check your input!')
+                }
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const getTemplate = () => {
+            try {
+                model.getTemplate({
+                    hash: hash
+                }, {
+                    success: (data) => {
+                        var res = JSON.parse(data)
+                        template = res.template
+                        res = null
+                        $update()
+
+                        $tick().then(() => {
+                            $('.task-check').click( function () {
+                                if ($(this).prop('checked') && $('.data-table-has-checked').length < 1) {
+                                } else {
+                                    if (!$(this).prop('checked') && $('.data-table-has-checked').length > 0) {
+                                        $(this).prop('checked', false)
+                                    } else {
+                                        $('.task-check').prop('checked', false)
+                                        $(this).prop('checked', true)
+                                    }
+                                }
+                            })
+                        })
+                    }, error: () => {
+                        toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const checkTemplate = (e) => {
+            templateName = e
+            $update()
+        }
+
+        const rmTemplate = () => {
+            $f7.dialog.create({
+                text: 'Are you sure you want to remove this template?',
+                buttons: [{
+                    text: 'Cancel',
+                    close: true
+                }, {
+                    text: 'Remove',
+                    onClick: () => {
+                        try {
+                            $f7.dialog.preloader('Deleting...')
+                            model.rmTemplate({
+                                template: templateName,
+                                hash: hash
+                            }, {
+                                success: (data) => {
+                                    var res = JSON.parse(data)
+                                    $f7.dialog.close()
+                                    if (res.status == 'success') {
+                                        res = null
+                                        $('.data-table').removeClass('data-table-has-checked')
+                                        $('.template-check').prop('checked', false)
+                                        toast('Success deleted!')
+                                        getTemplate()
+                                    } else {
+                                        toast('Failed deleted!')
+                                    }
+                                }, error: () => {
+                                    $f7.dialog.close()
+                                    toast('Connection problem!')
+                                }
+                            })
+                        } catch (e) {
+                            toast('Code problem!')
+                        }
+                    }
+                }]
+            }).open()
+        }
+
+        const addTask = () => {
+            try {
+                if ($('textarea[name="add-name"]').val()) {
+                    $f7.popover.close()
+                    $f7.dialog.preloader('Adding...')
+                    model.addTask({
+                        task: $('textarea[name="add-name"]').val(),
+                        hash: hash
+                    }, {
+                        success: (data) => {
+                            var res = JSON.parse(data)
+                            $f7.dialog.close()
+                            if (res.status == 'success') {
+                                res = null
+                                $('textarea[name="add-name"]').val('')
+                                toast('Success added!')
+                                getTask()
+                            } else {
+                                $('textarea[name="add-name"]').val('')
+                                toast('Failed added!')
+                            }
+                        }, error: () => {
+                            $f7.dialog.close()
+                            toast('Connection problem!')
+                        }
+                    })
+                } else {
+                    $('textarea[name="add-name"]').focus()
+                    toast('Check your input!')
+                }
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const getTask = () => {
+            try {
+                model.getTask({
+                    hash: hash
+                }, {
+                    success: (data) => {
+                        var res = JSON.parse(data)
+                        task = res.task
+                        res = null
+                        $update()
+
+                        $tick().then(() => {
+                            $('.template-check').click( function () {
+                                if ($(this).prop('checked') && $('.data-table-has-checked').length < 1) {
+                                } else {
+                                    if (!$(this).prop('checked') && $('.data-table-has-checked').length > 0) {
+                                        $(this).prop('checked', false)
+                                    } else {
+                                        $('.template-check').prop('checked', false)
+                                        $(this).prop('checked', true)
+                                    }
+                                }
+                            })
+                        })
+                    }, error: () => {
+                        toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const check = (a, b) => {
+            taskName = a
+            taskId = b
+            $update()
+        }
+
+        const editTask = () => {
+            try {
+                $f7.popover.close()
+                $f7.dialog.preloader('Setting...')
+                model.editTask({
+                    id: taskId,
+                    task: $('textarea[name="edit-name"]').val(),
+                    hash: hash
+                }, {
+                    success: (data) => {
+                        var res = JSON.parse(data)
+                        $f7.dialog.close()
+                        if (res.status == 'success') {
+                            res = null
+                            toast('Success edited!')
+                            getTask()
+                        } else {
+                            toast('Failed edited!')
+                        }
+                    }, error: () => {
+                        $f7.dialog.close()
+                        toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const rmTask = () => {
+            $f7.dialog.create({
+                text: 'Are you sure you want to remove this task?',
+                buttons: [{
+                    text: 'Cancel',
+                    close: true
+                }, {
+                    text: 'Remove',
+                    onClick: () => {
+                        try {
+                            $f7.dialog.preloader('Deleting...')
+                            model.rmTask({
+                                id: taskId,
+                                hash: hash
+                            }, {
+                                success: (data) => {
+                                    var res = JSON.parse(data)
+                                    $f7.dialog.close()
+                                    if (res.status == 'success') {
+                                        res = null
+                                        $('.data-table').removeClass('data-table-has-checked')
+                                        $('.task-check').prop('checked', false)
+                                        toast('Success deleted!')
+                                        getTask()
+                                    } else {
+                                        toast('Failed deleted!')
+                                    }
+                                }, error: () => {
+                                    $f7.dialog.close()
+                                    toast('Connection problem!')
+                                }
+                            })
+                        } catch (e) {
+                            toast('Code problem!')
+                        }
+                    }
+                }]
+            }).open()
+        }
+
+        const toast = function (msg) {
+            $f7.toast.create({
+                text: msg,
+                closeTimeout: 2000,
+            }).open()
+        }
+
+        return $render
+    }
+</script>

@@ -1,0 +1,572 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner">
+                <div class="left left-navbar">
+                    <a class="link back">
+                        <span>Back</span>
+                    </a>
+                </div>
+                <div class="title text-align-center" style="width: 100%;">Report</div>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div style="max-width: 1280px; margin: 0 auto;">
+                <div class="card card-outline data-table data-table-collapsible data-table-init">
+                    <div class="card-header">
+                        <div class="data-table-title">Report List</div>
+                        <div class="display-flex">
+                            <a class="link margin-right no-ripple" @click="${downloadReport}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
+                                    <path d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>
+                                </svg>
+                            </a>
+                            <a class="link margin-right-half popover-open no-ripple" data-popover="#report-filter">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512">
+                                    <path fill="currentColor" d="M479.968 0H32.038C3.613 0-10.729 34.487 9.41 54.627L192 237.255V424a31.996 31.996 0 0 0 10.928 24.082l64 55.983c20.438 17.883 53.072 3.68 53.072-24.082V237.255L502.595 54.627C522.695 34.528 508.45 0 479.968 0zM288 224v256l-64-56V224L32 32h448L288 224z"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                   
+                    <div class="card-content" style="max-height: calc(100vh - 162px);">
+                        <div class="list accordion-list">
+                            <ul>
+                                ${reportDate && reportDate.map((data) => $h`
+                                    <li class="accordion-item">
+                                        <a class="item-content item-link padding-right" @click="${reinitAccordion}">
+                                            <div class="item-inner">
+                                                <div class="item-title">
+                                                    <span style="font-weight: 500; color: #253238;">${data.date}</span>
+                                                    <span style="font-size: smaller; color: darkgray;"> (${data.count} Phase)</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="accordion-item-content">
+                                            <div class="block">
+                                                <div class="list accordion-list accordion-opposite">
+                                                    <ul>
+                                                        ${data.phase && data.phase.map((data, index) => $h`
+                                                            <li class="accordion-item report">
+                                                                <a class="item-content item-link padding-right">
+                                                                    <div class="item-inner">
+                                                                        <div class="item-title">
+                                                                            <span style=" color: gray;">Group </span>
+                                                                            <span style="font-weight: 500;"> [${data.schedule}]</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                                <div class="accordion-item-content">
+                                                                    <div class="block">
+                                                                        <div class="list accordion-list accordion-opposite">
+                                                                            <ul>
+                                                                                ${data.id && data.id.map((data, index) => $h`
+                                                                                    <li class="accordion-item report">
+                                                                                        <a class="item-content item-link padding-right" @click="${()=> loadActivity(data)}">
+                                                                                            <div class="item-inner">
+                                                                                                <div class="item-title">
+                                                                                                    <span style="font-weight: 500; color: #253238;">Phase ${parseInt(index)+1}</span>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </a>
+                                                                                        <div class="accordion-item-content">
+                                                                                            <div class="timeline timeline-sides no-padding">
+                                                                                                ${checkpoint && checkpoint.map((activity, index) => $h`
+                                                                                                    <div class="timeline-item timeline-item-right" style="margin-left: calc(50% - (var(--f7-timeline-divider-margin-horizontal) * 2 + 10px)/ 2 - 110px);">
+                                                                                                        <div class="timeline-item-date">
+                                                                                                            <span>${activity.start || 'Start'}</span><br/>
+                                                                                                            <span style="font-size: smaller; color: ${activity.eStartStatus};">${activity.elapseStart}</span>
+                                                                                                        </div>
+                                                                                                        <div class="timeline-item-divider" style="background: ${activity.status}"></div>
+                                                                                                        <div class="timeline-item-date" style="width: 50px; position: absolute; bottom: 0; left: 95px;">
+                                                                                                            <span>${activity.end || 'End'}</span><br/>
+                                                                                                            <span style="font-size: smaller; color: ${activity.eEndStatus};">${activity.elapseEnd}</span>
+                                                                                                        </div>
+                                                                                                        <div class="timeline-item-content" style="padding-left: 65px;">
+                                                                                                            ${activity.status == 'red' && $h`
+                                                                                                                <div class="timeline-item-inner margin-top" style="box-shadow: none; border: 1px solid #e0e0e0; border-radius: 4px 4px 0 0;">
+                                                                                                                    <span>Point : ${activity.checkpoint}</span><br/>
+                                                                                                                    <span>Guard : ${activity.person}</span>
+                                                                                                                </div>
+                                                                                                            `}
+                                                                                                            ${activity.status != 'red' && $h`
+                                                                                                                <div class="timeline-item-inner margin-top" @click="${getDetailTask}" data-index="${index}" style="box-shadow: none; border: 1px solid #e0e0e0; border-radius: 4px 4px 0 0;">
+                                                                                                                    <span data-index="${index}">Point : ${activity.checkpoint}</span><br/>
+                                                                                                                    <span data-index="${index}">Guard : ${activity.person}</span>
+                                                                                                                </div>
+                                                                                                                <div class="align-self-center">
+                                                                                                                    <a @click="${()=>getLocation(index)}" class="button button-fill" style="border-radius: 0 0 4px 4px;">
+                                                                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                                                                                                                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                                                                                                                        </svg>
+                                                                                                                        <span style="padding-left: 5px;">
+                                                                                                                            Open
+                                                                                                                        </span>
+                                                                                                                    </a>
+                                                                                                                </div>
+                                                                                                            `}
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                `)}
+                                                                                                ${checkpoint && $h`
+                                                                                                    <div class="timeline-item timeline-item-right" style="margin-left: calc(50% - (var(--f7-timeline-divider-margin-horizontal) * 2 + 10px)/ 2 - 110px);">
+                                                                                                        <div class="timeline-item-date"></div>
+                                                                                                        <div class="timeline-item-divider" style="background: ${endStatus};"></div>
+                                                                                                    </div>
+                                                                                                `}
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                `)}
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        `)}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                `)}
+                                ${!reportDate && $h`
+                                    <div class="padding">
+                                        <span>No report!</span>
+                                    </div>
+                                `}
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="report-note">
+            <div class="popover-inner">
+                <div class="block no-margin-bottom">
+                    <form>
+                        <div class="list margin-right">
+                            <ul>
+                                ${task && task.map((task) => $h`
+                                    <li>
+                                        <div class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title" style="white-space: normal;">${task.name}</div>
+                                                ${task.status == '1' && $h`
+                                                    <div class="item-after">
+                                                        <span class="badge color-green"></span>
+                                                    </div>
+                                                `}
+                                                ${task.status == '0' && $h`
+                                                    <div class="item-after">
+                                                        <span class="badge color-red"></span>
+                                                    </div>
+                                                `}
+                                            </div>
+                                        </div>
+                                    </li>
+                                `)}
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+                <div class="block no-margin-top">
+                    <form>
+                        <div class="list margin-right">
+                            <ul>
+                                <li class="item-content item-input">
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">Note</div>
+                                        <div class="item-input-wrap">
+                                            <textarea name="edit-name" value="${note}" required validate disabled ></textarea>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content padding-top">
+                                    <div class="segmented segmented-raised" style="width: 100%;">
+                                        <a class="button popover-close" style="border-radius: 0;">Close</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="report-filter">
+            <div class="popover-inner">
+                <div class="block">
+                    <div class="margin-bottom">
+                        <span style="font-size: large;">Filters</span>
+                    </div>
+                    <form id="form-filter">
+                        <div class="list no-hairlines-md">
+                            <ul>
+                                <li class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">Person</div>
+                                        <div class="item-input-wrap input-dropdown-wrap">
+                                            <select placeholder="Please choose..." @change="${()=> setFilter('name', event.target.value)}" >
+                                                <option value="" selected></option>
+                                                ${filterPerson && filterPerson.map((data) => $h`
+                                                    <option value="${data.name}">${data.name}</option>
+                                                `)}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content item-input padding-top-half">
+                                    <div class="segmented segmented-strong margin-right" style="width: 100%;">
+                                        <a @click="${toggleDate}" class="button no-ripple no-active-state ${isDate ? 'button-active' : ''}">Date</a>
+                                        <a @click="${toggleMonth}" class="button no-ripple no-active-state ${isMonth ? 'button-active' : ''}">Month</a>
+                                        <span class="segmented-highlight"></span>
+                                    </div>
+                                </li>
+                                <li class="item-content item-input">
+                                    ${isDate && $h`
+                                        <div class="item-inner">
+                                            <div class="item-title item-label">Date</div>
+                                            <div class="item-input-wrap">
+                                                <input type="date" placeholder="Please choose..." @change="${()=> setFilter('date', event.target.value)}" />
+                                            </div>
+                                        </div>
+                                    `}
+                                    ${isMonth && $h`
+                                        <div class="item-inner">
+                                            <div class="item-title item-label">Month</div>
+                                            <div class="item-input-wrap">
+                                                <input type="month" placeholder="Please choose..." @change="${()=> setFilter('month', event.target.value)}" />
+                                            </div>
+                                        </div>
+                                    `}
+                                </li>
+                                <li class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">Patrol Start</div>
+                                        <div class="item-input-wrap">
+                                            <input type="time" placeholder="Please choose..." @change="${()=> setFilter('start', event.target.value)}" />
+                                        </div>
+                                    </div>
+                                    ${filter.start && $h`
+                                        <div class="item-inner">
+                                            <div class="item-title item-label">Patrol End</div>
+                                            <div class="item-input-wrap">
+                                                <input type="time" placeholder="Please choose..." @change="${()=> setFilter('end', event.target.value)}" />
+                                            </div>
+                                        </div>
+                                    `}
+                                </li>
+                                <li class="item-content item-input">
+                                    <a class="button button-fill margin-right" @click="${submitFilter}" style="width: 100%;">Submit</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</template>
+<script>
+    "user strict"
+    export default (props, { $, $onBeforeMount, $onBeforeUnmount, $update, $tick, $f7 }) => {
+        let reportDate, report, reportMonth, checkpoint, endStatus, note, task, phaseTemp, filterPerson,
+            x, y,
+            isMonth = false, isDate = true,
+            api = new Model(),
+            filter = {
+                name: undefined,
+                date: undefined,
+                month: undefined,
+                start: undefined,
+                end: undefined,
+            },
+            download = {
+                name: undefined,
+                date: undefined,
+                month: undefined,
+                start: undefined,
+                end: undefined,
+            }
+
+        $onBeforeMount(() => {
+            $f7.dialog.preloader('Getting Data...')
+            setTimeout(() => {
+                getReportDate()
+                getPerson()
+            }, 250)
+            console.log('report:before-mount')
+        })
+
+        $onBeforeUnmount(() => {
+            reportDate = undefined
+            report = undefined
+            checkpoint = undefined
+            endStatus = undefined
+            note = undefined
+            task = undefined
+            x = undefined
+            y = undefined
+            phaseTemp = undefined
+            console.log('report:before-unmount')
+        })
+
+        const toggleDate = () => {
+            isDate = true
+            isMonth = false
+            $update()
+        }
+
+        const toggleMonth = () => {
+            isDate = false
+            isMonth = true
+            $update()
+        }
+
+        const formatMonth = (e) => {
+            let date = new Date(e),
+                year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date),
+                month = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(date)
+            return `${year}-${month}`
+        }
+
+        const downloadReport = () => {
+            reportDate ? location.href = `https://sidar.id/patrol/api/v1/report/?action=download&name=${download.name}&date=${download.date}&month=${download.month}&start=${download.start}&end=${download.end}` : toast('There is no data to export!')
+        }
+
+        const setFilter = (e, value) => {
+            switch (e) {
+                case 'name':
+                    filter.name = value.toLowerCase()
+                    download.name = value.toLowerCase()
+                    $update()
+                    break
+                case 'date':
+                    filter.date = value
+                    filter.month = undefined
+
+                    download.date = value
+                    download.month = undefined
+                    $update()
+                    break
+                case 'month':
+                    filter.date = undefined
+                    filter.month = value
+
+                    download.date = undefined
+                    download.month = value
+                    $update()
+                    break
+                case 'start':
+                    filter.start = value
+
+                    download.start = value
+                    $update()
+                    break
+                case 'end':
+                    filter.end = value
+
+                    download.end = value
+                    $update()
+                    break
+                default: break
+            }
+        }
+
+        const submitFilter = () => {
+            try {
+                $f7.popover.close()
+                $f7.dialog.preloader('Getting Data...')
+                setTimeout(() => {
+                    api.getReportDate({
+                        name: filter.name || undefined,
+                        date: filter.date || undefined,
+                        month: filter.month || undefined,
+                        start: filter.start || undefined,
+                        end: filter.end || undefined,
+                        hash: storage.getItem('hash-patrol') || ''
+                    }, {
+                        success: (data) => {
+                            let res = JSON.parse(data)
+                            res.data.length > 0 ? reportDate = res.data : reportDate = undefined
+                            filter.name = undefined
+                            filter.date = undefined
+                            filter.month = undefined
+                            filter.start = undefined
+                            filter.end = undefined
+                            $update()
+
+                            $tick().then(() => {
+                                $('#form-filter')[0].reset()
+                                $f7.dialog.close()
+                            })
+                        }, error: () => {
+                            $f7.dialog.close()
+                            throw toast('Connection problem!')
+                        }
+                    })
+                }, 250)
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const getPerson = () => {
+            try {
+                api.getPerson({
+                    hash: storage.getItem('hash-patrol') || ''
+                }, {
+                    success: (data) => {
+                        let res = JSON.parse(data)
+                        filterPerson = res.person
+                        $update()
+                    }, error: () => {
+                        throw toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const getReportDate = (e) => {
+            try {
+                reportDate = undefined
+                api.getReportDate({
+                    hash: storage.getItem('hash-patrol') || ''
+                }, {
+                    success: (data) => {
+                        let res = JSON.parse(data)
+                        if (res.data.length > 0) reportDate = res.data
+                        $update()
+
+                        $tick().then(() => {
+                            $f7.dialog.close()
+                        })
+                    }, error: () => {
+                        $f7.dialog.close()
+                        throw toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const reinitAccordion = () => {
+            $f7.accordion.toggle('.report.accordion-item-opened')
+        }
+
+        const loadActivity = async (e) => {
+            if (phaseTemp == e) {
+                checkpoint = undefined
+                report = undefined
+                phaseTemp = undefined
+                await $update()
+            } else {
+                phaseTemp = e
+                checkpoint = undefined
+                report = undefined
+                await $update()
+                await getActivity(e)
+                await getReportTask(e)
+            }
+        }
+
+        const getActivity = (e) => {
+            try {
+                $f7.dialog.preloader('Getting...')
+                setTimeout(() => {
+                    api.getActivity({
+                        hash: storage.getItem('hash-patrol') || '',
+                        phase: e
+                    }, {
+                        success: (data) => {
+                            let res = JSON.parse(data)
+                            checkpoint = res.schedule
+
+                            let len = checkpoint.length - 1
+                            endStatus = checkpoint[len].status
+                            $update()
+
+                            $tick().then(() => {
+                                $f7.dialog.close()
+                            })
+                        }, error: () => {
+                            $f7.dialog.close()
+                            throw toast('Connection problem!')
+                        }
+                    })
+                }, 250)
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const getReportTask = (e) => {
+            try {
+                api.getReportTask({
+                    hash: storage.getItem('hash-patrol') || '',
+                    phase: e
+                }, {
+                    success: (data) => {
+                        let res = JSON.parse(data)
+                        report = res.report
+                        $update()
+                    }, error: () => {
+                        throw toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const getDetailTask = (e) => {
+            let index = e.target.dataset.index
+            note = report[index].note
+            task = report[index].task
+            x = e.x
+            y = e.y
+            $update()
+
+            $tick().then(() => {
+                $f7.popover.create({
+                    el: '#report-note',
+                    targetX: x,
+                    targetY: y,
+                }).open()
+
+                $('#report-note').once('popover:closed', () => {
+                    $f7.popover.destroy('#report-note')
+                })
+            })
+            $update()
+        }
+
+        const getLocation = (e) => {
+            let tempCheckpoint = report[e].checkpoint.split(',')
+            if (tempCheckpoint[0] && tempCheckpoint[1]) map(report[e].startLocation, tempCheckpoint[0].toLowerCase(), report[e].endLocation, tempCheckpoint[1].toLowerCase())
+        }
+
+        const map = (a, b, c, d) => {
+            window.open(`https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s-${b}+66cc66(${a}),pin-s-${d}+007aff(${c})/auto/640x640@2x?access_token=pk.eyJ1IjoiZG9rb3RlbGVrIiwiYSI6ImNrNTUydHU0eTBwdDYzZXBubnU1cGg0bnMifQ.3mx4XwIRpMPjdcEssgS4lg&attribution=false&logo=false`)
+        }
+
+        const toast = (msg) => {
+            $f7.toast.create({
+                text: msg,
+                closeTimeout: 2000,
+            }).open()
+        }
+
+        return $render
+    }
+</script>

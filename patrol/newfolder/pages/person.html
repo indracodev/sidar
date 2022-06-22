@@ -1,0 +1,483 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner">
+                <div class="left left-navbar">
+                    <a class="link back">
+                        <span>Back</span>
+                    </a>
+                </div>
+                <div class="title text-align-center" style="width: 100%;">Guard</div>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div style="max-width: 1280px; margin: 0 auto;">
+                <div class="row no-gap">
+                    <div class="col-100 medium-50">
+                        <div class="card card-outline data-table data-table-collapsible data-table-init data-table-person">
+                            <div class="card-header" style="border-radius: inherit;">
+                                <div class="data-table-header">
+                                    <div class="data-table-title">Guard List</div>
+                                    <a class="link icon-only popover-open" data-popover="#person-add">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                                            <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                                        </svg>
+                                    </a>
+                                </div>
+
+                                <div class="data-table-header-selected">
+                                    <!-- Selected table title -->
+                                    <div class="data-table-title-selected">
+                                        <span class="data-table-selected-count"></span> items selected</div>
+                                    <!-- Selected table actions -->
+                                    <div class="data-table-actions">
+                                        <a class="link icon-only" @click="${rmPerson}" style="color: red;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                                <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                                                <path fill-rule="evenodd" d="M11 7.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z" />
+                                            </svg>
+                                        </a>
+                                        <a class="link icon-only popover-open" data-popover="#person-edit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
+                                                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="label-cell"></th>
+                                            <th class="label-cell"><b>Guard Name</b></th>
+                                            <th class="numeric-cell"><b>Last Update</b></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${!person && $h`
+                                            <tr style="background-color: white;">
+                                                <td class="label-cell"></td>
+                                                <td class="label-cell" data-collapsible-title="Guard Name">No data!</td>
+                                                <td class="numeric-cell" data-collapsible-title="Last Update"></td>
+                                            </tr>
+                                        `}
+                                        ${person && person.map((person) => $h`
+                                            <tr style="background-color: white;">
+                                                <td class="checkbox-cell">
+                                                    <label class="checkbox no-ripple">
+                                                        <input type="checkbox" class="person-check" @click="${()=> check('person', person.name, person.ref)}" />
+                                                        <i class="icon-checkbox"></i>
+                                                    </label>
+                                                </td>
+                                                <td class="label-cell" data-collapsible-title="Guard Name">${person.name}</td>
+                                                <td class="numeric-cell" data-collapsible-title="Last Update">${person.update}</td>
+                                            </tr>
+                                        `)}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-100 medium-50">
+                        <div class="card card-outline data-table data-table-collapsible data-table-init data-table-mapping">
+                            <div class="card-header" style="border-radius: inherit;">
+                                <div class="data-table-header">
+                                    <div class="data-table-title">Mapping List</div>
+                                </div>
+
+                                <div class="data-table-header-selected">
+                                    <!-- Selected table title -->
+                                    <div class="data-table-title-selected">
+                                        <span class="data-table-selected-count"></span> items selected</div>
+                                    <!-- Selected table actions -->
+                                    <div class="data-table-actions">
+                                        <a class="link icon-only popover-open" data-popover="#mapping-edit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
+                                                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="label-cell"></th>
+                                            <th class="label-cell"><b>Mapping Name</b></th>
+                                            <th class="label-cell"><b>Mapping NFC</b></th>
+                                            <th class="numeric-cell"><b>Last Update</b></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${!mapping && $h`
+                                            <tr style="background-color: white;">
+                                                <td class="label-cell"></td>
+                                                <td class="label-cell" data-collapsible-title="Mapping Name">No data!</td>
+                                                <td class="label-cell" data-collapsible-title="Mapping NFC"></td>
+                                                <td class="numeric-cell" data-collapsible-title="Last Update"></td>
+                                            </tr>
+                                        `}
+                                        ${mapping && mapping.map((mapping) => $h`
+                                            <tr style="background-color: white;">
+                                                <td class="checkbox-cell">
+                                                    <label class="checkbox no-ripple">
+                                                        <input type="checkbox" class="mapping-check" @click="${()=> check('mapping', mapping.name, mapping.id)}" />
+                                                        <i class="icon-checkbox"></i>
+                                                    </label>
+                                                </td>
+                                                <td class="label-cell" data-collapsible-title="Mapping Name">${mapping.name}</td>
+                                                <td class="label-cell" data-collapsible-title="Mapping NFC" style="font-size: smaller; color: darkgray;">${mapping.tag}</td>
+                                                <td class="numeric-cell" data-collapsible-title="Last Update">${mapping.update}</td>
+                                            </tr>
+                                        `)}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="person-add" data-close-by-backdrop-click="false" data-close-by-outside-click="false">
+            <div class="popover-inner">
+                <div class="block">
+                    <form id="form-person-add">
+                        <div class="list">
+                            <ul>
+                                <li class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">Guard Name</div>
+                                        <div class="item-input-wrap">
+                                            <input type="text" @keyup="${()=> set('person', event.target.value)}" required validate />
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content padding-top padding-right">
+                                    <div class="segmented segmented-raised" style="width: 100%;">
+                                        <a class="button popover-close" style="border-radius: 0; color: darkgrey;">Cancel</a>
+                                        <a class="button" @click="${addPerson}" style="border-radius: 0;">Save</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="person-edit" data-close-by-backdrop-click="false" data-close-by-outside-click="false">
+            <div class="popover-inner">
+                <div class="block">
+                    <form id="form-person-edit">
+                        <div class="list">
+                            <ul>
+                                <li class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">Guard Name</div>
+                                        <div class="item-input-wrap">
+                                            <input type="text" @keyup="${()=> set('person', event.target.value)}" value="${personName}" required validate />
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content padding-top padding-right">
+                                    <div class="segmented segmented-raised" style="width: 100%;">
+                                        <a class="button popover-close" style="border-radius: 0; color: darkgrey;">Cancel</a>
+                                        <a class="button" @click="${editPerson}" style="border-radius: 0;">Save</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="mapping-edit" data-close-by-backdrop-click="false" data-close-by-outside-click="false">
+            <div class="popover-inner">
+                <div class="block">
+                    <form id="form-mapping-edit">
+                        <div class="list">
+                            <ul>
+                                <li class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">Mapping Name</div>
+                                        <div class="item-input-wrap">
+                                            <input type="text" @keyup="${()=> set('mapping', event.target.value)}" value="${mappingName}" required validate />
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content padding-top padding-right">
+                                    <div class="segmented segmented-raised" style="width: 100%;">
+                                        <a class="button popover-close" style="border-radius: 0; color: darkgrey;">Cancel</a>
+                                        <a class="button" @click="${editMapping}" style="border-radius: 0;">Save</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</template>
+<script>
+    "user strict"
+    export default (props, { $onBeforeMount, $onMounted, $onBeforeUnmount, $, $f7, $update, $tick }) => {
+        let person, mapping,
+            personName, mappingName,
+            personId, mappingId,
+            hash = storage.getItem('hash-patrol') || '',
+            api = new Model()
+
+        $onBeforeMount(() => {
+            $f7.dialog.preloader('Getting Data...')
+            setTimeout(() => {
+                getPerson()
+            }, 250)
+            console.log('person:before-mount')
+        })
+
+        $onMounted(() => {
+            $('#person-edit').on('popover:close', () => {
+                $('.data-table-person').removeClass('data-table-has-checked')
+                $('.person-check').prop('checked', false)
+            })
+
+            $('#mapping-edit').on('popover:close', () => {
+                $('.data-table-mapping').removeClass('data-table-has-checked')
+                $('.mapping-check').prop('checked', false)
+            })
+            console.log('person:mounted')
+        })
+
+        $onBeforeUnmount(() => {
+            $('#person-edit').off('popover:close')
+            $('#mapping-edit').off('popover:close')
+            console.log('person:before-unmount')
+        })
+
+        const set = (e, value) => {
+            switch (e) {
+                case 'mapping': mappingName = value; break
+                case 'person': personName = value; break
+                default: break
+            }
+        }
+
+        const check = (e, a, b) => {
+            switch (e) {
+                case 'person':
+                    personName = a
+                    personId = b
+                    $update()
+                    break
+                case 'mapping':
+                    mappingName = a
+                    mappingId = b
+                    $update()
+                    break
+                default: break
+            }
+        }
+
+        const getPerson = () => {
+            try {
+                api.getPerson({
+                    hash: hash
+                }, {
+                    success: (data) => {
+                        let res = JSON.parse(data)
+                        person = res.person
+                        mapping = res.mapping
+                        $update()
+
+                        $tick().then(() => {
+                            $f7.dialog.close()
+
+                            $('.person-check').click(function () {
+                                if ($(this).prop('checked') && $('.data-table-has-checked').length < 1) {
+                                } else {
+                                    if (!$(this).prop('checked') && $('.data-table-has-checked').length > 0) {
+                                        $(this).prop('checked', false)
+                                    } else {
+                                        $('.person-check').prop('checked', false)
+                                        $(this).prop('checked', true)
+                                    }
+                                }
+                            })
+                        })
+                    }, error: () => {
+                        $f7.dialog.close()
+                        throw toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const addPerson = () => {
+            if ($f7.input.validateInputs($('#form-person-add'))) {
+                try {
+                    $f7.popover.close()
+                    $f7.dialog.preloader('Adding...')
+                    api.addPerson({
+                        name: personName,
+                        hash: hash
+                    }, {
+                        success: (data) => {
+                            let res = JSON.parse(data)
+                            switch (res.status) {
+                                case 'success':
+                                    toast('Success added!')
+                                    setTimeout(() => {
+                                        getPerson()
+                                    }, 250)
+                                    break
+                                default:
+                                    $f7.dialog.close()
+                                    toast('Failed added!')
+                                    break
+                            }
+                        }, error: () => {
+                            $f7.dialog.close()
+                            throw toast('Connection problem!')
+                        }
+                    })
+                } catch (e) {
+                    toast('Code problem!')
+                }
+            } else {
+                toast('Check again your input!')
+            }
+        }
+
+        const editPerson = () => {
+            if ($f7.input.validateInputs($('#form-person-edit'))) {
+                try {
+                    $f7.popover.close()
+                    $f7.dialog.preloader('Editing...')
+                    api.editPerson({
+                        person: personName,
+                        id: personId,
+                        hash: hash
+                    }, {
+                        success: (data) => {
+                            let res = JSON.parse(data)
+    
+                            if (res.status == "success") {
+                                toast('Success edited!')
+                                setTimeout(() => {
+                                    getPerson()
+                                }, 250)
+                            } else {
+                                toast('Failed edited!')
+                                $f7.dialog.close()
+                            }
+                        }, error: () => {
+                            $f7.dialog.close()
+                            throw toast('Connection problem!')
+                        }
+                    })
+                } catch (e) {
+                    toast('Code problem!')
+                }
+            } else {
+                toast('Check again your input!')
+            }
+        }
+
+        const rmPerson = () => {
+            $f7.dialog.create({
+                text: 'Are you sure want to remove this person?',
+                buttons: [{
+                    text: 'Cancel',
+                    close: true
+                }, {
+                    text: 'Remove',
+                    onClick: () => {
+                        try {
+                            $f7.dialog.preloader('Deleting...')
+                            api.rmPerson({
+                                id: personId,
+                                hash: hash
+                            }, {
+                                success: (data) => {
+                                    var res = JSON.parse(data)
+                                    if (res.status == "success") {
+                                        $('.data-table').removeClass('data-table-has-checked')
+                                        $('.person-check').prop('checked', false)
+                                        toast('Success deleted!')
+                                        setTimeout(() => {
+                                            getPerson()
+                                        }, 250)
+                                    } else {
+                                        toast('Failed deleted!')
+                                        $f7.dialog.close()
+                                    }
+                                }, error: () => {
+                                    $f7.dialog.close()
+                                    throw toast('Connection problem!')
+                                }
+                            })
+                        } catch (e) {
+                            toast('Code problem!')
+                        }
+                    }
+                }]
+            }).open()
+        }
+
+        const editMapping = () => {
+            if ($f7.input.validateInputs($('#form-mapping-edit'))) {
+                try {
+                    $f7.popover.close()
+                    $f7.dialog.preloader('Editing...')
+                    api.editMapping({
+                        mapping: mappingName,
+                        id: mappingId,
+                        hash: hash
+                    }, {
+                        success: (data) => {
+                            let res = JSON.parse(data)
+                            if (res.status == "success") {
+                                toast('Success edited!')
+                                setTimeout(() => {
+                                    getPerson()
+                                }, 250)
+                            } else {
+                                toast('Failed edited!')
+                                $f7.dialog.close()
+                            }
+                        }, error: () => {
+                            $f7.dialog.close()
+                            throw toast('Connection problem!')
+                        }
+                    })
+                } catch (e) {
+                    toast('Code problem!')
+                }
+            } else {
+                toast('Check again your input!')
+            }
+        }
+
+        const toast = (msg) => {
+            $f7.toast.create({
+                text: msg,
+                closeTimeout: 2000,
+            }).open()
+        }
+
+        return $render
+    }
+</script>
