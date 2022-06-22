@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$username = "root";
-$password = "";
+$username = "u1313327_sidar";
+$password = "1#k18j)S%SI?";
 $database = "u1313327_sidar";
 
 // Create connection
