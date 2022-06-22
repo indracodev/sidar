@@ -1,13 +1,18 @@
 <?php
 session_start();
+$headerURL = "https://localhost/sidar-git/";
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
-
-if($_SESSION["IDUser"] > 0 ){
-    header("Location: https://sidar.id/");
+if($_SESSION["IDUser"] == !null )
+{
+ if($_SESSION["IDUser"] > 0 ){
+    header("Location: ".$headerURL);
+}   
 }
-echo $_SESSION["IDUser"];
+
+// echo $_SESSION["IDUser"];
+// var_dump("asik");
 ?>
 
 <!DOCTYPE html>
@@ -74,13 +79,13 @@ echo $_SESSION["IDUser"];
                     <br>
                     DAILY ACTIVITY REPORT
                 </p>
-                <form action="https://sidar.id/login.php" method="post">
+                <form action=<?php echo $headerURL."login.php";?> method="post">
                     <div class="form-group border-bottom border-secondary">
-                        <input type="text" name="username" class="form-control form-control-lg rounded-0 bg-transparent border-0" placeholder="Username" maxlength="17" required>
+                        <input type="text" name="username" class="form-control form-control-lg rounded-0 bg-transparent border-0" placeholder="Username" maxlength="17" value = "suryo" required>
                     </div>
                     <div class="form-group border-bottom border-secondary position-relative">
                         <div class="input-group" id="show_hide_password">
-                            <input class="form-control form-control-lg rounded-0 bg-transparent border-0" name="password" type="password" placeholder="Password" required="required">
+                            <input class="form-control form-control-lg rounded-0 bg-transparent border-0" name="password" type="password" placeholder="Password" value = "085649224822" required="required">
                             <a href="" class="btn btn-show-pass d-flex justify-content-center align-items-center">
                                 <i class="fa fa-eye-slash" aria-hidden="true"></i>
                             </a>
