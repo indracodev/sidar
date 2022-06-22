@@ -1,0 +1,493 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner">
+                <div class="left left-navbar">
+                    <a class="link back">
+                        <span>Back</span>
+                    </a>
+                </div>
+                <div class="title text-align-center" style="width: 100%;">Checkpoint</div>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div style="max-width: 1280px; margin: 0 auto;">
+                <div class="card card-outline data-table data-table-collapsible data-table-init">
+                    <div class="row no-gap">
+                        <div class="col-100 medium-50" style="border-right: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0;">
+                            <div class="card-header" style="border-radius: inherit;">
+                                <div class="data-table-header">
+                                    <div class="data-table-title">Checkpoint List</div>
+                                </div>
+                                <div class="data-table-header-selected">
+                                    <!-- Selected table title -->
+                                    <div class="data-table-title-selected">
+                                        <span class="data-table-selected-count"></span> items selected</div>
+                                    <!-- Selected table actions -->
+                                    <div class="data-table-actions">
+                                        <a class="link icon-only popup-open" data-popup="#map-location">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+                                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                            </svg>
+                                        </a>
+                                        <a class="link icon-only" @click="${toggle}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                                <path d="M4.5 9a3.5 3.5 0 1 0 0 7h7a3.5 3.5 0 1 0 0-7h-7zm7 6a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm-7-14a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zm2.45 0A3.49 3.49 0 0 1 8 3.5 3.49 3.49 0 0 1 6.95 6h4.55a2.5 2.5 0 0 0 0-5H6.95zM4.5 0h7a3.5 3.5 0 1 1 0 7h-7a3.5 3.5 0 1 1 0-7z" />
+                                            </svg>
+                                        </a>
+                                        <a class="link icon-only" @click="${rmCheckpoint}" style="color: red;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
+                                            </svg>
+                                        </a>
+                                        <a class="link icon-only popover-open" data-popover="#checkpoint-edit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
+                                                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-content" style="max-height: calc(100vh - 175px);">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="label-cell"></th>
+                                            <th class="label-cell"><b>Checkpoint Name</b></th>
+                                            <th class="label-cell"><b>Checkpoint NFC</b></th>
+                                            <th class="numeric-cell"><b>Last Update</b></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${!checkpoint && $h`
+                                        <tr style="background-color: white;">
+                                            <td class="label-cell"></td>
+                                            <td class="label-cell" data-collapsible-title="Checkpoint Name">No data!</td>
+                                            <td class="label-cell" data-collapsible-title="Checkpoint NFC"></td>
+                                            <td class="numeric-cell" data-collapsible-title="Last Update"></td>
+                                        </tr>
+                                        `}
+                                        ${checkpoint && checkpoint.map((checkpoint, index) => $h`
+                                        <tr style="background-color: white; color: ${checkpoint.color}">
+                                            <td class="checkbox-cell">
+                                                <label class="checkbox no-ripple">
+                                                    <input type="checkbox" class="checkpoint-check"
+                                                        @click="${()=>check(checkpoint.name, checkpoint.ref, checkpoint.location)}" />
+                                                    <i class="icon-checkbox"></i>
+                                                </label>
+                                            </td>
+                                            <td class="label-cell" data-collapsible-title="Checkpoint Name">
+                                                <span class="padding-right">Point ${checkpoint.name}</span>
+                                                ${tempMapColor[index] != 'ff0000' && $h`
+                                                    <div class="chip" style="height: 24px; background: #${tempMapColor[index]};">
+                                                        <div class="chip-label"></div>
+                                                    </div>
+                                                `}
+                                            </td>
+                                            <td class="label-cell" data-collapsible-title="Checkpoint NFC" style="font-size: smaller; color: darkgray;">${checkpoint.ref.toUpperCase()}</td>
+                                            <td class="numeric-cell" data-collapsible-title="Last Update">${checkpoint.update}</td>
+                                        </tr>
+                                        `)}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-100 medium-50">
+                            <div class="margin">
+                                ${locationView && $h`
+                                <img @click="${()=> map(`https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/${locationView}/auto/640x640@2x?access_token=pk.eyJ1IjoiZG9rb3RlbGVrIiwiYSI6ImNrNTUydHU0eTBwdDYzZXBubnU1cGg0bnMifQ.3mx4XwIRpMPjdcEssgS4lg&attribution=false&logo=false`)}"
+                                    src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/${locationView}/auto/600x300@2x?access_token=pk.eyJ1IjoiZG9rb3RlbGVrIiwiYSI6ImNrNTUydHU0eTBwdDYzZXBubnU1cGg0bnMifQ.3mx4XwIRpMPjdcEssgS4lg&attribution=false&logo=false"
+                                    style="width: 100%; cursor: pointer;" />
+                                `}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="checkpoint-edit" data-close-by-backdrop-click="false" data-close-by-outside-click="false">
+            <div class="popover-inner">
+                <div class="block">
+                    <form id="form-checkpoint-edit">
+                        <div class="list">
+                            <ul>
+                                <li class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">Checkpoint Name</div>
+                                        <div class="item-input-wrap">
+                                            <input type="text" @keyup="${setEditName}" maxlength="2" autocomplete="off" value="${checkpointName}" required validate />
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content padding-top padding-right">
+                                    <div class="segmented segmented-raised" style="width: 100%;">
+                                        <a class="button popover-close" style="border-radius: 0; color: darkgrey;">Cancel</a>
+                                        <a class="button" @click="${editCheckpoint}" style="border-radius: 0;">Save</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup" id="map-location" data-close-by-backdrop-click="true">
+            <a class="link popup-close no-ripple" style="position: absolute; top: 5px; right: 5px; z-index: 2;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                </svg>
+            </a>
+            <div id="map" style="position: absolute; top: 0; bottom: 0; width: 100%; height: 100%;"></div>
+            <a class="button button-fill button-large" @click="${setLocation}" style="position: fixed; bottom: 0; width: 100%; z-index: 2; border-radius: 0;">Save</a>
+        </div>
+
+    </div>
+</template>
+<script>
+    "user strict"
+    export default (props, { $onBeforeMount, $onMounted, $onBeforeUnmount, $, $f7, $update, $tick }) => {
+        let checkpoint, checkpointName, editName, checkpointId, locationView, mapbox, mapboxMarker, tempColor = [], tempMapColor = [],
+            location = [],
+            hash = storage.getItem('hash-patrol') || '',
+            latitude = -7.293357, longitude = 112.675324,
+            api = new Model()
+
+        $onBeforeMount(() => {
+            $f7.dialog.preloader('Getting Data...')
+            setTimeout(() => {
+                getCheckpoint()
+            }, 250)
+            console.log('checkpoint:before-mount')
+        })
+
+        $onMounted(() => {
+            let tempURL = window.location.href.split('/')
+
+            $('#checkpoint-edit').on('popover:close', () => {
+                $('.data-table').removeClass('data-table-has-checked')
+                $('.checkpoint-check').prop('checked', false)
+            })
+
+            $('#map-location').on('popup:open', () => {
+                load(`js/mapbox-gl.js?v=${Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}`, async () => {
+                    mapboxgl.accessToken = 'pk.eyJ1IjoiZG9rb3RlbGVrIiwiYSI6ImNrNTUydHU0eTBwdDYzZXBubnU1cGg0bnMifQ.3mx4XwIRpMPjdcEssgS4lg'
+                    switch (tempURL[tempURL.length-2]) {
+                        case 'patrol':
+                            if (!longitude && !latitude) {
+                                longitude = 112.675324
+                                latitude = -7.293357
+                            }
+                            break
+                        case 'guard':
+                            if (!longitude && !latitude) {
+                                longitude = 112.7598806
+                                latitude = -7.7518994
+                            }
+                            break
+                        default: break
+                    }
+
+                    mapbox = new mapboxgl.Map({
+                        container: 'map',
+                        style: 'mapbox://styles/mapbox/streets-v11',
+                        center: [longitude, latitude],
+                        zoom: 20
+                    })
+
+                    mapboxMarker = new mapboxgl.Marker({
+                        draggable: true
+                    })
+
+                    mapbox.on('load', () => {
+                        mapboxMarker.setLngLat([longitude, latitude]).addTo(mapbox)
+                    })
+
+                    mapboxMarker.on('dragend', () => {
+                        let lngLat = mapboxMarker.getLngLat()
+                        latitude = lngLat.lat
+                        longitude = lngLat.lng
+                    })
+                })
+            })
+
+            $('#map-location').on('popup:close', () => {
+                $('.data-table').removeClass('data-table-has-checked')
+                $('.checkpoint-check').prop('checked', false)
+                delete self.mapboxgl
+            })
+
+            console.log('checkpoint:mounted')
+        })
+
+        $onBeforeUnmount(() => {
+            checkpoint = null
+            checkpointName = null
+            checkpointId = null
+            location = null
+            locationView = null
+            hash = null
+            mapbox = null
+            mapboxMarker = null
+
+            $('#map-location').off('popup:open')
+            $('#map-location').off('popup:close')
+            $('#checkpoint-edit').off('popover:close')
+
+            console.log('checkpoint:before-unmount')
+        })
+
+        const randomColor = () => {
+            let color, temp
+                R = Math.floor((Math.random() * 127) + 127), G = Math.floor((Math.random() * 127) + 127), B = Math.floor((Math.random() * 127) + 127),
+                rgb = (R << 16) + (G << 8) + B
+
+            temp = rgb.toString(16)
+            if (!tempColor.includes(temp)) {
+                color = temp
+                tempColor.push(color)
+            } else {
+                randomColor()
+            }
+            return color
+        }
+
+        const getCheckpoint = () => {
+            try {
+                location = []
+                api.getCheckpoint({
+                    hash: hash
+                }, {
+                    success: (data) => {
+                        let res = JSON.parse(data)
+                        switch (res.status) {
+                            case 'success':
+                                checkpoint = res.checkpoint
+                                let len = checkpoint.length
+                                let i = 0
+                                let rColor
+                                tempMapColor = []
+                                tempColor = []
+                                while (i < len) {
+                                    if (checkpoint[i].location != ',') {
+                                        rColor = randomColor()
+                                        checkpoint[i].status ? location.push(`pin-s-${checkpoint[i].name.toLowerCase()}+${rColor}(${checkpoint[i].location})`) : location.push(`pin-s-circle+ff0000(${checkpoint[i].location})`)
+                                        tempMapColor.push(rColor)
+                                    } else {
+                                        tempMapColor.push('ff0000')
+                                    }
+                                    i++
+                                }
+                                locationView = location.join(',')
+                                $update()
+
+                                $tick().then(() => {
+                                    $('.checkpoint-check').click(function () {
+                                        if ($(this).prop('checked') && $('.data-table-has-checked').length < 1) {
+                                        } else {
+                                            if (!$(this).prop('checked') && $('.data-table-has-checked').length > 0) {
+                                                $(this).prop('checked', false)
+                                            } else {
+                                                $('.checkpoint-check').prop('checked', false)
+                                                $(this).prop('checked', true)
+                                            }
+                                        }
+                                    })
+
+                                    $f7.dialog.close()
+                                })
+                                break
+                            default:
+                                $f7.dialog.close()    
+                                break
+                        }
+                    }, error: () => {
+                        $f7.dialog.close()
+                        throw toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const check = async (a, b, c) => {
+            checkpointName = a
+            checkpointId = b
+            let locationTemp = c.split(',')
+            latitude = locationTemp[1]
+            longitude = locationTemp[0]
+            $update()
+        }
+
+        const setEditName = (e) => {
+            editName = e.srcElement.value
+        }
+
+        const editCheckpoint = () => {
+            if ($f7.input.validateInputs($('#form-checkpoint-edit'))) {
+                try {
+                    $f7.dialog.preloader('Editing...')
+                    api.editCheckpoint({
+                        checkpoint: editName,
+                        id: checkpointId,
+                        hash: hash
+                    }, {
+                        success: (data) => {
+                            let res = JSON.parse(data)
+                            switch (res.status) {
+                                case 'success':
+                                    toast('Success Edited!')
+                                    setTimeout(() => {
+                                        getCheckpoint()
+                                    }, 250)
+                                    break
+                                default:
+                                    $f7.dialog.close()
+                                    toast('Failed Edited!')
+                                    break
+                            }
+                            $f7.popover.close()
+                        }, error: () => {
+                            $f7.dialog.close()
+                            $f7.popover.close()
+                            throw toast('Connection problem!')
+                        }
+                    })
+                } catch (e) {
+                    toast('Code problem!')
+                }
+            } else {
+                toast('Check again your input!')
+            }
+        }
+
+        const rmCheckpoint = () => {
+            $f7.dialog.create({
+                text: 'Are you sure want to remove this checkpoint?',
+                buttons: [{
+                    text: 'Cancel',
+                    close: true
+                }, {
+                    text: 'Remove',
+                    onClick: () => {
+                        try {
+                            $f7.dialog.preloader('Deleting...')
+                            api.rmCheckpoint({
+                                id: checkpointId,
+                                hash: hash
+                            }, {
+                                success: (data) => {
+                                    let res = JSON.parse(data)
+                                    switch (res.status) {
+                                        case 'success':
+                                            $('.data-table').removeClass('data-table-has-checked')
+                                            $('.checkpoint-check').prop('checked', false)
+                                            toast('Success deleted!')
+                                            setTimeout(() => {
+                                                getCheckpoint()
+                                            }, 250)
+                                            break
+                                        default:
+                                            $f7.dialog.close()
+                                            toast('Failed deleted!')
+                                            break
+                                    }
+                                }, error: () => {
+                                    $f7.dialog.close()
+                                    throw toast('Connection problem!')
+                                }
+                            })
+                        } catch (e) {
+                            toast('Code problem!')
+                        }
+                    }
+                }]
+            }).open()
+        }
+
+        const setLocation = () => {
+            try {
+                $f7.popup.close()
+                $f7.dialog.preloader('Setting...')
+                api.setCheckpoint({
+                    id: checkpointId,
+                    latitude: latitude,
+                    longitude: longitude,
+                    hash: hash
+                }, {
+                    success: (data) => {
+                        let res = JSON.parse(data)
+                        switch (res.status) {
+                            case 'success':
+                                setTimeout(() => {
+                                    getCheckpoint()
+                                }, 250)
+                                toast('Success set location!')
+                                break
+                            default:
+                                $f7.dialog.close()
+                                toast('Failed set location !')
+                                break
+                        }
+                    }, error: () => {
+                        $f7.dialog.close()
+                        throw toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const toggle = () => {
+            try {
+                $f7.dialog.preloader('Setting...')
+                api.toggleCheckpoint({
+                    id: checkpointId,
+                    hash: hash
+                }, {
+                    success: (data) => {
+                        let res = JSON.parse(data)
+                        switch (res.status) {
+                            case 'success':
+                                toast('Success Edited!')
+                                setTimeout(() => {
+                                    getCheckpoint()
+                                }, 250)
+                                break
+                            default:
+                                $f7.dialog.close()
+                                toast('Failed Edited!')
+                                break
+                        }
+                    }, error: () => {
+                        $f7.dialog.close()
+                        throw toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const map = (e) => {
+            window.open(e)
+        }
+
+        const toast = (msg) => {
+            $f7.toast.create({
+                text: msg,
+                closeTimeout: 2000,
+            }).open()
+        }
+
+        return $render
+    }
+</script>

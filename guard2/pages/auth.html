@@ -1,0 +1,45 @@
+<template>
+    <div class="page page-home">
+        <div class="page-content display-flex align-items-center justify-content-center">
+            <div class="preloader" style="width: 44px; height: 44px"></div>
+        </div>
+    </div>
+</template>
+<script>
+    "user strict"
+    export default (props, { $onBeforeMount, $f7, $ }) => {
+        $onBeforeMount(() => {
+            load(`js/model.js?v=${Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}`, () => {
+                auth()
+            })
+        })
+
+        const auth = () => {
+            try {
+                let api = new Model()
+                api.authentication({
+                    hash : storage.getItem('hash-patrol') || ''
+                }, {
+                    success : (data) => {
+                        let res = JSON.parse(data)
+                        res.status == 'success' ? $f7.view.main.router.navigate(`/navi/${res.level}/`, {transition: 'f7-circle', browserHistory: false}) :
+                            $f7.view.main.router.navigate({path: '/login/'}, {transition: 'f7-circle', browserHistory: false})
+                    }, error : () => {
+                        throw toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const toast = (msg) => {
+            $f7.toast.create({
+                text: msg,
+                closeTimeout: 2000,
+            }).open()
+        }
+
+        return $render
+    }
+</script>

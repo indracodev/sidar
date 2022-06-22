@@ -1,0 +1,2179 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner">
+                <div class="left left-navbar">
+                    <a class="link back">
+                        <span>Back</span>
+                    </a>
+                </div>
+                <div class="title text-align-center" style="width: 100%;">Schedule</div>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div style="max-width: 1280px; margin: 0 auto;">
+                <div class="card card-outline" style="border: 0; background: whitesmoke;">
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col-100 medium-50" style="background: white;">
+                                <div id="calendar"></div>
+                                <div class="card card-outline data-table data-table-collapsible data-table-init template-schedule">
+                                    <div class="card-header" style="border-radius: inherit;">
+                                        <div class="data-table-header">
+                                            <div class="data-table-title">Template Schedule</div>
+                                            ${isSearch && $h`
+                                                <div class="display-flex">
+                                                    <div class="list no-hairlines-md">
+                                                        <ul>
+                                                            <li class="item-content item-input item-input-outline">
+                                                                <div class="item-inner no-padding-top">
+                                                                    <div class="item-title item-floating-label">Search Template</div>
+                                                                    <div class="item-input-wrap">
+                                                                        <input type="text" placeholder="Search here" @change="${()=> set('search-template', event.target.value)}" @keyup="${()=> set('search-template', event.target.value)}" />
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <a class="link icon-only no-ripple" @click="${()=> set('template-search')}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 512 512">
+                                                            <path fill="currentColor" d="M307.8 223.8h-200c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12zM508.3 497L497 508.3c-4.7 4.7-12.3 4.7-17 0l-129-129c-2.3-2.3-3.5-5.3-3.5-8.5v-8.5C310.6 395.7 261.7 416 208 416 93.8 416 1.5 324.9 0 210.7-1.5 93.7 93.7-1.5 210.7 0 324.9 1.5 416 93.8 416 208c0 53.7-20.3 102.6-53.7 139.5h8.5c3.2 0 6.2 1.3 8.5 3.5l129 129c4.7 4.7 4.7 12.3 0 17zM384 208c0-97.3-78.7-176-176-176S32 110.7 32 208s78.7 176 176 176 176-78.7 176-176z" class=""></path>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            `}${!isSearch && $h`
+                                                <div class="display-flex">
+                                                    <a class="link icon-only margin-right" @click="${()=> set('template-search')}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 512 512">
+                                                            <path fill="currentColor" d="M319.8 204v8c0 6.6-5.4 12-12 12h-84v84c0 6.6-5.4 12-12 12h-8c-6.6 0-12-5.4-12-12v-84h-84c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h84v-84c0-6.6 5.4-12 12-12h8c6.6 0 12 5.4 12 12v84h84c6.6 0 12 5.4 12 12zm188.5 293L497 508.3c-4.7 4.7-12.3 4.7-17 0l-129-129c-2.3-2.3-3.5-5.3-3.5-8.5v-8.5C310.6 395.7 261.7 416 208 416 93.8 416 1.5 324.9 0 210.7-1.5 93.7 93.7-1.5 210.7 0 324.9 1.5 416 93.8 416 208c0 53.7-20.3 102.6-53.7 139.5h8.5c3.2 0 6.2 1.3 8.5 3.5l129 129c4.7 4.7 4.7 12.3 0 17zM384 208c0-97.3-78.7-176-176-176S32 110.7 32 208s78.7 176 176 176 176-78.7 176-176z" class=""></path>
+                                                        </svg>
+                                                    </a>
+                                                    <a class="link icon-only popup-open margin-left-half" data-popup="#template-editor">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            `}
+                                        </div>
+                                        <div class="data-table-header-selected">
+                                            <!-- Selected table title -->
+                                            <div class="data-table-title-selected"><span
+                                                    class="data-table-selected-count"></span> items selected</div>
+                                            <!-- Selected table actions -->
+                                            <div class="data-table-actions">
+                                                <a class="link icon-only" @click="${copyTemplateSchedule}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z"/>
+                                                        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                                                        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                                                    </svg>
+                                                </a>
+                                                <a class="link icon-only" @click="${removeTemplateSchedule}" style="color: red;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                                        <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-content" style="max-height: calc(100vh - 545px);">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="label-cell"></th>
+                                                    <th class="label-cell"><b>Template Name</b></th>
+                                                    <th class="numeric-cell"><b>Last Update</b></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                ${templateSchedule && templateSchedule.map((template) => $h`
+                                                    <tr style="background-color: white;">
+                                                        <td class="checkbox-cell">
+                                                            <label class="checkbox no-ripple">
+                                                                <input type="checkbox" class="template-check" @click="${()=> check(template.id)}" />
+                                                                <i class="icon-checkbox"></i>
+                                                            </label>
+                                                        </td>
+                                                        <td class="label-cell popup-open" @click="${()=> templateScheduleDetail(template.id)}" data-popup="#template-editor" data-collapsible-title="Task Name">${template.name}</td>
+                                                        <td class="numeric-cell popup-open" @click="${()=> templateScheduleDetail(template.id)}" data-popup="#template-editor" data-collapsible-title="Last Update">${template.update}</td>
+                                                    </tr>
+                                                `)}
+                                                ${!templateSchedule && $h`
+                                                    <tr style="background-color: white;">
+                                                        <td class="label-cell"></td>
+                                                        <td class="label-cell" data-collapsible-title="Task Name">No data!</td>
+                                                        <td class="label-cell" data-collapsible-title="Last Update"></td>
+                                                    </tr>
+                                                `}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-100 medium-50" style="background: white;">
+                                <div class="list accordion-list">
+                                    <ul>
+                                        ${group && group.map((data) => $h`
+                                            <li class="accordion-item">
+                                                <a class="item-content item-link padding-right" @click="${resetAccordion}">
+                                                    <div class="item-inner">
+                                                        <div class="item-title"><span style="color: gray;">Group</span> [<span style="font-weight: 500;">${data.group}</span>]</div>
+                                                    </div>
+                                                </a>
+                                                <div class="accordion-item-content">
+                                                    <div class="list accordion-list padding-left-half">
+                                                        <ul>
+                                                            ${data.phase && data.phase.map((phase, index) => $h`
+                                                                <li class="accordion-item content-item">
+                                                                    <a class="item-content item-link padding-right" @click="${()=> loadSchedule(phase)}">
+                                                                        <div class="item-inner no-padding-right">
+                                                                            <div class="item-title" style="font-weight: 500;">
+                                                                                Phase ${parseInt(index)+1} <small class="text-color-primary" style="font-weight: 400;">(${calendarView})</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+                                                                    <div class="accordion-item-content">
+                                                                        <div class="block" style="max-height: calc(65vh); overflow-y: auto;">
+                                                                            <div class="list media-list no-hairlines-between">
+                                                                                <ul>
+                                                                                    ${!schedule && $h`
+                                                                                        <li>
+                                                                                            <div class="item-content padding-left-half">
+                                                                                                <div class="item-inner">
+                                                                                                    <div class="item-title-row">
+                                                                                                        <div class="item-title" style="text-transform: capitalize; font-weight: 400;">
+                                                                                                            No Schedule
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </li>
+                                                                                    `}
+                                                                                    ${schedule && schedule.map((schedule, index) => $h`
+                                                                                        <li>
+                                                                                            <div class="item-content padding-left-half">
+                                                                                                <div class="item-inner no-padding-right margin-right">
+                                                                                                    <div class="item-title-row align-items-center">
+                                                                                                        <div class="item-title" style="text-transform: capitalize; font-weight: 400;">
+                                                                                                            Point ${schedule.checkpoint} - ${schedule.person}
+                                                                                                            ${schedule.mapping && $h`
+                                                                                                                <span style="color: grey;">(${schedule.mapping})</span>
+                                                                                                            `}
+                                                                                                            <br />
+                                                                                                            <div class="display-flex align-items-center" style="color: grey; height: 25px;">
+                                                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16" style="padding-right: 5px;">
+                                                                                                                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                                                                                                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
+                                                                                                                </svg>
+                                                                                                                <span style="font-size: small;">(${schedule.start.substring(0,5)} - ${schedule.end.substring(0,5)})</span>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="item-after">
+                                                                                                            ${schedule.isEdit && schedule.status == 'white' && $h`
+                                                                                                                <a @click="${()=> removeSchedule(schedule.id, phase)}" class="link margin-right" style="color: red;">
+                                                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                                                                                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                                                                                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                                                                                                    </svg>
+                                                                                                                </a>
+                                                                                                                <a @click="${()=>scheduleEdit(phase, schedule.id, index)}" class="link popover-open" data-popover="#schedule-edit">
+                                                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                                                                                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                                                                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                                                                                    </svg>
+                                                                                                                </a>
+                                                                                                            `}
+                                                                                                            ${!schedule.isEdit && props.level=='10' && $h`
+                                                                                                                <a @click="${()=> removeSchedule(schedule.id, phase)}" class="link margin-right" style="color: red;">
+                                                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                                                                                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                                                                                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                                                                                                    </svg>
+                                                                                                                </a>
+                                                                                                                <a @click="${()=>scheduleEdit(phase, schedule.id, index)}" class="link popover-open" data-popover="#schedule-edit">
+                                                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                                                                                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                                                                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                                                                                    </svg>
+                                                                                                                </a>
+                                                                                                            `}
+                                                                                                            ${schedule.status != 'white' && $h`
+                                                                                                                <span class="badge color-${schedule.status} margin-left"></span>
+                                                                                                            `}
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    ${schedule.isEdit && schedule.status == 'white' && $h`
+                                                                                                        <div class="item-subtitle" style="border-bottom: 1px solid #e0e0e0; white-space: normal;">
+                                                                                                            ${schedule.task && $h`
+                                                                                                                <div class="padding-vertical-half">
+                                                                                                                    ${schedule.task.map((task) => $h`
+                                                                                                                        <div class="chip chip-outline margin-left-half">
+                                                                                                                            <div class="chip-label">${task.name}</div>
+                                                                                                                        </div>
+                                                                                                                    `)}
+                                                                                                                </div>
+                                                                                                            `}
+                                                                                                            ${!schedule.task && schedule.isEdit && schedule.status == 'white' && $h`
+                                                                                                                <div class="padding-vertical-half display-flex justify-content-center">
+                                                                                                                    <a class="button button-fill popover-open" @click="${()=> scheduleEdit(phase, schedule.id, index)}" data-popover="#task-add" style="width: 50%">Set Task</a>
+                                                                                                                </div>
+                                                                                                            `}
+                                                                                                        </div>
+                                                                                                    `}
+                                                                                                    ${!schedule.isEdit && $h`
+                                                                                                        <div class="item-subtitle" style="border-bottom: 1px solid #e0e0e0; white-space: normal;">
+                                                                                                            ${schedule.task && $h`
+                                                                                                                <div class="padding-vertical-half">
+                                                                                                                    ${schedule.task.map((task) => $h`
+                                                                                                                        <div class="chip chip-outline margin-left-half ${task.state && task.state == '1' && $h`color-green`} ${task.state && task.state == '0' && $h`color-red`}">
+                                                                                                                            <div class="chip-label">${task.name}
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    `)}
+                                                                                                                </div>
+                                                                                                            `}
+                                                                                                            ${!schedule.task && $h`
+                                                                                                                <div style="padding-top: 5px;"></div>
+                                                                                                            `}
+                                                                                                        </div>
+                                                                                                    `}
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </li>
+                                                                                    `)}
+                                                                                </ul>
+                                                                            </div>
+                                                                            ${isEdited && $h`
+                                                                                <div class="segmented padding">
+                                                                                    ${!schedule && $h`
+                                                                                        <a class="button button-fill color-red" @click="${()=>removePhase(phase)}">Remove Phase</a>
+                                                                                    `}
+                                                                                    ${schedule && $h`
+                                                                                        <a class="button button-fill color-red" @click="${()=>removeAllSchedule(phase)}">Remove All Schedule</a>
+                                                                                    `}
+                                                                                    <a class="button button-outline popover-open" data-popover="#schedule-add" @click="${()=>popoverSchedule(phase)}">Add Schedule</a>
+                                                                                </div>
+                                                                            `}
+                                                                            ${!isEdited && props.level=='10' && $h`
+                                                                                <div class="segmented padding">
+                                                                                    ${!schedule && $h`
+                                                                                        <a class="button button-fill color-red" @click="${()=>removePhase(phase)}">Remove Phase</a>
+                                                                                    `}
+                                                                                    ${schedule && $h`
+                                                                                        <a class="button button-fill color-red" @click="${()=>removeAllSchedule(phase)}">Remove All Schedule</a>
+                                                                                    `}
+                                                                                    <a class="button button-outline popover-open" data-popover="#schedule-add" @click="${()=>popoverSchedule(phase)}">Add Schedule</a>
+                                                                                </div>
+                                                                            `}
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            `)}
+                                                            ${isEdited && $h`
+                                                                <li class="padding">
+                                                                    <a class="button button-fill color-red" @click="${()=> removeAllPhase(data.phase)}">Remove All Phase</a>
+                                                                </li>
+                                                            `}
+                                                            ${!isEdited && props.level=='10' && $h`
+                                                                <li class="padding">
+                                                                    <a class="button button-fill color-red" @click="${()=> removeAllPhase(data.phase)}">Remove All Phase</a>
+                                                                </li>
+                                                            `}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        `)}
+                                    </ul>
+                                </div>
+                                
+                                ${isEdited && $h`
+                                    <div class="segmented padding">
+                                        <a class="button button-fill" @click="${addPhase}">Add Phase</a>
+                                        ${group && $h`
+                                            <a class="button button-fill color-gray popover-open" data-popover="#schedule-copy">Copy All Phase</a>
+                                        `}
+                                    </div>
+                                `}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="task-add" data-close-by-backdrop-click="false" data-close-by-outside-click="false" style="width: auto;">
+            <div class="popover-inner">
+                <div class="block">
+                    <form>
+                        <div class="list">
+                            <ul>
+                                <li class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">Template</div>
+                                        <div class="item-input-wrap input-dropdown-wrap">
+                                            <select name="task-add-select" @change="${()=> set('task', event.target.value)}">
+                                                <option></option>
+                                                ${template && template.map((template, index) => $h`
+                                                    <option value="${index}">${template.name}</option>
+                                                `)}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </li>
+                                ${!isTemplateTask && $h`
+                                    <div class="page-content" style="height: 30vh; background: white;">
+                                        <div class="list">
+                                            <ul class="padding-left">
+                                                ${task && task.map((task) => $h`
+                                                    <li class="task-check padding-right">
+                                                        <label class="item-checkbox item-content">
+                                                            <input type="checkbox" name="task-check" class="task-check" value="${task.id}" />
+                                                            <i class="icon icon-checkbox"></i>
+                                                            <div class="item-inner">
+                                                                <div class="item-title">${task.name}</div>
+                                                            </div>
+                                                        </label>
+                                                    </li>
+                                                `)}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                `}
+                                <li class="item-content padding-top padding-right">
+                                    <div class="segmented segmented-raised" style="width: 100%;">
+                                        <a class="button popover-close" style="border-radius: 0; color: darkgrey;">Cancel</a>
+                                        <a class="button" @click="${setTask}" style="width: 100%;">Save</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="schedule-add" data-close-by-backdrop-click="false" data-close-by-outside-click="false">
+            <div class="popover-inner">
+                <div class="block">
+                    <div class="list">
+                        <ul>
+                            <li class="item-content item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Template</div>
+                                    <div class="item-input-wrap input-dropdown-wrap">
+                                        <select name="template-schedule-select" @change="${()=> set('template', event.target.value)}">
+                                            <option value="" selected></option>
+                                            ${templateSchedule && templateSchedule.map((template) => $h`
+                                                <option value="${template.id}">${template.name}</option>
+                                            `)}
+                                        </select>
+                                    </div>
+                                </div>
+                            </li>
+                            ${!isTemplateSchedule && $h`
+                                <form id="schedule-add-form">
+                                    <li class="item-content item-input">
+                                        <div class="item-inner">
+                                            <div class="item-title item-label">Tag NFC</div>
+                                            <div class="item-input-wrap input-dropdown-wrap">
+                                                <select @change="${()=> set('mapping', event.target.value)}" style="text-transform: capitalize;" required>
+                                                    <option value="" selected></option>
+                                                    ${mapping && mapping.map((mapping) => $h`
+                                                        <option value="${mapping.id}">${mapping.name}</option>
+                                                    `)}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content item-input">
+                                        <div class="item-inner">
+                                            <div class="item-title item-label">Person</div>
+                                            <div class="item-input-wrap input-dropdown-wrap">
+                                                <select @change="${()=> set('person', event.target.value)}" style="text-transform: capitalize;" required>
+                                                    <option value="" selected></option>
+                                                    ${person && person.map((person) => $h`
+                                                        <option value="${person.ref}">${person.name}</option>
+                                                    `)}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content item-input">
+                                        <div class="item-inner">
+                                            <div class="item-title item-label">Checkpoint</div>
+                                            <div class="item-input-wrap input-dropdown-wrap">
+                                                <select @change="${()=> set('checkpoint', event.target.value)}" required>
+                                                    <option value="" selected></option>
+                                                    ${checkpoint && checkpoint.map((checkpoint) => $h`
+                                                        <option value="${checkpoint.name}">Point ${checkpoint.name}</option>
+                                                    `)}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content item-input">
+                                        <div class="item-inner">
+                                            <div class="item-title item-label">Start Time</div>
+                                            <div class="item-input-wrap">
+                                                <input type="time" @change="${()=> set('startTime', event.target.value)}" required />
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content item-input">
+                                        <div class="item-inner">
+                                            <div class="item-title item-label">End Time</div>
+                                            <div class="item-input-wrap">
+                                                <input type="time" @change="${()=> set('endTime', event.target.value)}" required />
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content padding-top padding-right">
+                                        <div class="segmented segmented-raised" style="width: 100%;">
+                                            <a class="button popover-close" style="border-radius: 0; color: darkgrey;">Cancel</a>
+                                            <a class="button" @click="${addSchedule}" style="width: 100%;">Add</a>
+                                        </div>
+                                    </li>
+                                </form>
+                            `}
+                            ${isTemplateSchedule && $h`
+                                <li class="item-content padding-top padding-right">
+                                    <div class="segmented segmented-raised" style="width: 100%;">
+                                        <a class="button popover-close" style="border-radius: 0; color: darkgrey;">Cancel</a>
+                                        <a class="button" @click="${addScheduleTemplate}" style="width: 100%;">Set</a>
+                                    </div>
+                                </li>
+                            `}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="schedule-copy" data-close-by-backdrop-click="false" data-close-by-outside-click="false">
+            <div class="popover-inner">
+                <div id="calendar-copy"></div>
+                <div class="segmented segmented-raised" style="width: 100%;">
+                    <a class="button popover-close" style="border-radius: 0; color: darkgrey;">Cancel</a>
+                    <a class="button" @click="${copyAllPhase}" style="border-radius: 0;">Duplicate</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="schedule-edit" data-close-by-backdrop-click="false" data-close-by-outside-click="false">
+            <div class="popover-inner">
+                <div class="block">
+                    <form>
+                        <div class="list">
+                            <ul>
+                                <li class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">Start Time</div>
+                                        <div class="item-input-wrap">
+                                            <input type="time" @change="${()=> set('edit-start', event.target.value)}" value="${scheduleStart}" required validate />
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">End Time</div>
+                                        <div class="item-input-wrap">
+                                            <input type="time" @change="${()=> set('edit-end', event.target.value)}" value="${scheduleEnd}" required validate />
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content padding-top padding-right">
+                                    <div class="segmented segmented-raised" style="width: 100%;">
+                                        <a class="button popover-close" style="border-radius: 0; color: darkgrey;">Cancel</a>
+                                        <a class="button" @click="${editSchedule}" style="border-radius: 0;">Save</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="template-person" data-close-by-backdrop-click="false" data-close-by-outside-click="false" style="width: auto;">
+            <div class="popover-inner">
+                <div class="margin">
+                    <form>
+                        <div class="list">
+                            <ul>
+                                <li class="item-content item-input no-padding">
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">Person</div>
+                                        <div class="item-input-wrap input-dropdown-wrap">
+                                            <select @change="${()=> set('template-person', event.target.value)}" style="text-transform: capitalize;">
+                                                <option value="" selected></option>
+                                                ${person && person.map((person) => $h`
+                                                    <option value="${person.ref}">${person.name}</option>
+                                                `)}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content margin-top no-padding">
+                                    <div class="segmented segmented-raised" style="width: 100%;">
+                                        <a class="button popover-close" style="border-radius: 0; color: darkgrey;">Cancel</a>
+                                        <a class="button" @click="${()=> templateEditor('person-add')}" style="width: 100%;">Select</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="template-mapping" data-close-by-backdrop-click="false" data-close-by-outside-click="false" style="width: auto;">
+            <div class="popover-inner">
+                <div class="margin">
+                    <form>
+                        <div class="list">
+                            <ul>
+                                <li class="item-content item-input no-padding">
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">Tag NFC</div>
+                                        <div class="item-input-wrap input-dropdown-wrap">
+                                            <select @change="${()=> set('template-mapping', event.target.value)}" style="text-transform: capitalize;">
+                                                <option value="" selected></option>
+                                                ${mapping && mapping.map((mapping) => $h`
+                                                    <option value="${mapping.id}">${mapping.name}</option>
+                                                `)}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content margin-top no-padding">
+                                    <div class="segmented segmented-raised" style="width: 100%;">
+                                        <a class="button popover-close" style="border-radius: 0; color: darkgrey;">Cancel</a>
+                                        <a class="button" @click="${()=> templateEditor('mapping-add')}" style="width: 100%;">Select</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="template-time" data-close-by-backdrop-click="false" data-close-by-outside-click="false" style="width: auto;">
+            <div class="popover-inner">
+                <div class="margin">
+                    <form>
+                        <div class="list">
+                            <ul>
+                                <li class="item-content item-input no-padding-left">
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">Start Time</div>
+                                        <div class="item-input-wrap">
+                                            <input type="time" @change="${()=> set('template-start', event.target.value)}" required validate />
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content item-input no-padding-left">
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">End Time</div>
+                                        <div class="item-input-wrap">
+                                            <input type="time" @change="${()=> set('template-end', event.target.value)}" required validate />
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content margin-top no-padding">
+                                    <div class="segmented segmented-raised" style="width: 100%;">
+                                        <a class="button popover-close" style="border-radius: 0; color: darkgrey;">Cancel</a>
+                                        <a class="button" @click="${()=> templateEditor('time-add')}" style="width: 100%;">Select</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="template-task" data-close-by-backdrop-click="false" data-close-by-outside-click="false" style="width: auto;">
+            <div class="popover-inner">
+                <div class="margin">
+                    <form>
+                        <div class="list">
+                            <ul>
+                                <li class="item-content item-input no-padding-left">
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">Template</div>
+                                        <div class="item-input-wrap input-dropdown-wrap">
+                                            <select @change="${()=> set('template-task', event.target.value)}">
+                                                <option></option>
+                                                ${template && template.map((template, index) => $h`
+                                                    <option value="${index}">${template.name}</option>
+                                                `)}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content margin-top no-padding">
+                                    <div class="segmented segmented-raised" style="width: 100%;">
+                                        <a class="button popover-close" style="border-radius: 0; color: darkgrey;">Cancel</a>
+                                        <a class="button" @click="${()=> templateEditor('task-add')}" style="width: 100%;">Select</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="template-checkpoint" data-close-by-backdrop-click="false" data-close-by-outside-click="false" style="width: auto;">
+            <div class="popover-inner">
+                <div class="margin">
+                    <form>
+                        <div class="list">
+                            <ul>
+                                <li class="item-content item-input no-padding-left">
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">Checkpoint</div>
+                                        <div class="item-input-wrap input-dropdown-wrap">
+                                            <select @change="${()=> set('template-checkpointSelect', event.target.value)}">
+                                                <option></option>
+                                                ${checkpoint && checkpoint.map((checkpoint) => $h`
+                                                    <option value="${checkpoint.name}">Point ${checkpoint.name}</option>
+                                                `)}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content margin-top no-padding">
+                                    <div class="segmented segmented-raised" style="width: 100%;">
+                                        <a class="button popover-close" style="border-radius: 0; color: darkgrey;">Cancel</a>
+                                        <a class="button" @click="${()=> templateEditor('checkpoint-add')}" style="width: 100%;">Select</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup" id="template-editor" data-close-by-backdrop-click="false">
+            <div class="block-title block-title-medium no-margin padding" style="position: fixed; top: 0; z-index: 2; background-color: white; width: calc(100% - 32px);">Schedule Template</div>
+            <div class="row no-gap">
+                <div class="col-100 medium-50">
+                    <div class="page-content" style="background-color: white; max-height: calc(630px - 48px);">
+                        <form class="padding-horizontal" id="template-add-form">
+                            <div class="list no-margin no-hairlines padding-bottom" style="padding-top: 64px;">
+                                <ul>
+                                    <li class="item-content item-input">
+                                        <div class="item-inner">
+                                            <div class="item-title item-label">Template Name</div>
+                                            <div class="item-input-wrap">
+                                                <input type="text" autocomplete="off" @keyup="${()=> set('template-name', event.target.value)}" value="${_templateName}" required
+                                                    validate></input>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content item-input">
+                                        <div class="item-inner">
+                                            <div class="item-title item-label">Checkpoint</div>
+                                            <div class="item-input-wrap input-dropdown-wrap">
+                                                <select @change="${()=> set('template-checkpoint', event.target.value)}">
+                                                    <option value="" selected></option>
+                                                    ${checkpoint && checkpoint.map((checkpoint) => $h`
+                                                        <option value="${checkpoint.name}">Point ${checkpoint.name}</option>
+                                                    `)}
+                                                </select>
+                                            </div>
+                                            <a class="button button-raised margin-top" @click="${()=> templateEditor('checkpoint')}" style="width: 100%;">Add Checkpoint</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-100 medium-50">
+                    <div class="page-content" style="background-color: white; max-height: calc(630px - 48px);">
+                        <div class="list media-list no-hairlines no-margin padding-bottom" style="padding-top: 64px;">
+                            <ul>
+                                ${_templateCheckpoint && _templateCheckpoint.map((data, index) => $h`
+                                    <li>
+                                        <div class="item-content">
+                                            <div class="item-inner no-padding-right margin-right">
+                                                <div class="item-title-row align-items-center">
+                                                    <div class="item-title" style="text-transform: capitalize; font-weight: 400;">
+                                                        <span class="popover-open" data-popover="#template-checkpoint" @click="${()=> templateEditor('checkpoint-index', index)}">Point ${data} - </span>
+                                                        <span class="popover-open" data-popover="#template-person" @click="${()=> templateEditor('person-index', index)}">${_templatePerson.length > 0 ? person[person.findIndex(x => x.ref === _templatePerson[index])].name || '' : 'Person'} </span>
+                                                        <span class="popover-open" data-popover="#template-mapping" @click="${()=> templateEditor('mapping-index', index)}" style="color: grey;">(${_templateMapping.length > 0 ? mapping[mapping.findIndex(x => x.id === _templateMapping[index])].name : 'Mapping'})</span>
+                                                            <br />
+                                                            <div class="display-flex align-items-center popover-open" data-popover="#template-time" @click="${()=> templateEditor('time-index', index)}" style="color: grey; height: 25px;">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                                                                    viewBox="0 0 16 16" style="padding-right: 5px;">
+                                                                    <path
+                                                                        d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                                                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
+                                                                </svg>
+                                                                <span style="font-size: small;">(${_templateStart.length > 0 ? _templateStart[index] : 'Start'} - ${_templateEnd.length > 0 ? _templateEnd[index] : 'End'})</span>
+                                                            </div>
+                                                    </div>
+                                                    <div class="item-after">
+                                                        <div class="padding-vertical-half display-flex">
+                                                            <a class="button button-fill popover-open" @click="${()=>templateEditor('task-index', index)}" data-popover="#template-task" style="border-radius: 50%">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                                                    <path fill-rule="evenodd" d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z"/>
+                                                                    <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z"/>
+                                                                    <path fill-rule="evenodd" d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"/>
+                                                                </svg>
+                                                            </a>
+                                                            <a class="button button-fill margin-left-half color-red" @click="${()=>templateEditor('delete', index)}" style="border-radius: 50%">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                                </svg>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                ${_templateTask.length > 0 && _templateTask[index].map((task) => $h`
+                                                    <div class="chip chip-outline margin-left-half">
+                                                        <div class="chip-label">${task.name}
+                                                        </div>
+                                                    </div>
+                                                `)}
+                                            </div>
+                                        </div>
+                                    </li>
+                                `)}
+                                ${_templateCheckpoint.length < 1 && $h`
+                                    <li>
+                                        <div class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title" style="text-transform: capitalize; font-weight: 400;">
+                                                        No Schedule
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                `}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="segmented segmented-raised" style="width: 100%; position: fixed; bottom: 0; z-index: 1; background-color: white;">
+                <a class="button button-large popup-close" style="border-radius: 0; color: darkgrey;">Cancel</a>
+                ${templateScheduleId && $h`
+                    <a class="button button-large" @click="${editTemplate}" style="width: 100%;">Save</a>
+                `}
+                ${!templateScheduleId && $h`
+                    <a class="button button-large" @click="${addTemplate}" style="width: 100%;">Add</a>  
+                `}
+            </div>
+        </div>
+
+    </div>
+</template>
+<script>
+    "user strict"
+    export default (props, { $onBeforeMount, $onMounted, $onBeforeUnmount, $, $f7, $update, $tick }) => {
+        let template, templateSchedule,
+            task, taskId,
+            calendar, calendarView, calendarCopy,
+            phase, phaseId, templateScheduleId, group,
+            schedule, scheduleId, scheduleStart, scheduleEnd,
+            person, checkpoint, mapping, phaseTemp, db,
+            isEdited = true, isSearch = false,
+            hash = storage.getItem('hash-patrol') || ''
+
+        let personId, mappingId, checkpointName, startTime, endTime, templateSelect, taskSelect
+
+        let isTemplateTask = false, isTemplateSchedule = false
+
+        let _indexCheckpoint, _indexPerson, _indexMapping, _indexTime, _indexTask,
+            _templateName, _templateCheckpointName, _templatePersonId, _templateMappingId, _templateStartTime, _templateEndTime, _templateTaskSelect, _templateCheckpointSelect,
+            _templateCheckpoint = [], _templatePerson = [], _templateMapping = [], _templateStart = [], _templateEnd = [], _templateTask = []
+
+        let api = new Model()
+
+        $onBeforeMount(() => {
+            $f7.dialog.preloader('Getting Data...')
+            setTimeout( async () => {
+                await getPerson()
+                await getMapping()
+                await getCheckpoint()
+                await getTemplate()
+                await getTemplateSchedule()
+            }, 250)
+            console.log('schedule:before-mount')
+        })
+
+        $onMounted(() => {
+            try {
+                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+                calendar = $f7.calendar.create({
+                    containerEl: '#calendar',
+                    value: [new Date()],
+                    weekHeader: true,
+                    renderToolbar: () => {
+                        return `
+                            <div class="toolbar calendar-toolbar no-shadow">
+                                <div class="toolbar-inner">
+                                    <div class="left">
+                                        <a class="link icon-only"><i class="icon icon-back"></i></a>
+                                    </div>
+                                    <div class="center"></div>
+                                    <div class="right">
+                                        <a class="link icon-only"><i class="icon icon-forward"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    },
+                    on: {
+                        init: (c) => {
+                            $('.calendar-toolbar .center').text(`${monthNames[c.currentMonth]}, ${c.currentYear}`)
+                            $('.calendar-toolbar .left .link').click(() => {
+                                calendar.prevMonth()
+                            })
+                            $('.calendar-toolbar .right .link').click(() => {
+                                calendar.nextMonth()
+                            })
+                            calendarView = `${c.value[0].getDate()} ${monthNames[c.currentMonth]}`
+                        },
+                        monthYearChangeStart: (c) => {
+                            $('.calendar-toolbar .center').html(`${monthNames[c.currentMonth]}, ${c.currentYear}`)
+                        }
+                    }
+                })
+
+                calendarCopy = $f7.calendar.create({
+                    containerEl: '#calendar-copy',
+                    value: [new Date()],
+                    weekHeader: true,
+                    renderToolbar: () => {
+                        return `
+                            <div class="toolbar calendar-copy-toolbar no-shadow">
+                                <div class="toolbar-inner">
+                                    <div class="left">
+                                        <a class="link icon-only"><i class="icon icon-back"></i></a>
+                                    </div>
+                                    <div class="center"></div>
+                                    <div class="right">
+                                        <a class="link icon-only"><i class="icon icon-forward"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    },
+                    on: {
+                        init: (c) => {
+                            $('.calendar-copy-toolbar .center').text(`${monthNames[c.currentMonth]}, ${c.currentYear}`)
+                            $('.calendar-copy-toolbar .left .link').click(() => {
+                                calendarCopy.prevMonth()
+                            })
+                            $('.calendar-copy-toolbar .right .link').click(() => {
+                                calendarCopy.nextMonth()
+                            })
+                        },
+                        monthYearChangeStart: (c) => {
+                            $('.calendar-copy-toolbar .center').text(`${monthNames[c.currentMonth]}, ${c.currentYear}`)
+                        }
+                    }
+                })
+                
+                //Reset Template Editor
+                $('#template-editor').on('popup:closed', () => {
+                    $('#template-add-form')[0].reset()
+                    templateScheduleId = null
+                    
+                    _templateName = null
+                    _templateCheckpointName = null
+                    _templatePersonId = null
+                    _templateMappingId = null
+                    _templateStartTime = null
+                    _templateEndTime = null
+                    _templateTaskSelect = null
+                    _templateCheckpointSelect = null
+                    $('select').val('')
+                    $('input').val('')
+
+                    _templateCheckpoint = []
+                    _templatePerson = []
+                    _templateMapping = []
+                    _templateStart = []
+                    _templateEnd = []
+                    _templateTask = []
+                    $update()
+                })
+
+                $('#schedule-add').on('popover:opened', () => {
+                    let tempSelect = document.getElementsByName('template-schedule-select')[0].tomselect
+                    tempSelect.on('dropdown_open', () => {
+                        tempSelect.clear(true)
+                        isTemplateSchedule = false
+                        $update()
+                    })
+                })
+
+                //Reset Schedule Add
+                $('#schedule-add').on('popover:closed', async () => {
+                    let tempSelect = document.getElementsByName('template-schedule-select')[0].tomselect
+                    if (!isTemplateSchedule) {
+                        $('#schedule-add-form')[0].reset()
+                    } else {
+                        tempSelect.clear(true)
+                        isTemplateSchedule = false
+                        $update()
+                    }
+
+                    tempSelect.off('dropdown_open')
+                })
+
+                $('#task-add').on('popover:opened', () => {
+                    let tempSelect = document.getElementsByName('task-add-select')[0].tomselect
+                    tempSelect.on('dropdown_open', () => {
+                        tempSelect.clear(true)
+                        isTemplateTask = false
+                        taskId = null
+                        $update()
+                    })
+                })
+
+                $('#task-add').on('popover:closed', () => {
+                    let tempSelect = document.getElementsByName('task-add-select')[0].tomselect
+                    tempSelect.clear(true)
+                    tempSelect.off('dropdown_open')
+
+                    $('.task-check').prop('checked', false)
+                    isTemplateTask = false
+                    taskId = null
+                    $update()
+                })
+
+                calendar.on('change', (c, e) => {
+                    $f7.dialog.preloader('Getting Data...')
+                    if ($('.accordion-item-opened').length > 0) $f7.accordion.close('.accordion-item')
+                    calendarView = `${e[0].getDate()} ${monthNames[c.currentMonth]}`
+                    phaseTemp = null
+                    schedule = null
+
+                    setTimeout(() => {
+                        getPhase()
+                    }, 250)
+                })
+
+                load(`js/firebase-app-compat.js?v=${Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}`, () => {
+                    load(`js/firebase-firestore-compat.js?v=${Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}`, () => {
+                        load(`js/firebase-auth-compat.js?v=${Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}`, () => {
+                            firebase.initializeApp({
+                                apiKey: "AIzaSyAQM-xlePpxNzX9jJ0zoNEXqJhXvanYz9A",
+                                authDomain: "patrol-guard-e2973.firebaseapp.com",
+                                projectId: "patrol-guard-e2973"
+                            })
+                            db = firebase.firestore()
+                            
+                            firebase.auth().signInAnonymously().then(() => {
+                                console.log('Sign In')
+                            }).catch((error) => { })
+                        })
+                    })
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+            console.log('schedule:mounted')
+        })
+
+        $onBeforeUnmount(() => {
+            delete self.firebase
+            $('#template-editor').off('popup:closed')
+            $('#schedule-add').off('popover:opened')
+            $('#schedule-add').off('popover:closed')
+            $('#task-add').off('popover:opened')
+            $('#task-add').off('popover:closed')
+            calendar.off('change')
+            console.log('schedule:before-unmount')
+        })
+
+        const set = (e, value) => {
+            switch (e) {
+                case 'person': personId = value; break
+                case 'mapping': mappingId = value; break
+                case 'checkpoint': checkpointName = value; break
+                case 'startTime': startTime = value; break
+                case 'endTime': endTime = value; break
+                case 'edit-start': scheduleStart = value; break
+                case 'edit-end': scheduleEnd = value; break
+                case 'task':
+                    taskSelect = value
+
+                    if (taskSelect) {
+                        isTemplateTask = true
+
+                        let len = template[taskSelect].task.length
+                        let i = 0
+                        taskId = []
+                        while (i < len) {
+                            taskId.push(template[taskSelect].task[i].id)
+                            i++
+                        }
+                        $update()
+                    } else {
+                        isTemplateTask = false
+                        taskId = null
+                        $update()
+                    }
+                    break
+                case 'template':
+                    templateSelect = value
+                    if (templateSelect) {
+                        if (!isTemplateSchedule) $('#schedule-add-form')[0].reset()
+                        isTemplateSchedule = true
+                        $update()
+                    } else {
+                        isTemplateSchedule = false
+                        $update()
+
+                        $tick().then(() => {
+                            $('#schedule-add-form')[0].reset()
+                        })
+                    }
+                    break
+                case 'template-name': _templateName = value; break
+                case 'template-checkpoint': _templateCheckpointName = value; break
+                case 'template-person': _templatePersonId = value; break
+                case 'template-mapping': _templateMappingId = value; break
+                case 'template-start': _templateStartTime = value; break
+                case 'template-end': _templateEndTime = value; break
+                case 'template-task': _templateTaskSelect = value; break
+                case 'template-checkpointSelect': _templateCheckpointSelect = value; break
+                case 'template-search':
+                    isSearch ? isSearch = false : isSearch = true
+                    $update()
+                    
+                    $tick().then(() => {
+                        if (!isSearch) {
+                            search('')
+                        }
+                    })
+                    break
+                case 'search-template':
+                    search(value)
+                    break
+                default: break
+            }
+        }
+
+        const search = (e) => {
+            val = e || ''
+            let tr = document.getElementsByTagName('table')[0].getElementsByTagName('tr'),
+                len = tr.length
+
+            for (let i = 0; i < len; i++) {
+                let td = tr[i].getElementsByTagName('td')[1]
+                if (td) {
+                    let txtValue = td.textContent || td.innerText
+                    if (txtValue.toUpperCase().indexOf(val.toUpperCase()) > -1) {
+                        tr[i].style.display = ''
+                    } else {
+                        tr[i].style.display = 'none'
+                    }
+                }       
+            }
+        }
+
+        const dateDiff = (a, b) => {
+            let d1 = new Date(a), d2 = new Date(b),
+                dit = d2.getTime() - d1.getTime(),
+                did = dit / (1000 * 3600 * 24)
+            return did
+        }
+
+        const formatDate = (date) => {
+            let d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear()
+
+            if (month.length < 2) month = '0' + month
+            if (day.length < 2) day = '0' + day
+            return [year, month, day].join('-')
+        }
+
+        const hasDuplicates = (array) => {
+            let valuesSoFar = Object.create(null),
+                len = array.length,
+                i = 0
+
+            for (i; i < len; ++i) {
+                let value = array[i]
+                if (value in valuesSoFar) {
+                    return true
+                }
+                valuesSoFar[value] = true
+            }
+            return false
+        }
+
+        const getMapping = () => {
+            try {
+                api.getMapping({
+                    hash: hash
+                }, {
+                    success: (data) => {
+                        let res = JSON.parse(data)
+                        mapping = res.mapping
+                        $update()
+                    }, error: () => {
+                        throw toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const getTask = () => {
+            try {
+                api.getTask({
+                    hash: hash
+                }, {
+                    success: (data) => {
+                        let res = JSON.parse(data)
+                        task = res.task
+                        $update()
+
+                        $tick().then(() => {
+                            $f7.dialog.close()
+                        })
+                    }, error: () => {
+                        throw toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const getTemplate = () => {
+            try {
+                api.getTemplate({
+                    hash: hash
+                }, {
+                    success: (data) => {
+                        let res = JSON.parse(data)
+                        template = res.template
+                        $update()
+
+                        $tick().then(() => {
+                            if (!document.getElementsByName('task-add-select')[0].tomselect) new TomSelect('select[name="task-add-select"]', {
+                                create: false,
+                                sortField: {
+                                    field: "text",
+                                    direction: "asc"
+                                }
+                            })
+                        })
+                    }, error: () => {
+                        throw toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const resetAccordion = () => {
+            if ($('.content-item.accordion-item-opened').length > 0) $f7.accordion.close('.content-item')
+            phaseTemp = null
+            schedule = null
+            $update()
+        }
+
+        const setTask = () => {
+            let $data = taskId || []
+            $('input[name="task-check"]:checked').each(function () {
+                $data.push($(this).val())
+            })
+            try {
+                $f7.popover.close()
+                $f7.dialog.preloader('Setting...')
+                setTimeout(() => {
+                    api.setTask({
+                        id: scheduleId,
+                        task: $data,
+                        hash: hash
+                    }, {
+                        success: async (data) => {
+                            let res = JSON.parse(data)
+                            res.status == "success" ? toast('Success Added!') : toast('Failed Added!')
+                            taskId = null
+                            getSchedule(phaseId)
+                        }, error: () => {
+                            $f7.dialog.close()
+                            throw toast('Connection problem!')
+                        }
+                    })
+                }, 250)
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const getPerson = () => {
+            try {
+                api.getPerson({
+                    hash: hash
+                }, {
+                    success: (data) => {
+                        let res = JSON.parse(data)
+                        person = res.person
+                        $update()
+                    }, error: () => {
+                        throw toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const getCheckpoint = () => {
+            try {
+                api.getCheckpoint({
+                    hash: hash
+                }, {
+                    success: (data) => {
+                        let res = JSON.parse(data)
+                        checkpoint = res.checkpoint
+                        $update()
+                    }, error: () => {
+                        throw toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const getPhase = () => {
+            try {
+                api.getPhaseSchedule({
+                    date: formatDate(calendar.getValue()) || formatDate(new Date())
+                }, {
+                    success: (data) => {
+                        let res = JSON.parse(data)
+                        if (dateDiff(formatDate(new Date()), formatDate(calendar.getValue())) < 0) {
+                            isEdited = false
+                        } else {
+                            isEdited = true
+                        }
+                        res.phase.length > 0 ? group = res.phase : group = null
+                        $update()
+
+                        $tick().then(() => {
+                            $f7.dialog.close()
+                            if ($('.content-item.accordion-item-opened').length > 0) $f7.accordion.close('.content-item')
+                            phaseTemp = null
+                            schedule = null
+                            $update()
+                        })
+                    }, error: () => {
+                        throw toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const addPhase = () => {
+            try {
+                $f7.dialog.preloader('Adding...')
+                setTimeout(() => {
+                    api.addPhase({
+                        date: formatDate(calendar.getValue()),
+                        hash: hash
+                    }, {
+                        success: async (data) => {
+                            let res = JSON.parse(data)
+                            res.status == "success" ? toast('Success Added!') : toast('Failed Added!')
+                            getPhase()
+                        }, error: () => {
+                            $f7.dialog.close()
+                            throw toast('Connection problem!')
+                        }
+                    })
+                }, 250)
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const removePhase = (e) => {
+            $f7.dialog.create({
+                text: 'Are you sure want to remove this phase?',
+                buttons: [{
+                    text: 'Cancel',
+                    close: true
+                }, {
+                    text: 'Remove',
+                    onClick: () => {
+                        try {
+                            $f7.dialog.preloader('Deleting...')
+                            setTimeout(() => {
+                                api.removePhase({
+                                    phase: e,
+                                    hash: hash
+                                }, {
+                                    success: async (data) => {
+                                        let res = JSON.parse(data)
+                                        res.status == "success" ? toast('Success Deleted!') : toast('Failed Deleted!')
+                                        getPhase()
+                                    }, error: () => {
+                                        $f7.dialog.close()
+                                        throw toast('Connection problem!')
+                                    }
+                                })
+                            }, 250)
+                        } catch (e) {
+                            toast('Code problem!')
+                        }
+                    }
+                }]
+            }).open()
+        }
+
+        const loadSchedule = async (e) => {
+            if (phaseTemp == e) {
+                schedule = null
+                phaseTemp = null
+                $update()
+            } else {
+                phaseTemp = e
+                schedule = null
+                $update()
+
+                $tick().then(() => {
+                    getSchedule(e)
+                })
+            }
+        }
+
+        const getSchedule = (e) => {
+            try {
+                personId = null
+                mappingId = null
+                checkpointName = null
+                startTime = null
+                endTime = null
+
+                $f7.dialog.get() ? $f7.dialog.get().setTitle('Getting...') : $f7.dialog.preloader('Getting...')
+                setTimeout(() => {
+                    api.getSchedule({
+                        phase: e
+                    }, {
+                        success: (data) => {
+                            let res = JSON.parse(data)
+                            if (res.schedule.length > 0) schedule = res.schedule
+                            $update()
+
+                            $tick().then(() => {
+                                getTask()
+                            })
+                        }, error: () => {
+                            $f7.dialog.close()
+                            throw toast('Connection problem!')
+                        }
+                    })
+                }, 250)
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const editSchedule = () => {
+            try {
+                $f7.popover.close()
+                $f7.dialog.preloader('Editing...')
+                setTimeout(() => {
+                    api.editSchedule({
+                        schedule: scheduleId,
+                        start: scheduleStart,
+                        end: scheduleEnd,
+                        hash: hash
+                    }, {
+                        success: (data) => {
+                            let res = JSON.parse(data)
+                            switch (res.status) {
+                                case 'success':
+                                    firebase.auth().onAuthStateChanged((user) => {
+                                        if (user) {
+                                            db.collection('patrol').doc('sync-data').update({
+                                                'last-update': firebase.firestore.FieldValue.serverTimestamp()
+                                            }).then(() => {
+                                                toast('Success Edited!')
+                                                getSchedule(phaseId)
+                                            }).catch((error) => {
+                                                throw toast('Failed update sync data!')
+                                                $f7.dialog.close()
+                                            })
+                                        }
+                                    })
+                                    break
+                                default:
+                                    toast('Failed Edited!')
+                                    $f7.dialog.close()
+                                    break
+                            }
+                        }, error: () => {
+                            $f7.dialog.close()
+                            throw toast('Connection problem!')
+                        }
+                    })
+                }, 250)
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const removeSchedule = (a, b) => {
+            $f7.dialog.create({
+                text: 'Are you sure want to remove this schedule?',
+                buttons: [{
+                    text: 'Cancel',
+                    close: true
+                }, {
+                    text: 'Remove',
+                    onClick: () => {
+                        try {
+                            $f7.dialog.preloader('Deleting...')
+                            setTimeout(() => {
+                                api.removeSchedule({
+                                    schedule: a,
+                                    hash: hash
+                                }, {
+                                    success: (data) => {
+                                        let res = JSON.parse(data)
+                                        switch (res.status) {
+                                            case 'success':
+                                                firebase.auth().onAuthStateChanged((user) => {
+                                                    if (user) {
+                                                        db.collection('patrol').doc('sync-data').update({
+                                                            'last-update': firebase.firestore.FieldValue.serverTimestamp()
+                                                        }).then(() => {
+                                                            toast('Success Deleted!')
+                                                            schedule.length < 2 ? getPhase() : getSchedule(b)
+                                                        }).catch((error) => {
+                                                            throw toast('Failed update sync data!')
+                                                            $f7.dialog.close()
+                                                        })
+                                                    }
+                                                })
+                                                break
+                                            default:
+                                                toast('Failed Deleted!')
+                                                $f7.dialog.close()
+                                                break
+                                        }
+                                    }, error: () => {
+                                        $f7.dialog.close()
+                                        throw toast('Connection problem!')
+                                    }
+                                })
+                            }, 250)
+                        } catch (e) {
+                            toast('Code problem!')
+                        }
+                    }
+                }]
+            }).open()
+        }
+
+        const removeAllSchedule = (e) => {
+            $f7.dialog.create({
+                text: 'Are you sure want to remove all schedule on this phase?',
+                buttons: [{
+                    text: 'Cancel',
+                    close: true
+                }, {
+                    text: 'Remove',
+                    onClick: () => {
+                        try {
+                            $f7.dialog.preloader('Deleting...')
+                            setTimeout(() => {
+                                api.removeAllSchedule({
+                                    phase: e,
+                                    hash: hash
+                                }, {
+                                    success: (data) => {
+                                        let res = JSON.parse(data)
+                                        switch (res.status) {
+                                            case 'success':
+                                                firebase.auth().onAuthStateChanged((user) => {
+                                                    if (user) {
+                                                        db.collection('patrol').doc('sync-data').update({
+                                                            'last-update': firebase.firestore.FieldValue.serverTimestamp()
+                                                        }).then(() => {
+                                                            toast('Success Deleted!')
+                                                            getPhase()
+                                                            // getSchedule(e)
+                                                        }).catch((error) => {
+                                                            throw toast('Failed update sync data!')
+                                                            $f7.dialog.close()
+                                                        })
+                                                    }
+                                                })
+                                                break
+                                            default:
+                                                toast('Failed Deleted!')
+                                                $f7.dialog.close()
+                                                break
+                                        }
+                                    }, error: () => {
+                                        $f7.dialog.close()
+                                        throw toast('Connection problem!')
+                                    }
+                                })
+                            }, 250)
+                        } catch (e) {
+                            toast('Code problem!')
+                        }
+                    }
+                }]
+            }).open()
+        }
+
+        const removeAllPhase = (e) => {
+            $f7.dialog.create({
+                text: 'Are you sure want to remove all schedule and phase on this group?',
+                buttons: [{
+                    text: 'Cancel',
+                    close: true
+                }, {
+                    text: 'Remove',
+                    onClick: () => {
+                        try {
+                            $f7.dialog.preloader('Deleting...')
+                            setTimeout(() => {
+                                api.removeAllPhase({
+                                    phase: e,
+                                    hash: hash
+                                }, {
+                                    success: (data) => {
+                                        let res = JSON.parse(data)
+                                        switch (res.status) {
+                                            case 'success':
+                                                firebase.auth().onAuthStateChanged((user) => {
+                                                    if (user) {
+                                                        db.collection('patrol').doc('sync-data').update({
+                                                            'last-update': firebase.firestore.FieldValue.serverTimestamp()
+                                                        }).then(() => {
+                                                            toast('Success Deleted!')
+                                                            getPhase()
+                                                            // getSchedule(e)
+                                                        }).catch((error) => {
+                                                            throw toast('Failed update sync data!')
+                                                            $f7.dialog.close()
+                                                        })
+                                                    }
+                                                })
+                                                break
+                                            default:
+                                                toast('Failed Deleted!')
+                                                $f7.dialog.close()
+                                                break
+                                        }
+                                    }, error: () => {
+                                        $f7.dialog.close()
+                                        throw toast('Connection problem!')
+                                    }
+                                })
+                            }, 250)
+                        } catch (e) {
+                            toast('Code problem!')
+                        }
+                    }
+                }]
+            }).open()
+        }
+
+        const scheduleEdit = (a, b, c) => {
+            try {
+                phaseId = a
+                scheduleId = b
+                scheduleStart = schedule[c].start
+                scheduleEnd = schedule[c].end
+                $update()
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const popoverSchedule = (e) => {
+            try {
+                phaseId = e
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const addSchedule = () => {
+            try {
+                if ($f7.input.validateInputs($('#schedule-add-form'))) {
+                    $f7.popover.close()
+                    $f7.dialog.preloader('Adding...')
+                    setTimeout(() => {
+                        api.addSchedule({
+                            mapping: mappingId,
+                            person: personId,
+                            checkpoint: checkpointName,
+                            phase: phaseId,
+                            start: startTime,
+                            end: endTime,
+                            date: formatDate(calendar.getValue()),
+                            hash: hash
+                        }, {
+                            success: (data) => {
+                                let $data = JSON.parse(data)
+                                switch ($data.status) {
+                                    case 'success':
+                                        firebase.auth().onAuthStateChanged((user) => {
+                                            if (user) {
+                                                db.collection('patrol').doc('sync-data').update({
+                                                    'last-update': firebase.firestore.FieldValue.serverTimestamp()
+                                                }).then(() => {
+                                                    toast('Success Added!')
+                                                    getPhase()
+                                                    // getSchedule(phaseId)
+                                                }).catch((error) => {
+                                                    throw toast('Failed update sync data!')
+                                                    $f7.dialog.close()
+                                                })
+                                            }
+                                        })
+                                        break
+                                    default:
+                                        toast('Error Occured!')
+                                        $f7.dialog.close()
+                                        break
+                                }
+                            }, error: () => {
+                                $f7.dialog.close()
+                                throw toast('Connection problem!')
+                            }
+                        })
+                    }, 250)
+                } else {
+                    $f7.dialog.close()
+                    toast('Form can\'t be empty!')
+                }
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const addScheduleTemplate = () => {
+            try {
+                $f7.popover.close()
+                $f7.dialog.preloader('Adding...')
+                setTimeout(() => {
+                    api.scheduleTemplate({
+                        template: templateSelect,
+                        phase: phaseId,
+                        date: formatDate(calendar.getValue()),
+                        hash: hash
+                    }, {
+                        success: (data) => {
+                            let res = JSON.parse(data)
+                            switch (res.status) {
+                                case 'success':
+                                    firebase.auth().onAuthStateChanged((user) => {
+                                        if (user) {
+                                            db.collection('patrol').doc('sync-data').update({
+                                                'last-update': firebase.firestore.FieldValue.serverTimestamp()
+                                            }).then(() => {
+                                                toast('Success Added!')
+                                                getPhase()
+                                                // getSchedule(phaseId)
+                                            }).catch((error) => {
+                                                throw toast('Failed update sync data!')
+                                                $f7.dialog.close()
+                                            })
+                                        }
+                                    })
+                                    break
+                                case 'failed':
+                                    toast('Failed Added!')
+                                    $f7.dialog.close()
+                                    break
+                                case 'false':
+                                    toast('Failed, User Unknown!')
+                                    $f7.dialog.close()
+                                    break
+                                case 'error':
+                                    toast('Data problem!')
+                                    $f7.dialog.close()
+                                    break
+                            }
+                        }, error: () => {
+                            $f7.dialog.close()
+                            throw toast('Connection problem!')
+                        }
+                    })
+                }, 250)
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const removeTemplateSchedule = () => {
+            $f7.dialog.create({
+                text: 'Are you sure want to remove this task?',
+                buttons: [{
+                    text: 'Cancel',
+                    close: true
+                }, {
+                    text: 'Remove',
+                    onClick: () => {
+                        try {
+                            $f7.dialog.preloader('Deleting...')
+                            api.removeTemplateSchedule({
+                                template: templateScheduleId,
+                                hash: hash
+                            }, {
+                                success: async (data) => {
+                                    let res = JSON.parse(data)
+                                    switch (res.status) {
+                                        case 'success':
+                                            $('.data-table').removeClass('data-table-has-checked')
+                                            $('.template-check').prop('checked', false)
+                                            getTemplateSchedule()
+                                            toast('Success deleted!')
+                                            break
+                                        default:
+                                            $f7.dialog.close()
+                                            toast('Failed deleted!')
+                                            break
+                                    }
+                                }, error: () => {
+                                    $f7.dialog.close()
+                                    throw toast('Connection problem!')
+                                }
+                            })
+                        } catch (e) {
+                            toast('Code problem!')
+                        }
+                    }
+                }]
+            }).open()
+        }
+
+        const copyTemplateSchedule = () => {
+            try {
+                $f7.dialog.preloader('Copying...')
+                api.copyTemplateSchedule({
+                    template: templateScheduleId,
+                    hash: hash
+                }, {
+                    success: (data) => {
+                        let res = JSON.parse(data)
+                        switch (res.status) {
+                            case 'success':
+                                $('.data-table').removeClass('data-table-has-checked')
+                                $('.template-check').prop('checked', false)
+                                getTemplateSchedule()
+                                toast('Success duplicate!')
+                            break
+                        default:
+                            $f7.dialog.close()
+                            toast('Failed duplicate!')
+                            break
+                        }
+                    }, error: () => {
+                        $f7.dialog.close()
+                        throw toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const copyAllPhase = () => {
+            if (dateDiff(calendar.value[0], calendarCopy.value[0]) > 0) {
+                try {
+                    $f7.popover.close()
+                    $f7.dialog.preloader('Duplicating...')
+                    api.copyAllPhase({
+                        date: formatDate(calendar.getValue()),
+                        dateSelect: formatDate(calendarCopy.getValue()),
+                        hash: hash
+                    }, {
+                        success: (data) => {
+                            let res = JSON.parse(data)
+                            res.status == "success" ? toast('Success duplicate!') : toast('Failed duplicate!')
+                            $f7.dialog.close()
+                        }, error: () => {
+                            $f7.dialog.close()
+                            throw toast('Connection problem!')
+                        }
+                    })
+                } catch (e) {
+                    toast('Code problem!')
+                }
+            } else {
+                toast('Can\'t duplicate!')
+            }
+        }
+
+        const editTemplate = () => {
+            let len = _templateTask.length
+            let i = 0
+            let taskTemp = []
+            let task = {
+                data : []
+            }
+            while (i < len) {
+                taskTemp = []
+                let j = 0
+                while (j < _templateTask[i].length) {
+                    taskTemp.push(_templateTask[i][j].id)
+                    j++
+                }
+                task.data.push(taskTemp)
+                i++
+            }
+
+            if (!hasDuplicates(_templateCheckpoint)) {
+                try {
+                    if (!_templateStart.includes('00:00:00') && !_templateEnd.includes('00:00:00')) {
+                        $f7.dialog.preloader('Editing...')
+                        api.editTemplateSchedule({
+                            id: templateScheduleId,
+                            name: _templateName,
+                            mapping: _templateMapping,
+                            person: _templatePerson,
+                            checkpoint: _templateCheckpoint,
+                            start: _templateStart,
+                            end: _templateEnd,
+                            task: JSON.stringify(task),
+                            hash: hash
+                        }, {
+                            success: (data) => {
+                                let res = JSON.parse(data)
+                                switch (res.status) {
+                                    case 'success':
+                                        getTemplateSchedule()
+                                        toast('Success Edited!')
+                                        $f7.popup.close()
+                                        break
+                                    case 'failed':
+                                        toast('Failed Edited!')
+                                        $f7.dialog.close()
+                                        break
+                                    case 'false':
+                                        toast('Failed, User Unknown!')
+                                        $f7.dialog.close()
+                                        break
+                                    case 'error':
+                                        toast('Data problem!')
+                                        $f7.dialog.close()
+                                        break
+                                }
+                            }, error: () => {
+                                $f7.dialog.close()
+                                throw toast('Connection problem!')
+                            }
+                        })
+                    } else {
+                        toast('Time is not set!')
+                    }
+                } catch (e) {
+                    toast('Code problem!')
+                }
+            } else {
+                toast('Check again your template!')
+            }
+        }
+
+        const addTemplate = () => {
+            let len = _templateTask.length
+            let i = 0
+            let taskTemp = []
+            let task = {
+                data : []
+            }
+            while (i < len) {
+                taskTemp = []
+                let j = 0
+                while (j < _templateTask[i].length) {
+                    taskTemp.push(_templateTask[i][j].id)
+                    j++
+                }
+                task.data.push(taskTemp)
+                i++
+            }
+
+            if (!hasDuplicates(_templateCheckpoint)) {
+                try {
+                    if (!_templateStart.includes('00:00:00') && !_templateEnd.includes('00:00:00')) {
+                        $f7.dialog.preloader('Adding...')
+                        api.templateSchedule({
+                            name: _templateName,
+                            mapping: _templateMapping,
+                            person: _templatePerson,
+                            checkpoint: _templateCheckpoint,
+                            start: _templateStart,
+                            end: _templateEnd,
+                            task: JSON.stringify(task),
+                            hash: hash
+                        }, {
+                            success: (data) => {
+                                let res = JSON.parse(data)
+                                switch (res.status) {
+                                    case 'success':
+                                        getTemplateSchedule()
+                                        toast('Success added!')
+                                        $f7.popup.close()
+                                        break
+                                    case 'failed':
+                                        toast('Failed Added!')
+                                        $f7.dialog.close()
+                                        break
+                                    case 'false':
+                                        toast('Failed, User Unknown!')
+                                        $f7.dialog.close()
+                                        break
+                                    case 'error':
+                                        toast('Data problem!')
+                                        $f7.dialog.close()
+                                        break
+                                }
+                            }, error: () => {
+                                $f7.dialog.close()
+                                throw toast('Connection problem!')
+                            }
+                        })
+                    } else {
+                        toast('Time is not set!')
+                    }
+                } catch (e) {
+                    toast('Code problem!')
+                }
+            } else {
+                toast('Check again your template!')
+            }
+        }
+
+        const templateScheduleDetail = async (e) => {
+            try {
+                templateScheduleId = e
+                api.getTemplateScheduleDetail({
+                    template: e,
+                    hash: hash
+                }, {
+                    success: (data) => {
+                        let res = JSON.parse(data)
+                        let len = res.data.length
+                        let i = 0
+                        _templateName = res.name
+                        while (i < len) {
+                            _templateMapping.push(res.data[i].mapping)
+                            _templatePerson.push(res.data[i].person)
+                            _templateCheckpoint.push(res.data[i].checkpoint)
+                            _templateStart.push(res.data[i].start)
+                            _templateEnd.push(res.data[i].end)
+                            _templateTask.push(res.data[i].task)
+                            i++
+                        }
+                        console.log(_templateMapping, _templatePerson, person, mapping)
+                        $update()
+                    }, error: () => {
+                        throw toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }            
+        }
+
+        const getTemplateSchedule = () => {
+            try {
+                api.getTemplateSchedule({
+                    hash: hash
+                }, {
+                    success: (data) => {
+                        let res = JSON.parse(data)
+                        switch (res.status) {
+                            case 'success':
+                                $('#template-add-form')[0].reset()
+                                templateSchedule = res.template
+                                $update()
+
+                                $tick().then(() => {
+                                    $('.template-check').click(function () {
+                                        if ($(this).prop('checked') && $('.data-table-has-checked').length < 1) {
+                                        } else {
+                                            if (!$(this).prop('checked') && $('.data-table-has-checked').length > 0) {
+                                                $(this).prop('checked', false)
+                                            } else {
+                                                $('.template-check').prop('checked', false)
+                                                $(this).prop('checked', true)
+                                            }
+                                        }
+                                    })
+
+                                    if (!document.getElementsByName('template-schedule-select')[0].tomselect) new TomSelect('select[name="template-schedule-select"]', {
+                                        create: false,
+                                        sortField: {
+                                            field: "text",
+                                            direction: "asc"
+                                        }
+                                    })
+
+                                    getPhase()
+                                })
+                                break
+                            default:
+                                $f7.dialog.close()
+                                templateSchedule = null
+                                $update()
+                                break
+                        }
+                    }, error: () => {
+                        $f7.dialog.close()
+                        throw toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const check = (e) => {
+            templateScheduleId = e
+        }
+
+        const templateEditor = async (e, a) => {
+            let value
+            switch (e) {
+                case 'checkpoint':
+                    value = _templateCheckpointName
+                    if (value) {
+                        if (!_templateCheckpoint.includes(value)) {
+                            _templateCheckpoint.push(value)
+                            _templatePerson.push(person[0].ref)
+                            _templateMapping.push(mapping[0].id)
+                            _templateStart.push('00:00:00')
+                            _templateEnd.push('00:00:00')
+                            _templateTask.push([{
+                                id: '0',
+                                name: 'Task'
+                            }])
+                            $update()
+                        } else {
+                            toast('Checkpoint already add!')
+                        }
+                    } else {
+                        toast('Checkpoint not selected!')
+                    }
+                    break
+                case 'person-index':
+                    _indexPerson = a
+                    break
+                case 'person-add':
+                    value = _templatePersonId
+                    if (value) {
+                        $f7.popover.close()
+                        _templatePerson[_indexPerson] = value
+                        $update()
+                    } else {
+                        toast('Person not selected!')
+                    }
+                    break
+                case 'mapping-index':
+                    _indexMapping = a
+                    break
+                case 'mapping-add':
+                    value = _templateMappingId
+                    if (value) {
+                        $f7.popover.close()
+                        _templateMapping[_indexMapping] = value
+                        $update()
+                    } else {
+                        toast('Tag not selected!')
+                    }
+                    break
+                case 'time-index':
+                    _indexTime = a
+                    break
+                case 'time-add':
+                    let start = _templateStartTime
+                    let end = _templateEndTime
+                    if (start && end) {
+                        $f7.popover.close()
+                        _templateStart[_indexTime] = start
+                        _templateEnd[_indexTime] = end
+                        $update()
+                    } else {
+                        toast('Time not set!')
+                    }
+                    break
+                case 'task-index':
+                    _indexTask = a
+                    break
+                case 'task-add':
+                    value = _templateTaskSelect
+                    if (value) {
+                        $f7.popover.close()
+                        _templateTask[_indexTask] = template[value].task
+                        $update()
+                    } else {
+                        toast('Task not selected!')
+                    }
+                    break
+                case 'checkpoint-index':
+                    _indexCheckpoint = a
+                    break
+                case 'checkpoint-add':
+                    value = _templateCheckpointSelect
+                    if (value) {
+                        $f7.popover.close()
+                        _templateCheckpoint[_indexCheckpoint] = value
+                        $update()
+                    } else {
+                        toast('Checkpoint not selected!')
+                    }
+                    break
+                case 'delete':
+                    _templateMapping.splice(a, 1)
+                    _templatePerson.splice(a, 1)
+                    _templateCheckpoint.splice(a, 1)
+                    _templateStart.splice(a, 1)
+                    _templateEnd.splice(a, 1)
+                    _templateTask.splice(a, 1)
+                    $update()
+                    break
+            }
+        }
+
+        const toast = (msg) => {
+            $f7.toast.create({
+                text: msg,
+                closeTimeout: 2000,
+            }).open()
+        }
+
+        return $render
+    }
+</script>

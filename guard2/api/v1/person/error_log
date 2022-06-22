@@ -1,0 +1,88 @@
+[23-Jul-2021 17:08:29 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98
+[23-Jul-2021 17:08:35 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98
+[23-Jul-2021 17:08:39 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98
+[23-Jul-2021 17:08:57 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98
+[23-Jul-2021 17:09:17 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98
+[23-Jul-2021 17:09:23 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98
+[23-Jul-2021 17:09:43 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98
+[23-Jul-2021 17:09:47 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98
+[23-Jul-2021 17:09:57 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98
+[23-Jul-2021 17:10:03 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98
+[23-Jul-2021 17:12:01 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98
+[23-Jul-2021 17:29:36 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98
+[23-Jul-2021 17:29:39 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98
+[23-Jul-2021 17:30:07 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98
+[23-Jul-2021 17:30:14 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98
+[23-Jul-2021 17:32:52 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98
+[23-Jul-2021 17:36:00 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98
+[23-Jul-2021 17:36:03 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98
+[23-Jul-2021 17:37:42 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98
+[23-Jul-2021 17:37:45 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98
+[23-Jul-2021 17:39:30 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98
+[23-Jul-2021 17:39:55 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php:98
+Stack trace:
+#0 {main}
+  thrown in /home/u1132260/public_html/sidar.id/patrol/api/v1/person/index.php on line 98

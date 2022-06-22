@@ -1,0 +1,911 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner">
+                <div class="left left-navbar">
+                    <a class="link back">
+                        <span>Back</span>
+                    </a>
+                </div>
+                <div class="title text-align-center" style="width: 100%;">Task</div>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div style="max-width: 1280px; margin: 0 auto;">
+                <div class="row no-gap">
+                    <div class="col-100 medium-50">
+                        <div class="card card-outline data-table data-table-collapsible data-table-init">
+                            <div class="card-header" style="border-radius: inherit;">
+                                <div class="data-table-header">
+                                    <div class="data-table-title">Task List</div>
+                                    ${isSearchTask && $h`
+                                        <div class="display-flex">
+                                            <div class="list no-hairlines-md">
+                                                <ul>
+                                                    <li class="item-content item-input item-input-outline">
+                                                        <div class="item-inner no-padding-top">
+                                                            <div class="item-title item-floating-label">Search Task</div>
+                                                            <div class="item-input-wrap">
+                                                                <input type="text" placeholder="Search here" @change="${()=> set('search-task', event.target.value)}" @keyup="${()=> set('search-task', event.target.value)}" />
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <a class="link icon-only" @click="${()=> set('task-search')}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 512 512">
+                                                    <path fill="currentColor" d="M307.8 223.8h-200c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12zM508.3 497L497 508.3c-4.7 4.7-12.3 4.7-17 0l-129-129c-2.3-2.3-3.5-5.3-3.5-8.5v-8.5C310.6 395.7 261.7 416 208 416 93.8 416 1.5 324.9 0 210.7-1.5 93.7 93.7-1.5 210.7 0 324.9 1.5 416 93.8 416 208c0 53.7-20.3 102.6-53.7 139.5h8.5c3.2 0 6.2 1.3 8.5 3.5l129 129c4.7 4.7 4.7 12.3 0 17zM384 208c0-97.3-78.7-176-176-176S32 110.7 32 208s78.7 176 176 176 176-78.7 176-176z" class=""></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    `}${!isSearchTask && $h`
+                                        <div class="display-flex">
+                                            <a class="link icon-only margin-right" @click="${()=> set('task-search')}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 512 512">
+                                                    <path fill="currentColor" d="M319.8 204v8c0 6.6-5.4 12-12 12h-84v84c0 6.6-5.4 12-12 12h-8c-6.6 0-12-5.4-12-12v-84h-84c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h84v-84c0-6.6 5.4-12 12-12h8c6.6 0 12 5.4 12 12v84h84c6.6 0 12 5.4 12 12zm188.5 293L497 508.3c-4.7 4.7-12.3 4.7-17 0l-129-129c-2.3-2.3-3.5-5.3-3.5-8.5v-8.5C310.6 395.7 261.7 416 208 416 93.8 416 1.5 324.9 0 210.7-1.5 93.7 93.7-1.5 210.7 0 324.9 1.5 416 93.8 416 208c0 53.7-20.3 102.6-53.7 139.5h8.5c3.2 0 6.2 1.3 8.5 3.5l129 129c4.7 4.7 4.7 12.3 0 17zM384 208c0-97.3-78.7-176-176-176S32 110.7 32 208s78.7 176 176 176 176-78.7 176-176z" class=""></path>
+                                                </svg>
+                                            </a>
+                                            <a class="link icon-only popover-open margin-left-half" data-popover="#task-add">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    `}
+                                </div>
+                                <div class="data-table-header-selected">
+                                    <!-- Selected table title -->
+                                    <div class="data-table-title-selected"><span class="data-table-selected-count"></span> items selected</div>
+                                    <!-- Selected table actions -->
+                                    <div class="data-table-actions">
+                                        <a class="link icon-only" @click="${rmTask}" style="color: red;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
+                                            </svg>
+                                        </a>
+                                        <a class="link icon-only popover-open" data-popover="#task-edit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
+                                                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-content" style="max-height: calc(100vh - 172px);">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="label-cell"></th>
+                                            <th class="label-cell"><b>Task Name</b></th>
+                                            <th class="numeric-cell"><b>Last Update</b></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${!task && $h`
+                                            <tr style="background-color: white;">
+                                                <td class="label-cell"></td>
+                                                <td class="label-cell">No data!</td>
+                                                <td class="numeric-cell"></td>
+                                            </tr>
+                                        `}
+                                        ${task && task.map((task) => $h`
+                                            <tr style="background-color: white;">
+                                                <td class="checkbox-cell">
+                                                    <label class="checkbox no-ripple">
+                                                        <input type="checkbox" class="task-check" @click="${()=>check('task', task.name, task.id)}" />
+                                                        <i class="icon-checkbox"></i>
+                                                    </label>
+                                                </td>
+                                                <td class="label-cell" data-collapsible-title="Task Name">${task.name}</td>
+                                                <td class="numeric-cell" data-collapsible-title="Last Update">${task.update}
+                                                </td>
+                                            </tr>
+                                        `)}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-100 medium-50">
+                        <div class="card card-outline data-table data-table-collapsible data-table-init">
+                            <div class="card-header" style="border-radius: inherit;">
+                                <div class="data-table-header">
+                                    <div class="data-table-title">Template List</div>
+                                    ${isSearchTemplate && $h`
+                                        <div class="display-flex">
+                                            <div class="list no-hairlines-md">
+                                                <ul>
+                                                    <li class="item-content item-input item-input-outline">
+                                                        <div class="item-inner no-padding-top">
+                                                            <div class="item-title item-floating-label">Search Template</div>
+                                                            <div class="item-input-wrap">
+                                                                <input type="text" placeholder="Search here" @change="${()=> set('search-template', event.target.value)}" @keyup="${()=> set('search-template', event.target.value)}" />
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <a class="link icon-only" @click="${()=> set('template-search')}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 512 512">
+                                                    <path fill="currentColor" d="M307.8 223.8h-200c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12zM508.3 497L497 508.3c-4.7 4.7-12.3 4.7-17 0l-129-129c-2.3-2.3-3.5-5.3-3.5-8.5v-8.5C310.6 395.7 261.7 416 208 416 93.8 416 1.5 324.9 0 210.7-1.5 93.7 93.7-1.5 210.7 0 324.9 1.5 416 93.8 416 208c0 53.7-20.3 102.6-53.7 139.5h8.5c3.2 0 6.2 1.3 8.5 3.5l129 129c4.7 4.7 4.7 12.3 0 17zM384 208c0-97.3-78.7-176-176-176S32 110.7 32 208s78.7 176 176 176 176-78.7 176-176z" class=""></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    `}${!isSearchTemplate && $h`
+                                        <div class="display-flex">
+                                            <a class="link icon-only margin-right" @click="${()=> set('template-search')}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 512 512">
+                                                    <path fill="currentColor" d="M319.8 204v8c0 6.6-5.4 12-12 12h-84v84c0 6.6-5.4 12-12 12h-8c-6.6 0-12-5.4-12-12v-84h-84c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h84v-84c0-6.6 5.4-12 12-12h8c6.6 0 12 5.4 12 12v84h84c6.6 0 12 5.4 12 12zm188.5 293L497 508.3c-4.7 4.7-12.3 4.7-17 0l-129-129c-2.3-2.3-3.5-5.3-3.5-8.5v-8.5C310.6 395.7 261.7 416 208 416 93.8 416 1.5 324.9 0 210.7-1.5 93.7 93.7-1.5 210.7 0 324.9 1.5 416 93.8 416 208c0 53.7-20.3 102.6-53.7 139.5h8.5c3.2 0 6.2 1.3 8.5 3.5l129 129c4.7 4.7 4.7 12.3 0 17zM384 208c0-97.3-78.7-176-176-176S32 110.7 32 208s78.7 176 176 176 176-78.7 176-176z" class=""></path>
+                                                </svg>
+                                            </a>
+                                            <a class="link icon-only popover-open margin-left-half" data-popover="#template-add">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    `}
+                                </div>
+                                <div class="data-table-header-selected">
+                                    <!-- Selected table title -->
+                                    <div class="data-table-title-selected">
+                                        <span class="data-table-selected-count"></span> items selected</div>
+                                    <!-- Selected table actions -->
+                                    <div class="data-table-actions">
+                                        <a class="link icon-only" @click="${rmTemplate}" style="color: red;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
+                                            </svg>
+                                        </a>
+                                        <a class="link icon-only popover-open" data-popover="#template-edit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
+                                                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-content" style="max-height: calc(100vh - 172px);">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="label-cell"></th>
+                                            <th class="label-cell"><b>Template Name</b></th>
+                                            <th class="label-cell text-align-center"><b>Task</b></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${!template && $h`
+                                            <tr style="background-color: white;">
+                                                <td class="label-cell"></td>
+                                                <td class="label-cell">No data!</td>
+                                                <td class="label-cell"></td>
+                                            </tr>
+                                        `}
+                                        ${template && template.map((template) => $h`
+                                            <tr style="background-color: white;">
+                                                <td class="checkbox-cell">
+                                                    <label class="checkbox no-ripple">
+                                                        <input type="checkbox" class="template-check" @click="${()=>check('template', template.name)}" />
+                                                        <i class="icon-checkbox"></i>
+                                                    </label>
+                                                </td>
+                                                <td class="label-cell" data-collapsible-title="Template Name">${template.name}
+                                                </td>
+                                                <td class="label-cell padding-vertical-half" data-collapsible-title="Task">
+                                                    <div>
+                                                        ${template.task.map((task) => $h`
+                                                            <div class="chip chip-outline margin-left-half">
+                                                                <div class="chip-label" style="color: darkgray;">${task.name}</div>
+                                                            </div>
+                                                        `)}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        `)}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="task-add" data-close-by-backdrop-click="false" data-close-by-outside-click="false">
+            <div class="popover-inner">
+                <div class="block">
+                    <form id="task-add-form">
+                        <div class="list">
+                            <ul>
+                                <li class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">Task Name</div>
+                                        <div class="item-input-wrap">
+                                            <textarea name="add-name" @keyup="${()=> set('task', event.target.value)}" value="${taskName}" required validate></textarea>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content padding-top padding-right">
+                                    <div class="segmented segmented-raised" style="width: 100%;">
+                                        <a class="button popover-close" style="border-radius: 0; color: darkgrey;">Cancel</a>
+                                        <a class="button" @click="${addTask}" style="border-radius: 0;">Add</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="template-add" data-close-by-backdrop-click="false" data-close-by-outside-click="false" style="width: auto;">
+            <div class="popover-inner">
+                <div class="block">
+                    <form id="template-add-form">
+                        <div class="list margin-right no-hairlines">
+                            <ul>
+                                <li class="item-content item-input">
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">Template Name</div>
+                                        <div class="item-input-wrap">
+                                            <input type="text" @keyup="${()=> set('template', event.target.value)}" value="${templateName}" required validate />
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                    <div class="list no-margin-top margin-right no-hairlines no-hairlines-between page-content" style="height: 300px; background: white;">
+                        <ul>
+                            ${task && task.map((task) => $h`
+                                <li>
+                                    <label class="item-checkbox item-content">
+                                        <input type="checkbox" name="task-template-check" class="task-template-check" value="${task.id}" />
+                                        <i class="icon icon-checkbox"></i>
+                                        <div class="item-inner">
+                                            <div class="item-title">${task.name}</div>
+                                        </div>
+                                    </label>
+                                </li>
+                            `)}
+                        </ul>
+                    </div>
+                    <div class="list no-margin-top margin-right no-hairlines">
+                        <ul>
+                            <li class="item-content padding-top">
+                                <div class="segmented segmented-raised" style="width: 100%;">
+                                    <a class="button popover-close" style="border-radius: 0; color: darkgrey;">Cancel</a>
+                                    <a class="button" @click="${addTemplate}" style="width: 100%;">Save</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="template-edit" data-close-by-backdrop-click="false" data-close-by-outside-click="false" style="width: auto;">
+            <div class="popover-inner">
+                <div class="block">
+                    <form id="template-edit-form">
+                        <div class="list margin-right no-hairlines">
+                            <ul>
+                                <li class="item-content item-input">
+                                    <div class="item-inner no-padding-right">
+                                        <div class="item-title item-label">Template Name</div>
+                                        <div class="item-input-wrap">
+                                            <input type="text" @keyup="${()=> set('template-edit', event.target.value)}" value="${templateName}" required validate />
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                    <div class="list no-margin-top margin-right no-hairlines no-hairlines-between page-content" style="max-height: 300px; background: white;">
+                        <ul>
+                            ${_Template && _Template.map((task) => $h`
+                                <li>
+                                    <label class="item-checkbox item-content">
+                                        ${task.status && $h`
+                                            <input type="checkbox" name="task-template-check" class="task-template-check" value="${task.id}" checked />
+                                        `}
+                                        ${!task.status && $h`
+                                            <input type="checkbox" name="task-template-check" class="task-template-check" value="${task.id}" />
+                                        `}
+                                        <i class="icon icon-checkbox"></i>
+                                        <div class="item-inner">
+                                            <div class="item-title">${task.name}</div>
+                                        </div>
+                                    </label>
+                                </li>
+                            `)}
+                        </ul>
+                    </div>
+                    <div class="list no-margin-top margin-right no-hairlines">
+                        <ul>
+                            <li class="item-content padding-top">
+                                <div class="segmented segmented-raised" style="width: 100%;">
+                                    <a class="button popover-close" style="border-radius: 0; color: darkgrey;">Cancel</a>
+                                    <a class="button" @click="${editTemplate}" style="width: 100%;">Save</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover" id="task-edit" data-close-by-backdrop-click="false" data-close-by-outside-click="false">
+            <div class="popover-inner">
+                <div class="block">
+                    <form id="task-edit-form">
+                        <div class="list">
+                            <ul>
+                                <li class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">Task Name</div>
+                                        <div class="item-input-wrap">
+                                            <textarea @keyup="${()=> set('task', event.target.value)}" value="${taskName}" required validate></textarea>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content padding-top padding-right">
+                                    <div class="segmented segmented-raised" style="width: 100%;">
+                                        <a class="button popover-close" style="border-radius: 0; color: darkgrey;">Cancel</a>
+                                        <a class="button" @click="${editTask}" style="border-radius: 0;">Add</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</template>
+<script>
+    "user strict"
+    export default (props, { $onBeforeMount, $onMounted, $onBeforeUnmount, $, $update, $tick, $f7 }) => {
+        let template, templateName, _templateName,
+            task, taskId, taskName,
+            hash = storage.getItem('hash-patrol') || '',
+            isSearchTemplate = false, isSearchTask = false,
+            api = new Model()
+
+        let _Template = []
+
+        $onBeforeMount(() => {
+            $f7.dialog.preloader('Getting Data...')
+            setTimeout(() => {
+                getTask()
+            }, 250)
+            console.log('task:before-mount')
+        })
+
+        $onMounted(() => {
+            $('#task-edit').on('popover:close', () => {
+                $('.data-table').removeClass('data-table-has-checked')
+                $('.task-check').prop('checked', false)
+                taskName = null
+                $update()
+            })
+
+            $('#template-edit').on('popover:close', () => {
+                $('.data-table').removeClass('data-table-has-checked')
+                $('.template-check').prop('checked', false)
+                _Template = null
+                $update()
+            })
+            console.log('task:mounted')
+        })
+
+        $onBeforeUnmount(() => {
+            $('#task-edit').off('popover:close')
+            console.log('task:before-unmount')
+        })
+
+        const set = (e, value) => {
+            switch (e) {
+                case 'task':
+                    taskName = value
+                    $update()
+                    break
+                case 'template':
+                    templateName = value
+                    break
+                case 'template-edit':
+                    _templateName = value
+                    break
+                case 'task-search':
+                    isSearchTask ? isSearchTask = false : isSearchTask = true
+                    $update()
+                    
+                    $tick().then(() => {
+                        if (!isSearchTask) {
+                            searchTask('')
+                        }
+                    })
+                case 'search-task':
+                    searchTask(value)
+                    break
+                case 'template-search':
+                    isSearchTemplate ? isSearchTemplate = false : isSearchTemplate = true
+                    $update()
+                    
+                    $tick().then(() => {
+                        if (!isSearchTemplate) {
+                            searchTemplate('')
+                        }
+                    })
+                case 'search-template':
+                    searchTemplate(value)
+                    break
+                default:
+                    break
+            }
+        }
+
+        const searchTask = (e) => {
+            val = e || ''
+            let tr = document.getElementsByTagName('table')[0].getElementsByTagName('tr'),
+                len = tr.length
+
+            for (let i = 0; i < len; i++) {
+                let td = tr[i].getElementsByTagName('td')[1]
+                if (td) {
+                    let txtValue = td.textContent || td.innerText
+                    if (txtValue.toUpperCase().indexOf(val.toUpperCase()) > -1) {
+                        tr[i].style.display = ''
+                    } else {
+                        tr[i].style.display = 'none'
+                    }
+                }       
+            }
+        }
+
+        const searchTemplate = (e) => {
+            val = e || ''
+            let tr = document.getElementsByTagName('table')[1].getElementsByTagName('tr'),
+                len = tr.length
+
+            for (let i = 0; i < len; i++) {
+                let td = tr[i].getElementsByTagName('td')[1]
+                if (td) {
+                    let txtValue = td.textContent || td.innerText
+                    if (txtValue.toUpperCase().indexOf(val.toUpperCase()) > -1) {
+                        tr[i].style.display = ''
+                    } else {
+                        tr[i].style.display = 'none'
+                    }
+                }       
+            }
+        }
+
+        const check = (e, a, b) => {
+            switch (e) {
+                case 'task':
+                    taskName = a
+                    taskId = b
+                    $update()
+                    break
+                case 'template':
+                    templateName = a
+                    _Template = []
+                    let index = template.findIndex(x => x.name === a)
+                    let temp = template[index].task
+                    let len = task.length
+                    let i = 0
+                    while (i < len) {
+                        _Template.push({
+                            id: task[i].id,
+                            name: task[i].name,
+                            status: false
+                        })
+                        i++
+                    }
+
+                    i = 0
+                    while (i < len) {
+                        let lenTemp = temp.length
+                        let j = 0
+                        while (j < lenTemp) {
+                            if (temp[j].id == task[i].id) {
+                                _Template[i] = {
+                                    id: task[i].id,
+                                    name: task[i].name,
+                                    status: true
+                                }
+                            }
+                            j++
+                        }
+                        i++
+                    }
+                    $update()
+                    break
+                default: break
+            }
+        }
+
+        const addTemplate = () => {
+            let $data = []
+            $('input[name="task-template-check"]:checked').each(function () {
+                $data.push($(this).val())
+            })
+
+            try {
+                if ($f7.input.validateInputs($('#template-add-form'))) {
+                    $f7.dialog.preloader('Adding...')
+                    api.addTemplate({
+                        template: templateName,
+                        task: $data,
+                        hash: hash
+                    }, {
+                        success: (data) => {
+                            let res = JSON.parse(data)
+                            switch (res.status) {
+                                case 'success':
+                                    toast('Success added!')
+                                    templateName = null
+                                    $update()
+
+                                    $tick().then(() => {
+                                        $('.task-template-check').prop('checked', false)
+                                        setTimeout(() => {
+                                            getTemplate()
+                                        }, 250)
+                                    })
+                                    break
+                                default:
+                                    toast('Failed added!')
+                                    templateName = null
+                                    $update()
+
+                                    $tick().then(() => {
+                                        $('.task-template-check').prop('checked', false)
+                                        $f7.dialog.close()
+                                    })
+                                    break
+                            }
+                            $f7.popover.close()
+                        }, error: () => {
+                            $f7.dialog.close()
+                            $f7.popover.close()
+                            throw toast('Connection problem!')
+                        }
+                    })
+                } else {
+                    toast('Check your input!')
+                }
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const getTemplate = () => {
+            try {
+                api.getTemplate({
+                    hash: hash
+                }, {
+                    success: (data) => {
+                        let res = JSON.parse(data)
+                        template = res.template
+                        $update()
+
+                        $tick().then(() => {
+                            $('.task-check').click(function () {
+                                if ($(this).prop('checked') && $('.data-table-has-checked').length < 1) {
+                                } else {
+                                    if (!$(this).prop('checked') && $('.data-table-has-checked').length > 0) {
+                                        $(this).prop('checked', false)
+                                    } else {
+                                        $('.task-check').prop('checked', false)
+                                        $(this).prop('checked', true)
+                                    }
+                                }
+                            })
+
+                            $f7.dialog.close()
+                        })
+                    }, error: () => {
+                        $f7.dialog.close()
+                        throw toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const editTemplate = () => {
+            let $data = []
+            $('input[name="task-template-check"]:checked').each(function () {
+                $data.push($(this).val())
+            })
+
+            try {
+                if ($f7.input.validateInputs($('#template-edit-form'))) {
+                    $f7.dialog.preloader('Setting...')
+                    api.editTemplate({
+                        template: _templateName || templateName,
+                        _template: templateName,
+                        task: $data,
+                        hash: hash
+                    }, {
+                        success: (data) => {
+                            let res = JSON.parse(data)
+                            switch (res.status) {
+                                case 'success':
+                                    toast('Success edited!')
+                                    template = null
+                                    _templateName = null
+                                    $update()
+
+                                    $tick().then(() => {
+                                        setTimeout(() => {
+                                            getTask()
+                                        }, 250)
+                                    })
+                                    break
+                                default:
+                                    toast('Failed edited!')
+                                    
+                                    $f7.dialog.close()
+                                    template = null
+                                    _templateName = null
+                                    $update()
+                                    break
+                            }
+                            $f7.popover.close()
+                        }, error: () => {
+                            $f7.dialog.close()
+                            $f7.popover.close()
+                            throw toast('Connection problem!')
+                        }
+                    })
+                } else {
+                    toast('Check your input!')
+                }
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const rmTemplate = () => {
+            $f7.dialog.create({
+                text: 'Are you sure want to remove this template?',
+                buttons: [{
+                    text: 'Cancel',
+                    close: true,
+                    onClick: () => {
+                        $('.data-table').removeClass('data-table-has-checked')
+                        $('.template-check').prop('checked', false)
+                    }
+                }, {
+                    text: 'Remove',
+                    onClick: () => {
+                        try {
+                            $f7.dialog.preloader('Deleting...')
+                            api.rmTemplate({
+                                template: templateName,
+                                hash: hash
+                            }, {
+                                success: (data) => {
+                                    let res = JSON.parse(data)
+                                    switch (res.status) {
+                                        case 'success':
+                                            $('.data-table').removeClass('data-table-has-checked')
+                                            $('.template-check').prop('checked', false)
+                                            toast('Success deleted!')
+                                            setTimeout(() => {
+                                                getTemplate()
+                                            }, 250)
+                                            break
+                                        default:
+                                            $f7.dialog.close()
+                                            toast('Failed deleted!')
+                                            break
+                                    }
+                                }, error: () => {
+                                    $f7.dialog.close()
+                                    throw toast('Connection problem!')
+                                }
+                            })
+                        } catch (e) {
+                            toast('Code problem!')
+                        }
+                    }
+                }]
+            }).open()
+        }
+
+        const addTask = () => {
+            try {
+                if ($f7.input.validateInputs($('#task-add-form'))) {
+                    $f7.dialog.preloader('Adding...')
+                    api.addTask({
+                        task: taskName,
+                        hash: hash
+                    }, {
+                        success: (data) => {
+                            let res = JSON.parse(data)
+                            switch (res.status) {
+                                case 'success':
+                                    toast('Success added!')
+                                    $update()
+
+                                    $tick().then(() => {
+                                        setTimeout(() => {
+                                            getTask()
+                                        }, 250)
+                                    })
+                                    break
+                                default:
+                                    $f7.dialog.close()
+                                    toast('Failed added!')
+                                    $update()
+                                    break
+                            }
+                            $f7.popover.close()
+                        }, error: () => {
+                            $f7.dialog.close()
+                            $f7.popover.close()
+                            throw toast('Connection problem!')
+                        }
+                    })
+                } else {
+                    toast('Check your input!')
+                }
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const getTask = () => {
+            try {
+                api.getTask({
+                    hash: hash
+                }, {
+                    success: (data) => {
+                        let res = JSON.parse(data)
+                        task = res.task
+                        $update()
+
+                        $tick().then(() => {
+                            getTemplate()
+
+                            $('.template-check').click(function () {
+                                if ($(this).prop('checked') && $('.data-table-has-checked').length < 1) {
+                                } else {
+                                    if (!$(this).prop('checked') && $('.data-table-has-checked').length > 0) {
+                                        $(this).prop('checked', false)
+                                    } else {
+                                        $('.template-check').prop('checked', false)
+                                        $(this).prop('checked', true)
+                                    }
+                                }
+                            })
+                        })
+                    }, error: () => {
+                        throw toast('Connection problem!')
+                    }
+                })
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const editTask = () => {
+            try {
+                if ($f7.input.validateInputs($('#task-edit-form'))) {
+                    $f7.dialog.preloader('Setting...')
+                    api.editTask({
+                        id: taskId,
+                        task: taskName,
+                        hash: hash
+                    }, {
+                        success: (data) => {
+                            let res = JSON.parse(data)
+                            switch (res.status) {
+                                case 'success':
+                                    toast('Success edited!')
+                                    taskName = null
+                                    $update()
+
+                                    $tick().then(() => {
+                                        setTimeout(() => {
+                                            getTask()
+                                        }, 250)
+                                    })
+                                    break
+                                default:
+                                    toast('Failed edited!')
+                                    
+                                    $f7.dialog.close()
+                                    taskName = null
+                                    $update()
+                                    break
+                            }
+                            $f7.popover.close()
+                        }, error: () => {
+                            $f7.dialog.close()
+                            $f7.popover.close()
+                            throw toast('Connection problem!')
+                        }
+                    })
+                } else {
+                    toast('Check your input!')
+                }
+            } catch (e) {
+                toast('Code problem!')
+            }
+        }
+
+        const rmTask = () => {
+            $f7.dialog.create({
+                text: 'Are you sure want to remove this task?',
+                buttons: [{
+                    text: 'Cancel',
+                    close: true,
+                    onClick: () => {
+                        $('.data-table').removeClass('data-table-has-checked')
+                        $('.task-check').prop('checked', false)
+                    }
+                }, {
+                    text: 'Remove',
+                    onClick: () => {
+                        try {
+                            $f7.dialog.preloader('Deleting...')
+                            api.rmTask({
+                                id: taskId,
+                                hash: hash
+                            }, {
+                                success: (data) => {
+                                    let res = JSON.parse(data)
+                                    switch (res.status) {
+                                        case 'success':
+                                            $('.data-table').removeClass('data-table-has-checked')
+                                            $('.task-check').prop('checked', false)
+                                            toast('Success deleted!')
+
+                                            setTimeout(() => {
+                                                getTask()
+                                            }, 250)
+                                            break
+                                        default:
+                                            $f7.dialog.close()
+                                            toast('Failed deleted!')
+                                            break
+                                    }
+                                }, error: () => {
+                                    $f7.dialog.close()
+                                    throw toast('Connection problem!')
+                                }
+                            })
+                        } catch (e) {
+                            toast('Code problem!')
+                        }
+                    }
+                }]
+            }).open()
+        }
+
+        const toast = function (msg) {
+            $f7.toast.create({
+                text: msg,
+                closeTimeout: 2000,
+            }).open()
+        }
+
+        return $render
+    }
+</script>
