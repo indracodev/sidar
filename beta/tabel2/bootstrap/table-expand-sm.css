@@ -1,0 +1,23 @@
+@media screen and (max-width: 575px) {
+    table.table-expand-sm thead {
+        position: absolute;
+        height: 0px;
+        overflow: hidden;
+    }
+
+    table.table-expand-sm tr {
+        display: flex;
+        flex-direction: column;
+    }
+
+    table.table-expand-sm td {
+        display: flex;
+        text-align: left;
+    }
+
+        table.table-expand-sm td::before {
+            content: attr(data-label);
+            flex: 0 0 30%;
+            font-weight: bold;
+        }
+}

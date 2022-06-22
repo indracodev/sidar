@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MK - Deals Listing Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/shortcut-icon.PNG" type="image/vnd.microsoft.icon" />
+    <!-- CSS INCLUSION -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <!-- HEADER STARTS -->
+    <header class="header--top">
+        <nav class="navbar navbar-default menu--top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#MK-collapse" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    <a href="index.html">
+                        <img src="img/logo.PNG" class="img-responsive" alt="MK logo"/>
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse text-uppercase" id="yume-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li><a href="#">Zones<span class="sr-only">(current)</span></a></li>
+                        <li class="active"><a href="#">Deals</a></li>
+                        <li><a href="#">Reports</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Accune/Family Circle</a></li>
+                        <li><a href="#">Anne Hathway</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        <section class="deals_breadcrumb">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h1>Deals</h1>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="input-group search--wrapper pull-right">
+                            <input type="text" class="form-control" placeholder="Search">
+                            <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row deal_add--wrapper">
+                    <div class="col-xs-6">
+                        <a href="#"><span class="glyphicon glyphicon-plus"></span> Add Deal</a>
+                    </div>
+                    <div class="col-xs-6">
+                        <ul class="nav--right pull-right text-uppercase">
+                            <li><a href="#" class="active">Active</a></li>
+                            <li><a href="#">Archive</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+    <!-- HEADER ENDS -->
+
+    <!-- MAIN CONTENT STARTS -->
+    <main>
+        <section class="container deal_table--wrapper">
+            <div class="row">
+                <h5 class="col-xs-12 text-uppercase text-right deal_remarks">*Data period is for the Entire Deal, up to one year of Data</h5>
+            </div>
+            <table class="table">
+                <thead class="text-uppercase">
+                    <tr>
+                        <th class="text-center">Priority</th>
+                        <th class="text-center">Status</th>
+                        <th>Name</th>
+                        <th class="progress_heading text-center">%Complete</th>
+                        <th class="progress_heading text-center">%Impressions Goal</th>
+                        <th>Revenue*</th>
+                        <th>Impressions*</th>
+                        <th>Fill Rate*</th>
+                        <th>CPM*</th>
+                    </tr>
+                </thead>
+
+                <tbody id="accordion-test">
+                    <tr class="collapse-click" data-toggle="collapse" href="#collapseData1" aria-expanded="false" aria-controls="collapseData1">
+                        <td data-title="Priority" class="text-center"><span class="glyphicon glyphicon-resize-vertical"></span> 1</td>
+                        <td data-title="Status" class="text-center"><span class="glyphicon glyphicon-dashboard deal_status"></span></td>
+                        <td data-title="Name">Toyota Direct</td>
+                        <td data-title="%Complete" class="progress-middle text-center">
+                            <span>50%</span>
+                            <div class="progress progress-low">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"
+                                    style="width: 50%">
+                                    <span class="sr-only">50% Complete</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-title="%Impressions Goal" class="progress-middle text-center">
+                            <span>80%</span>
+                            <div class="progress progress-high">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
+                                    style="width: 80%">
+                                    <span class="sr-only">80% Complete</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-title="Revenue*">$1,244,222</td>
+                        <td data-title="Impressions">50,000</td>
+                        <td data-title="Fill Rate*">20%</td>
+                        <td data-title="CPM*">$250,000,000,000 <span class="glyphicon glyphicon-option-vertical pull-right" data-toggle="collapse"
+                                href="#collapseData1" aria-expanded="false" aria-controls="collapseData1"></span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="9" class="padding-0">
+                            <div id="collapseData1" class="collapse table_content--inner text-uppercase">
+                                <h3>Toyoto Direct - Report</h3>
+                                <div class="row">
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>500,000</h4>
+                                        <h5>Request</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>300,000</h4>
+                                        <h5>Responses</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>60%</h4>
+                                        <h5>Response Rate</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>500,000</h4>
+                                        <h5>Impressions</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>60%</h4>
+                                        <h5>Impression/Response</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>20%</h4>
+                                        <h5>Fill Rate</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>$11.50</h4>
+                                        <h5>Average CPM</h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>$1,244,222</h4>
+                                        <h5>Revenue</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>50%</h4>
+                                        <h5>VCR</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>50%</h4>
+                                        <h5>CTR</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>$6.78</h4>
+                                        <h5>Average Bid</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>3.5</h4>
+                                        <h5>Average #Bids</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>$7.88</h4>
+                                        <h5>Average Winning Bid</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>25%</h4>
+                                        <h5>Average Premium to Floor</h5>
+                                    </div>
+                                </div>
+                                <div class="table_content--navigator">
+                                    <div class="navigator--top">
+                                        <span>Edit Deal<i class="glyphicon glyphicon-pencil"></i></span>
+                                        <span>Clone Deal<i class="glyphicon glyphicon-copy"></i></span>
+                                    </div>
+                                    <div class="navigator--bottom">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="collapse-click deal_color--even" data-toggle="collapse" href="#collapseData2" aria-expanded="false" aria-controls="collapseData2">
+                        <td data-title="Priority" class="text-center"><span class="glyphicon glyphicon-resize-vertical"></span> 2</td>
+                        <td data-title="Status" class="text-center"><span class="glyphicon glyphicon-dashboard deal_status"></span></td>
+                        <td data-title="Name">MK Direct</td>
+                        <td data-title="%Complete" class="progress-middle text-center">
+                            <span>30%</span>
+                            <div class="progress progress-low">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"
+                                    style="width: 30%">
+                                    <span class="sr-only">30% Complete</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-title="%Impressions Goal" class="progress-middle text-center">
+                            <span>100%</span>
+                            <div class="progress progress-high">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                                    style="width: 100%">
+                                    <span class="sr-only">100% Complete</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-title="Revenue*">$1,244,222</td>
+                        <td data-title="Impressions">50,000</td>
+                        <td data-title="Fill Rate*">20%</td>
+                        <td data-title="CPM*">$250,000,000,000 <span class="glyphicon glyphicon-option-vertical pull-right" data-toggle="collapse"
+                                href="#collapseData2" aria-expanded="false" aria-controls="collapseData2"></span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="9" class="padding-0">
+                            <div id="collapseData2" class="collapse table_content--inner text-uppercase">
+                                <h3>MK Direct - Report</h3>
+                                <div class="row">
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>500,000</h4>
+                                        <h5>Request</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>300,000</h4>
+                                        <h5>Responses</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>60%</h4>
+                                        <h5>Response Rate</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>500,000</h4>
+                                        <h5>Impressions</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>60%</h4>
+                                        <h5>Impression/Response</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>20%</h4>
+                                        <h5>Fill Rate</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>$11.50</h4>
+                                        <h5>Average CPM</h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>$1,244,222</h4>
+                                        <h5>Revenue</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>50%</h4>
+                                        <h5>VCR</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>50%</h4>
+                                        <h5>CTR</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>$6.78</h4>
+                                        <h5>Average Bid</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>3.5</h4>
+                                        <h5>Average #Bids</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>$7.88</h4>
+                                        <h5>Average Winning Bid</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>25%</h4>
+                                        <h5>Average Premium to Floor</h5>
+                                    </div>
+                                </div>
+                                <div class="table_content--navigator">
+                                    <div class="navigator--top">
+                                        <span>Edit Deal<i class="glyphicon glyphicon-pencil"></i></span>
+                                        <span>Clone Deal<i class="glyphicon glyphicon-copy"></i></span>
+                                    </div>
+                                    <div class="navigator--bottom">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="collapse-click" data-toggle="collapse" href="#collapseData3" aria-expanded="false" aria-controls="collapseData3">
+                        <td data-title="Priority" class="text-center"><span class="glyphicon glyphicon-resize-vertical"></span> 3</td>
+                        <td data-title="Status" class="text-center"><span class="glyphicon glyphicon-dashboard deal_status"></span></td>
+                        <td data-title="Name">Toyota Direct</td>
+                        <td data-title="%Complete" class="progress-middle text-center">
+                            <span>50%</span>
+                            <div class="progress progress-low">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
+                                    style="width: 40%">
+                                    <span class="sr-only">40% Complete</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-title="%Impressions Goal" class="progress-middle text-center">
+                            <span>80%</span>
+                            <div class="progress progress-high">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
+                                    style="width: 80%">
+                                    <span class="sr-only">80% Complete</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-title="Revenue*">$1,244,222</td>
+                        <td data-title="Impressions">50,000</td>
+                        <td data-title="Fill Rate*">20%</td>
+                        <td data-title="CPM*">$250,000,000,000 <span class="glyphicon glyphicon-option-vertical pull-right" data-toggle="collapse"
+                                href="#collapseData3" aria-expanded="false" aria-controls="collapseData3"></span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="9" class="padding-0">
+                            <div id="collapseData3" class="collapse table_content--inner text-uppercase">
+                                <h3>Toyoto Direct - Report</h3>
+                                <div class="row">
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>500,000</h4>
+                                        <h5>Request</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>300,000</h4>
+                                        <h5>Responses</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>60%</h4>
+                                        <h5>Response Rate</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>500,000</h4>
+                                        <h5>Impressions</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>60%</h4>
+                                        <h5>Impression/Response</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>20%</h4>
+                                        <h5>Fill Rate</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>$11.50</h4>
+                                        <h5>Average CPM</h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>$1,244,222</h4>
+                                        <h5>Revenue</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>50%</h4>
+                                        <h5>VCR</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>50%</h4>
+                                        <h5>CTR</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>$6.78</h4>
+                                        <h5>Average Bid</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>3.5</h4>
+                                        <h5>Average #Bids</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>$7.88</h4>
+                                        <h5>Average Winning Bid</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>25%</h4>
+                                        <h5>Average Premium to Floor</h5>
+                                    </div>
+                                </div>
+                                <div class="table_content--navigator">
+                                    <div class="navigator--top">
+                                        <span>Edit Deal<i class="glyphicon glyphicon-pencil"></i></span>
+                                        <span>Clone Deal<i class="glyphicon glyphicon-copy"></i></span>
+                                    </div>
+                                    <div class="navigator--bottom">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="collapse-click deal_color--even" data-toggle="collapse" href="#collapseData4" aria-expanded="false" aria-controls="collapseData4">
+                        <td data-title="Priority" class="text-center"><span class="glyphicon glyphicon-resize-vertical"></span> 4</td>
+                        <td data-title="Status" class="text-center"><span class="glyphicon glyphicon-dashboard deal_status"></span></td>
+                        <td data-title="Name">Kraft Direct</td>
+                        <td data-title="%Complete" class="progress-middle text-center">
+                            <span>10%</span>
+                            <div class="progress progress-low">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"
+                                    style="width: 10%">
+                                    <span class="sr-only">10% Complete</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-title="%Impressions Goal" class="progress-middle text-center">
+                            <span>50%</span>
+                            <div class="progress progress-high">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"
+                                    style="width: 50%">
+                                    <span class="sr-only">50% Complete (success)</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-title="Revenue*">$1,244,222</td>
+                        <td data-title="Impressions">50,000</td>
+                        <td data-title="Fill Rate*">20%</td>
+                        <td data-title="CPM*">$250,000,000,000 <span class="glyphicon glyphicon-option-vertical pull-right" data-toggle="collapse"
+                                href="#collapseData4" aria-expanded="false" aria-controls="collapseData4"></span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="9" class="padding-0">
+                            <div id="collapseData4" class="collapse table_content--inner text-uppercase">
+                                <h3>Kraft Direct - Report</h3>
+                                <div class="row">
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>500,000</h4>
+                                        <h5>Request</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>300,000</h4>
+                                        <h5>Responses</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>60%</h4>
+                                        <h5>Response Rate</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>500,000</h4>
+                                        <h5>Impressions</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>60%</h4>
+                                        <h5>Impression/Response</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>20%</h4>
+                                        <h5>Fill Rate</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>$11.50</h4>
+                                        <h5>Average CPM</h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>$1,244,222</h4>
+                                        <h5>Revenue</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>50%</h4>
+                                        <h5>VCR</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>50%</h4>
+                                        <h5>CTR</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>$6.78</h4>
+                                        <h5>Average Bid</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>3.5</h4>
+                                        <h5>Average #Bids</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>$7.88</h4>
+                                        <h5>Average Winning Bid</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>25%</h4>
+                                        <h5>Average Premium to Floor</h5>
+                                    </div>
+                                </div>
+                                <div class="table_content--navigator">
+                                    <div class="navigator--top">
+                                        <span>Edit Deal<i class="glyphicon glyphicon-pencil"></i></span>
+                                        <span>Clone Deal<i class="glyphicon glyphicon-copy"></i></span>
+                                    </div>
+                                    <div class="navigator--bottom">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="collapse-click" data-toggle="collapse" href="#collapseData5" aria-expanded="false" aria-controls="collapseData5">
+                        <td data-title="Priority" class="text-center"><span class="glyphicon glyphicon-resize-vertical"></span> 5</td>
+                        <td data-title="Status" class="text-center"><span class="glyphicon glyphicon-dashboard deal_status"></span></td>
+                        <td data-title="Name">Open Auction</td>
+                        <td data-title="%Complete" class="progress-middle text-center">
+                            <span>30%</span>
+                            <div class="progress progress-low">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"
+                                    style="width: 30%">
+                                    <span class="sr-only">30% Complete (success)</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-title="%Impressions Goal" class="progress-middle text-center">
+                            <span>70%</span>
+                            <div class="progress progress-high">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+                                    style="width: 70%">
+                                    <span class="sr-only">70% Complete (success)</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-title="Revenue*">$1,244,222</td>
+                        <td data-title="Impressions">50,000</td>
+                        <td data-title="Fill Rate*">20%</td>
+                        <td data-title="CPM*">$250,000,000,000 <span class="glyphicon glyphicon-option-vertical pull-right" data-toggle="collapse"
+                                href="#collapseData5" aria-expanded="false" aria-controls="collapseData5"></span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="9" class="padding-0">
+                            <div id="collapseData5" class="collapse table_content--inner text-uppercase">
+                                <h3>Open Auction</h3>
+                                <div class="row">
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>500,000</h4>
+                                        <h5>Request</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>300,000</h4>
+                                        <h5>Responses</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>60%</h4>
+                                        <h5>Response Rate</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>500,000</h4>
+                                        <h5>Impressions</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>60%</h4>
+                                        <h5>Impression/Response</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>20%</h4>
+                                        <h5>Fill Rate</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>$11.50</h4>
+                                        <h5>Average CPM</h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>$1,244,222</h4>
+                                        <h5>Revenue</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>50%</h4>
+                                        <h5>VCR</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>50%</h4>
+                                        <h5>CTR</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner table_data--small">
+                                        <h4>$6.78</h4>
+                                        <h5>Average Bid</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>3.5</h4>
+                                        <h5>Average #Bids</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>$7.88</h4>
+                                        <h5>Average Winning Bid</h5>
+                                    </div>
+                                    <div class="col-sm-2 table_data--inner">
+                                        <h4>25%</h4>
+                                        <h5>Average Premium to Floor</h5>
+                                    </div>
+                                </div>
+                                <div class="table_content--navigator">
+                                    <div class="navigator--top">
+                                        <span>Edit Deal<i class="glyphicon glyphicon-pencil"></i></span>
+                                        <span>Clone Deal<i class="glyphicon glyphicon-copy"></i></span>
+                                    </div>
+                                    <div class="navigator--bottom">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <!-- MAIN CONTENT ENDS -->
+
+    <!-- FOOTER STARTS -->
+    <footer class="footer text-center">
+        <h5>&copy;
+            <script>
+                document.write(new Date().getFullYear())
+            </script> <a href="http://www.MK.com/" target="_blank">MK.</a> All Rights Reserved.</h5>
+    </footer>
+    <!-- FOOTER ENDS -->
+
+    <!-- EXTERNAL LIBRARIES AND SCRIPT INCLUSION -->
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,439 @@
+/*CUSTOM FONT INCLUSION*/
+@font-face {
+  font-family: "latobold";
+  src: url("../font/lato-bold-webfont.woff2") format("woff2"),
+    url("../font/lato-bold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "latohairline";
+  src: url("../font/lato-hairline-webfont.woff2") format("woff2"),
+    url("../font/lato-hairline-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "latolight";
+  src: url("../font/lato-light-webfont.woff2") format("woff2"),
+    url("../font/lato-light-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "latoregular";
+  src: url("../font/lato-regular-webfont.woff2") format("woff2"),
+    url("../font/lato-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  font-family: "latolight", sans-serif;
+}
+/*HEADER STYLE STARTS*/
+.menu--top {
+  margin-bottom: 2px;
+  background: #e6e7e8;
+  border-top: 1px solid #bdbdbd;
+  border-bottom: 2px solid #bdbdbd;
+}
+.menu--top .nav {
+  min-height: 0;
+}
+.navbar-header {
+  padding: 10px 15px 0 0;
+}
+.navbar-header img {
+  width: 80px;
+}
+.menu--top .collapse {
+  margin-top: 8px;
+}
+.menu--top .navbar-nav li a {
+  padding: 5px 15px;
+  font-size: 13px;
+  color: #8e8d8e;
+}
+.menu--top .navbar-left li a {
+  border: 1px solid transparent;
+}
+.menu--top .active,
+.menu--top .navbar-left li a:hover,
+.menu--top .navbar-left li a:focus {
+  border-width: 1px;
+  border-style: solid dotted solid dotted;
+  border-color: #8e8d8e;
+}
+.menu--top .navbar-right li {
+  position: relative;
+}
+
+.menu--top .navbar-right li::before {
+  position: absolute;
+  content: "";
+  top: 5px;
+  right: 0;
+  width: 1px;
+  height: 20px;
+  border-right: 1px dotted #8e8d8e;
+}
+.menu--top .navbar-right li:last-child::before {
+  display: none;
+}
+.menu--top .active a {
+  font-family: "latobold";
+}
+.deals_breadcrumb {
+  padding: 30px 0 10px 0;
+  background: #455e6f;
+  border-bottom: 2px solid #fff;
+  position: relative;
+}
+.deals_breadcrumb::after {
+  content: "";
+  border-bottom: 2px solid #ccc;
+  position: absolute;
+  bottom: -4px;
+  width: 100%;
+  height: 1px;
+}
+.search--wrapper {
+  width: 50%;
+}
+.search--wrapper .form-control,
+.search--wrapper .btn {
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  color: #a2c9cd;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+.search--wrapper .form-control {
+  border-bottom: 1px solid #819a9c;
+}
+.search--wrapper .input-group-btn {
+  position: absolute;
+  right: 20px;
+  top: 5px;
+}
+.search--wrapper .btn span {
+  font-size: 20px;
+}
+h1,
+h2 {
+  margin: 0;
+  color: #a2c9cd;
+  font-family: "latoregular";
+}
+.deals_breadcrumb a {
+  text-decoration: none;
+  font-family: "latoregular";
+  font-size: 16px;
+  color: #a2c9cd;
+}
+.deals_breadcrumb h2 span {
+  font-size: 13px;
+}
+.deal_add--wrapper {
+  margin-top: 30px;
+}
+.nav--right li {
+  display: inline-block;
+  list-style: none;
+  margin-left: 10px;
+  position: relative;
+}
+.nav--right li::before {
+  content: "";
+  position: absolute;
+  right: -6px;
+  top: 3px;
+  height: 15px;
+  width: 1px;
+  border-right: 1px dotted #a2c9cd;
+}
+.nav--right li:last-child::before {
+  display: none;
+}
+.nav--right li a {
+  color: #8fa6a9;
+  font-size: 12px;
+}
+.nav--right li a.active,
+.nav--right li a:hover {
+  color: #a69581;
+}
+/*HEADER STYLE ENDS*/
+
+/*MAIN CONTENT & FOOTER STYLE STARTS*/
+.deal_table--wrapper {
+  padding: 30px 15px;
+}
+.deal_remarks {
+  color: #ccc;
+  font-size: 11px;
+}
+.collapse-click {
+  cursor: pointer;
+}
+.deal_table--wrapper .table > thead > tr > th {
+  font-size: 12px;
+  color: #9c9c9c;
+  font-family: "latolight";
+  border-bottom: 1px dotted #ddd;
+}
+.table > tbody > tr.collapse-click > td {
+  vertical-align: middle;
+  color: #929292;
+}
+.deal_color--even {
+  background: #f4f5f4;
+}
+.table > tbody > tr > td,
+.table > tbody > tr > th,
+.table > tfoot > tr > td,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > thead > tr > th {
+  border-top: 1px dotted #ddd;
+}
+.deal_status {
+  color: #60dbec;
+}
+.progress_heading {
+  width: 200px;
+}
+.progress {
+  height: auto;
+  padding: 2px;
+  margin: 0;
+  border: 1px solid #b1b1b1;
+  box-shadow: none;
+}
+
+.progress .progress-bar {
+  height: 8px;
+  border-radius: 2px;
+}
+
+.progress.progress-low .progress-bar {
+  background: #191919;
+}
+.progress.progress-high .progress-bar {
+  background: #ed2c26;
+}
+.table_content--inner {
+  padding: 0 125px 10px 0;
+  position: relative;
+  background: #f4f5f4;
+  -moz-box-shadow: inset 0 0 15px #969696;
+  -webkit-box-shadow: inset 0 0 15px #969696;
+  box-shadow: inset 0 0 15px #969696;
+}
+.table > tbody > tr > td.padding-0 {
+  padding: 0;
+  border: 0;
+}
+.table_content--inner h3 {
+  margin: 0;
+  padding: 18px;
+  font-size: 16px;
+  font-family: "latobold";
+}
+.table_content--navigator {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 125px;
+  height: 100%;
+  background: #768996;
+}
+.navigator--top {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 50%;
+  background: #374b5b;
+}
+
+.navigator--top span {
+  position: relative;
+  width: 100%;
+  height: 50%;
+  padding-left: 10px;
+  line-height: 45px;
+  display: block;
+  cursor: pointer;
+  color: #d8d8d8;
+}
+.navigator--top span i {
+  display: none;
+}
+
+.navigator--bottom {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 50%;
+  cursor: pointer;
+}
+
+.navigator--bottom span {
+  font-size: 35px;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  color: #d8d8d8;
+}
+
+.navigator--top span + span {
+  border-top: 1px solid #526573;
+}
+.table_data--inner {
+  width: 17%;
+  border-right: 1px dotted #cac7c7;
+}
+.table_data--small {
+  width: 12%;
+}
+.table_data--inner h4 {
+  color: #60dbec;
+  font-size: 16px;
+  font-family: "latoregular";
+  margin-bottom: 3px;
+}
+.table_data--inner h5 {
+  font-size: 11px;
+  margin-top: 0;
+}
+.table_content--inner .row {
+  padding: 0 30px;
+}
+
+.table_content--inner h3 + .row::after {
+  border-bottom: 1px dotted #cac7c7;
+  content: "";
+  display: block;
+}
+
+.table_data--inner:last-child {
+  border-right: none;
+}
+.footer h5 a {
+  text-decoration: none;
+  color: #929292;
+}
+/*MAIN & FOOTER STYLE ENDS*/
+
+/*RESPONSIVE STYLE STARTS*/
+@media screen and (max-width: 1024px) {
+  .navbar-header {
+    padding: 10px 15px 0 15px;
+  }
+  .search--wrapper {
+    width: 100%;
+  }
+  .deal_table--wrapper thead {
+    display: none;
+  }
+  .deal_table--wrapper table,
+  .deal_table--wrapper tbody,
+  .deal_table--wrapper th,
+  .deal_table--wrapper td,
+  .deal_table--wrapper tr {
+    display: block;
+  }
+  .collapse-click {
+    cursor: default;
+    margin-top: 25px;
+  }
+  .glyphicon-option-vertical {
+    cursor: pointer;
+  }
+  .table > tbody > tr.collapse-click > td {
+    padding-left: 50%;
+    position: relative;
+  }
+  .table > tbody > tr.collapse-click > td::before {
+    content: attr(data-title);
+    position: absolute;
+    left: 15px;
+    font-family: "latobold";
+    text-transform: uppercase;
+  }
+  .table > tbody > tr.collapse-click > td.progress-middle::before {
+    margin-top: 8px;
+  }
+
+  .table_content--navigator {
+    right: 0;
+    width: 135px;
+    height: 50px;
+    font-size: 0;
+    background: #374b5b;
+  }
+  .navigator--top span {
+    font-size: 0;
+  }
+  .navigator--top span i {
+    display: inline-block;
+    font-size: 28px;
+    margin-top: 5px;
+  }
+  .navigator--top,
+  .navigator--bottom {
+    position: static;
+    display: inline-block;
+    width: auto;
+    font-size: 15px;
+    background: none;
+    vertical-align: middle;
+  }
+
+  .navigator--top span {
+    display: inline-block;
+    width: auto;
+    height: auto;
+  }
+
+  .navigator--bottom span {
+    position: static;
+    font-size: 25px;
+    margin: 10px 0 0 10px;
+  }
+
+  .navigator--top span + span {
+    border: 0;
+  }
+
+  .table_content--inner {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .table_data--inner {
+    width: 25%;
+    float: left;
+  }
+}
+@media screen and (max-width: 550px) {
+  .table_data--inner {
+    width: 50%;
+  }
+}
+/*RESPONSIVE STYLE ENDS*/
