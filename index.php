@@ -1,13 +1,16 @@
 <?php
 session_start();
+$headerURL = "https://localhost/sidar-git/";
 include "config.php";
-
-
+error_reporting(E_ERROR | E_WARNING | E_PARSE); 
 
 $iduser = $_SESSION["IDUser"] ;
 $keuser = $_SESSION["Ke"] ;
 $lokasikerja = $_SESSION["Lokasikerja"] ;
-
+// var_dump($iduser);
+// var_dump($keuser);
+// var_dump($lokasikerja);
+// die;
 //$nodar =  $_SESSION["Nodar"] ;
 //$pecah = explode("/", $nodar);
 //$hasil = $pecah[1] + 1;
@@ -17,6 +20,8 @@ $ambilizintelat = "SELECT * FROM formtelat WHERE iduser = '" .$iduser. "' AND su
 $queryambilizintelat =$conn->query($ambilizintelat);
 
  if($queryambilizintelat->num_rows){
+  // var_dump("in  ikzin telat");
+  // die;
 $rowizintelat = mysqli_fetch_array($queryambilizintelat, MYSQLI_ASSOC);
 $notelat = $rowizintelat['notelat'];
 header("Location: https://sidar.id/updatealasantelat.php?notelat=".$notelat);
@@ -28,6 +33,8 @@ $ambilizintelatatas = "SELECT * FROM formtelat WHERE ke1 = '" .$iduser. "' AND m
 $queryambilizintelatatas =$conn->query($ambilizintelatatas);
 
  if($queryambilizintelatatas->num_rows){
+  // var_dump("in  ikzin telat atas");
+  // die;
 //$rowizintelat = mysqli_fetch_array($queryambilizintelatatas, MYSQLI_ASSOC);
 //$notelat = $rowizintelat['notelat'];
 header("Location: https://sidar.id/formtelat.php");
@@ -90,8 +97,11 @@ $queryuser = $conn->query($infomuser);
 $arraymuser = mysqli_fetch_all($queryuser, MYSQLI_ASSOC);
 $jumlahmuser = sizeof($arraymuser);
 
+// var_dump("in  index");
+//   die;
+
 if($_SESSION["IDUser"] == 0){
-header("Location: https://sidar.id/login");
+header("Location: ".$headerURL."login");
 exit();
     }
     
