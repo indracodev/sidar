@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+$headerURL = "https://localhost/sidar-git/";
+	
 $namaa = $_SESSION["NMUser"];
 
 if($lokasikerja == 'ib' || $lokasikerja == 'IB'){
@@ -73,27 +75,27 @@ if($_SESSION["Level"] == "admin" || $_SESSION["Level"] == "user"){
 	</div>
 	<header class="text-center py-5"><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<a href="index.php" class="logo">
-			<img src="img/logo.png" class="img-fluid" width="55%">
+			<img src=<?php echo $headerURL."img/logo.png";?> class="img-fluid" width="55%">
 		</a>
 	</header>
 	
 	<ul class="accordion list-unstyled mb-0" id="sidebarMenu">
 		
 		<hr class="m-0">
-			<a href="index.php" class="menu-link">
+			<a href=<?php echo $headerURL."index.php";?> class="menu-link">
 		<li class="menu-list <?php echo $navactivedashbaord;?>">
 				<i class="fa fa-area-chart ikon-menu"></i> DASHBOARD
 		</li>
 			</a>
 		<hr class="m-0">
-		<a style="<?php echo $dar?>" href="dar.php" class="menu-link">
+		<a style="<?php echo $dar?>" href=<?php echo $headerURL."dar.php";?> class="menu-link">
 		<li style="<?php echo $dar?>"class="menu-list <?php echo $navactivedar;?>">
 				<i class="fa fa-pencil ikon-menu"></i> DAR
 		</li>
 		</a>
 		
 	   <hr class="m-0">
-		<a style="<?php echo $report?>" href="report.php" class="menu-link">
+		<a style="<?php echo $report?>" href=<?php echo $headerURL."report.php";?> class="menu-link">
 		<li style="<?php echo $report?>" class="menu-list <?php echo $navactivereport;?>">
 				<i class="fa fa-tasks ikon-menu"></i> REPORT
 		</li>
@@ -109,28 +111,76 @@ if($_SESSION["Level"] == "admin" || $_SESSION["Level"] == "user"){
 			
 	
 		<hr style="<?php echo $absence?>" class="m-0">
-		<a style="<?php echo $absence?>" href="reportabsensi.php" class="menu-link">
+		<a style="<?php echo $absence?>" href=<?php echo $headerURL."reportabsensi.php";?> class="menu-link">
 		<li style="<?php echo $absence?>" class="menu-list <?php echo $navactivereportabsensi;?>">
 				<i class="fa fa-map-signs ikon-menu"></i> REPORT DINAS LUAR
 		</li>
 		</a>
 		
 		<hr style="<?php echo $frmtlt; ?>" class="m-0">
-		<a style="<?php echo $frmtlt; ?>" href="formtelat.php" class="menu-link">
+		<a style="<?php echo $frmtlt; ?>" href=<?php echo $headerURL."formtelat.php";?> class="menu-link">
 		<li style="<?php echo $frmtlt; ?>" class="menu-list <?php echo $navactivereportabsensi;?>">
 				<i class="fa fa-calendar ikon-menu"></i> FORM IZIN TERLAMBAT (BETA VERSION)
 		</li>
 		</a>
 		
 		<hr style="<?php echo $frmtlt; ?>" class="m-0">
-		<a style="<?php echo $frmtlt; ?>" href="formcuti.php" class="menu-link">
+		<a style="<?php echo $frmtlt; ?>" href=<?php echo $headerURL."formcuti.php";?> class="menu-link">
 		<li style="<?php echo $frmtlt; ?>" class="menu-list <?php echo $navactivereportabsensi;?>">
 				<i class="fa fa-chain-broken ikon-menu"></i> FORM IZIN CUTI (BETA VERSION)<br>
 		</li>
 		</a>
+
+		<li class="card border-0 menu-list">
+			<div class="card-header border-0" id="menuizin">
+				<div class="menu-link" data-toggle="collapse" data-target="#collapseMenu2">
+					<i class="ikon-menu fa fa-cog"></i> FORM IZIN CUTI (STAGGING VERSION)
+				</div>
+			</div>
+			<div class="collapse" id="collapseMenu2" aria-labelledby="menuizin" data-parent="#sidebarMenu">
+				<div class="card-body">
+					<ul class="list-unstyled mb-0">
+						<li>
+							<a href=<?php echo $headerURL."nfr/izinsakit";?> class="collapse-link">
+								<i class="fa fa-caret-right mr-2"></i> Izin Sakit
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="collapse" id="collapseMenu2" aria-labelledby="menuizin" data-parent="#sidebarMenu">
+				<div class="card-body">
+					<ul class="list-unstyled mb-0">
+						<li>
+							<a href=<?php echo $headerURL."nfr/izincuti";?> class="collapse-link">
+								<i class="fa fa-caret-right mr-2"></i> Izin Cuti
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="collapse" id="collapseMenu2" aria-labelledby="menuizin" data-parent="#sidebarMenu">
+				<div class="card-body">
+					<ul class="list-unstyled mb-0">
+						<li>
+							<a href=<?php echo $headerURL."nfr/izintidakdibayar";?> class="collapse-link">
+								<i class="fa fa-caret-right mr-2"></i> Izin Tidak Dibayar
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		
+		
+	
+		</li>
+
+
+
 			
 		<hr style="<?php echo $absence?>" class="m-0">
-		<a style="<?php echo $absence?>" href="updateresign.php" class="menu-link">
+		<a style="<?php echo $absence?>" href=<?php echo $headerURL."updateresign.php";?> class="menu-link">
 		<li style="<?php echo $absence?>" class="menu-list <?php echo $navactivereportabsensi;?>">
 		<i class="fa fa-users ikon-menu"></i> SET RESIGN
 		</li>
@@ -151,7 +201,7 @@ if($_SESSION["Level"] == "admin" || $_SESSION["Level"] == "user"){
 				<div class="card-body">
 					<ul class="list-unstyled mb-0">
 						<li>
-							<a href="harvest.php" class="collapse-link">
+							<a href=<?php echo $headerURL."harvest.php";?> class="collapse-link">
 								<i class="fa fa-hourglass-end ikon-menu"></i> LATE STATUS
 							</a>
 						</li>
@@ -162,7 +212,7 @@ if($_SESSION["Level"] == "admin" || $_SESSION["Level"] == "user"){
 				<div class="card-body">
 					<ul class="list-unstyled mb-0">
 						<li>
-							<a href="confirmabsence.php" class="collapse-link">
+							<a href=<?php echo $headerURL."confirmabsence.php" ;?>class="collapse-link">
 							<i class="fa fa-home ikon-menu"></i> ABSENCE STATUS
 							</a>
 						</li>
@@ -173,7 +223,7 @@ if($_SESSION["Level"] == "admin" || $_SESSION["Level"] == "user"){
 				<div class="card-body">
 					<ul class="list-unstyled mb-0">
 						<li>
-							<a href="activitylog.php" class="collapse-link">
+							<a href=<?php echo $headerURL."activitylog.php";?> class="collapse-link">
 							<i class="fa fa-bookmark ikon-menu"></i> ACTIVITY LOG
 							</a>
 						</li>
@@ -184,7 +234,7 @@ if($_SESSION["Level"] == "admin" || $_SESSION["Level"] == "user"){
 				<div class="card-body">
 					<ul class="list-unstyled mb-0">
 						<li>
-							<a href="monitoring.php" class="collapse-link">
+							<a href=<?php echo $headerURL."monitoring.php";?> class="collapse-link">
 							<i class="fa fa-table ikon-menu"></i> MONITORING USER
 							</a>
 						</li>
@@ -196,7 +246,7 @@ if($_SESSION["Level"] == "admin" || $_SESSION["Level"] == "user"){
 		
 		<hr class="m-0" style="<?php echo $navbar?>">
 		<li class="menu-list" style="<?php echo $navbar?>">
-			<a href="reportfilter.php" class="menu-link">
+			<a href=<?php echo $headerURL."reportfilter.php";?> class="menu-link">
 				<i class="fa fa-filter ikon-menu"></i> REPORT PER USER
 			</a>
 		</li>
@@ -205,7 +255,7 @@ if($_SESSION["Level"] == "admin" || $_SESSION["Level"] == "user"){
 			
 		<hr class="m-0" style="<?php echo $mngnuser;?>">
 		<li class="menu-list" style="<?php echo $mngnuser;?>">
-			<a href="holidaysetting.php" class="menu-link">
+			<a href=<?php echo $headerURL."holidaysetting.php";?> class="menu-link">
 				<i class="fa fa-bell-slash ikon-menu"></i> HOLIDAY SETTING
 			</a>
 		</li>
@@ -220,7 +270,7 @@ if($_SESSION["Level"] == "admin" || $_SESSION["Level"] == "user"){
 				<div class="card-body">
 					<ul class="list-unstyled mb-0">
 						<li>
-							<a href="addUser.php" class="collapse-link">
+							<a href=<?php echo $headerURL."addUser.php" ;?>class="collapse-link">
 								<i class="fa fa-caret-right mr-2"></i> ADD USER
 							</a>
 						</li>
@@ -232,7 +282,7 @@ if($_SESSION["Level"] == "admin" || $_SESSION["Level"] == "user"){
 				<div class="card-body">
 					<ul class="list-unstyled mb-0">
 						<li>
-							<a href="listedituser.php" class="collapse-link">
+							<a href=<?php echo $headerURL."listedituser.php";?> class="collapse-link">
 								<i class="fa fa-caret-right mr-2"></i> EDIT USER
 							</a>
 						</li>
@@ -244,7 +294,7 @@ if($_SESSION["Level"] == "admin" || $_SESSION["Level"] == "user"){
 				<div class="card-body">
 					<ul class="list-unstyled mb-0">
 						<li>
-							<a href="setizinabsen.php" class="collapse-link">
+							<a href=<?php echo $headerURL."setizinabsen.php";?> class="collapse-link">
 								<i class="fa fa-caret-right mr-2"></i> SET IZIN ABSEN
 							</a>
 						</li>
@@ -256,7 +306,7 @@ if($_SESSION["Level"] == "admin" || $_SESSION["Level"] == "user"){
 				<div class="card-body">
 					<ul class="list-unstyled mb-0">
 						<li>
-							<a href="updateresign.php" class="collapse-link">
+							<a href=<?php echo $headerURL."updateresign.php";?> class="collapse-link">
 								<i class="fa fa-caret-right mr-2"></i> SET RESIGN
 							</a>
 						</li>
@@ -268,26 +318,26 @@ if($_SESSION["Level"] == "admin" || $_SESSION["Level"] == "user"){
 		<hr class="m-0">
 		<li class="card border-0 menu-list">
 			<div class="card-header border-0" id="menu1">
-				<div class="menu-link" data-toggle="collapse" data-target="#collapseMenu2">
+				<div class="menu-link" data-toggle="collapse" data-target="#collapseMenu3">
 					<i class="ikon-menu fa fa-cog"></i> SETTING
 				</div>
 			</div>
-			<div class="collapse" id="collapseMenu2" aria-labelledby="menu1" data-parent="#sidebarMenu">
+			<div class="collapse" id="collapseMenu3" aria-labelledby="menu1" data-parent="#sidebarMenu">
 				<div class="card-body">
 					<ul class="list-unstyled mb-0">
 						<li>
-							<a href="resetPassword.php" class="collapse-link">
+							<a href=<?php echo $headerURL."resetPassword.php";?> class="collapse-link">
 								<i class="fa fa-caret-right mr-2"></i> RESET PASSWORD
 							</a>
 						</li>
 					</ul>
 				</div>
 			</div>
-			<div class="collapse" id="collapseMenu2" aria-labelledby="menu1" data-parent="#sidebarMenu">
+			<div class="collapse" id="collapseMenu3" aria-labelledby="menu1" data-parent="#sidebarMenu">
 				<div class="card-body">
 					<ul class="list-unstyled mb-0">
 						<li>
-							<a href="emailupdate.php" class="collapse-link">
+							<a href=<?php echo $headerURL."emailupdate.php";?> class="collapse-link">
 								<i class="fa fa-caret-right mr-2"></i> UPDATE EMAIL
 							</a>
 						</li>
@@ -298,7 +348,7 @@ if($_SESSION["Level"] == "admin" || $_SESSION["Level"] == "user"){
 				<div class="card-body">
 					<ul class="list-unstyled mb-0">
 						<li>
-							<a href="managementUser.php" class="collapse-link">
+							<a href=<?php echo $headerURL."managementUser.php";?> class="collapse-link">
 								<i class="fa fa-caret-right mr-2"></i> MANAGEMENT USER
 							</a>
 						</li>
@@ -360,7 +410,7 @@ if($_SESSION["Level"] == "admin" || $_SESSION["Level"] == "user"){
 		<hr class="m-0">
 		<li class="card border-0 menu-list">
 			<div class="card-header border-0" id="menu1">
-			  <a href="/help/TATA_CARA_PENGGUNAAN_SIDAR_ver_1.03.pdf" class="menu-link">
+			  <a href=<?php echo $headerURL."help/TATA_CARA_PENGGUNAAN_SIDAR_ver_1.03.pdf";?> class="menu-link">
 				<div class="menu-link" >
 				   
 					<i class="ikon-menu fa fa-book"></i> HELP
@@ -373,7 +423,7 @@ if($_SESSION["Level"] == "admin" || $_SESSION["Level"] == "user"){
 		<li class="card border-0 menu-list">
 			<div class="card-header border-0" id="menu1">
 				<div class="menu-link" >
-				     <a href="logout.php" class="menu-link">
+				     <a href=<?php echo $headerURL."logout.php";?> class="menu-link">
 					<i class="ikon-menu fa fa-power-off"></i> LOGOUT
 					</a>
 				</div>
@@ -396,7 +446,7 @@ if($_SESSION["Level"] == "admin" || $_SESSION["Level"] == "user"){
 	<div class="akun d-flex align-items-center">
 		Welcome "<i><strong><?php echo $namaa ?></strong></i>"
 		<div class="mini-foto-user ml-2 rounded-circle">
-			<img src="img/fotouser.jpg" class="img-fluid">
+			<img src=<?php echo $headerURL."img/fotouser.jpg";?> class="img-fluid">
 		</div>
 	</div>
 </div><!-- end topbar -->
